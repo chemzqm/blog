@@ -1,0 +1,10 @@
+extends ../views/layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul.posts
+    each p in posts
+      li 
+        span.title #{p.title} 
+        span.date #{p.create}

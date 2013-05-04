@@ -1,0 +1,12 @@
+extends ../views/layout
+
+block content
+  div.container
+    div#editor
+      form(action="/post",method="post")
+        div
+          input(type="text",name="title")
+        div
+          textarea(name="content")
+        div
+          input(type="submit",value="Create")

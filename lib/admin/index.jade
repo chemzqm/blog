@@ -1,0 +1,12 @@
+extends ../views/layout
+
+block content
+  div.admin
+    div
+      a.button(href="/post") New
+    ul.posts
+      each p in posts
+        li
+          span.title #{p.title}
+          a.remove(href="/post/remove/#{p.id}") X
+

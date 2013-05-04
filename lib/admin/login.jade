@@ -1,0 +1,12 @@
+extends ../views/layout
+
+block content
+  form(action='/login',method="post")
+    div
+      label Name:
+      input(type="text",name="name",autofocus="true")
+    div
+      label Password:
+      input(type="password",name="password")
+    div
+      input(type="submit",value="submit")
