@@ -1,10 +1,13 @@
 extends ../views/layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  ul.posts
-    each p in posts
-      li 
-        span.title #{p.title} 
-        span.date #{p.create}
+  #title
+    h1 启明的博客
+    p 关于互联网技术、管理、产品
+
+  .container
+    ul.listview
+      each p in posts
+        li 
+          span.title #{p.title} 
+          span.date #{p.create}

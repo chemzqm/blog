@@ -1,12 +1,14 @@
 extends ../views/layout
 
 block content
+  script(type="text/javascript", src="/build/editor.min.js")
   div.container
-    div#editor
-      form(action="/post",method="post")
+    form(action="/post",method="post")
+      div.editor-wrapper
+        input.title(type="text",name="title",placeholder="title")
+        textarea#editor(name="content", "Content here...")
         div
-          input(type="text",name="title")
-        div
-          textarea(name="content")
-        div
-          input(type="submit",value="Create")
+          input.btn.btn-block(type="submit",value="新建")
+  script(type="text/javascript")
+    var editor = new Editor();
+    editor.render();

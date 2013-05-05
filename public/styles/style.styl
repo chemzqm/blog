@@ -1,13 +1,215 @@
 @import 'nib'
 
+//colors
+$seaGreen = #16A085
+$lightSeaGreen = #1ABC9C
+$green = #27AE60
+$lightGreen = #2ecc71
+$blue = #2980B9
+$lightBlue = #3498DB
+$purple = #8E44AD
+$lightPurple = #9B59B6
+$black = #2C3E50
+$lightBlack = #34495E
+$yellow = #F39C12
+$lightYellow = #F1C40F
+$orange = #D35400
+$lightOrange = #E67E22
+$red = #C0392B
+$lightRed = #e74c3c
+$silver = #BDC3C7
+$lightSilver = #ECF0F1
+$gray = #7F8C8D
+$lightGray = #95A5A6
+
+$maxWidth = 700px
+html
+  height:100%
+
 body
-  padding: 50px
   font: Arial,/*'Microsoft YaHei',*/Verdana,"BitStream vera Sans",Tahoma,Helvetica,Sans-serif
   font-size: 14px
+  color: $black
 
-a
-  color: #00B7FF
+a, a:hover, a:focus
+  color: $lightSeaGreen
 
 .clearfix
   clearfix()
 
+.container
+  max-width: $maxWidth - 20
+  margin:0 auto
+  padding-left: 20px
+
+section
+  border-radius: 5px
+  background-color:  $lightSilver
+
+#title
+  text-align: center
+  p
+    color: $gray
+
+#header
+  font-size: 1.3em
+  width: 100%
+  top: 0
+  left: 0
+  background-color: $black
+  .nav
+    max-width: $maxWidth
+    margin: 0 auto
+    ul
+      margin: 0
+      padding: 0
+      li
+        list-style: none
+        float: left
+        margin: 0
+        padding: 0
+        a
+          display:block
+          padding: 10px 20px
+          color: #fff
+          text-decoration: none
+          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+          &:hover,&.active
+            color:$seaGreen
+
+ul.listview
+  padding-left: 0px
+  li:nth-child(odd)
+    background-color: #f9f9f9
+  li
+    line-height: 2.8
+    list-style: none
+    position: relative
+    & > a
+      color: $black
+      text-decoration: none
+      display: block
+      transition: 0.25s
+      &:hover
+        color: $lightBlack
+        background-color: $lightSilver
+    .btn-group
+      position:absolute
+      margin: 0
+      right: 10px
+      top: 0
+
+#admin-list
+  li
+    border-top:1px solid #dddddd
+
+
+//headers
+h1
+  font-size: 32px
+  margin: 10px 0
+h2
+  font-size: 26px
+  font-weight: 700
+  margin-bottom: 2px
+
+h3
+  font-size: 24px
+  font-weight: 700
+  margin-bottom: 4px
+  margin-top: 2px
+
+h4
+  font-size: 18px
+  font-weight: 500
+  margin-top: 4px
+
+h1, h2, h3
+  line-height: 40px
+
+.control-group
+  margin: 1em 0
+
+//button
+.btn
+  display:inline-block
+  border: none
+  color: #fff
+  font-size: 16.5px
+  transition: 0.25s
+  border-radius: 6px
+  height: 2em
+  line-height: 2em
+  padding: 0 1em
+
+.btn-block
+  background-color: $black
+  &:hover
+    background-color: $lightBlack
+
+.btn-primary
+  background-color: $seaGreen
+  &:hover
+    background-color: $lightSeaGreen
+
+.btn-danger
+  background-color: $red
+  &:hover
+    background-color: $lightRed
+
+a.btn
+  text-decoration: none
+  font-size: 1em
+  &:hover
+    color:#fff
+  .icon
+    margin-right:10px
+
+.btn-group
+  margin:20px 0
+
+//form
+input[type="text"]:focus, input[type="password"]:focus
+  border-color: $seaGreen
+
+input[type="text"], input[type="password"], input[type="textarea"]
+  box-shadow: none
+  outline: 0
+  border: 2px solid $lightSilver
+  color: $black
+  border-radius: 6px
+
+
+
+#login_form
+  max-width:360px
+  margin:40px auto
+  & input:focus + .login-field-icon
+    color:$seaGreen
+  .control-group
+    position:relative
+  input[type="text"], & input[type="password"]
+    font-size: 17px
+    padding-bottom: 11px
+    padding-top: 11px
+    text-indent: 6px
+    width:100%
+  .login-field-icon
+    color: $silver
+    position: absolute
+    right: 13px
+    top: 14px
+    transition: 0.25s
+    backface-visibility: hidden
+  .btn
+    width:100%
+
+#form
+  border-radius: 6px
+  padding: 24px 23px 20px
+  position: relative
+  background-color: $lightSilver
+
+//editor
+.editor-wrapper
+  margin: 30px 0

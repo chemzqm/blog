@@ -1,12 +1,18 @@
 extends ../views/layout
 
 block content
-  div.admin
-    div
-      a.button(href="/post") New
-    ul.posts
-      each p in posts
-        li
-          span.title #{p.title}
-          a.remove(href="/post/remove/#{p.id}") X
+  .container
+    div.btn-group
+      a.btn.btn-primary(href="/post") 
+        span.icon.fui-plus-16
+        |  新建
+        
+
+    div#admin-list
+      ul.listview
+        each p in posts
+          li
+            a(href="/post/edit/#{p.id}") #{p.title}
+            .btn-group
+              a.btn.btn-danger(href="/post/remove/#{p.id}") 删除
 

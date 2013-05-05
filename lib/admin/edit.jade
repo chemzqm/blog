@@ -1,0 +1,16 @@
+extends ../views/layout
+
+block content
+  script(type="text/javascript", src="/build/editor.min.js")
+  div.container
+    form(action="/post",method="post")
+      div.editor-wrapper
+        input(type="hidden",name="id",value="#{post.id}")
+        input.title(type="text",name="title",placeholder="title",value="#{post.title}")
+        textarea#editor(name="content", placeholder="Content here...")
+          | !{post.content}
+        div
+          input.btn.btn-block(type="submit",value="提交")
+  script(type="text/javascript")
+    var editor = new Editor();
+    editor.render();

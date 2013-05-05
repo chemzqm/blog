@@ -2,6 +2,23 @@ doctype 5
 html
   head
     title= title
-    link(rel='stylesheet', href='/styles/style.css')
+    link(rel='stylesheet', href='/build/build.css')
   body
+    #header
+      .nav
+        ul.clearfix
+          li: a(href="/") 主页
+          li: a(href="/achieve") 归档
+          li: a(href="/about") 关于
+    script(type="text/javascript")
+      var path = window.location.pathname;
+      var navs = document.querySelectorAll('#header ul a');
+      if(path === '/'){
+        navs[0].className = 'active';
+      }else if(path === '/achieve'){
+        navs[1].className = 'active';
+      }else if(path === '/about'){
+        navs[2].className = 'active';
+      }
+
     block content
