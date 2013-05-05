@@ -1,24 +1,73 @@
+
+/* line 1 : /home/jack/modules/stylus/lib/functions/index.styl */
+
+/* line 14 : /home/jack/modules/nib/lib/nib/index.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/border.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/clearfix.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/color-image.styl */
+
+/* line 6 : /home/jack/modules/nib/lib/nib/flex.styl */
+
+/* line 154 : /home/jack/modules/nib/lib/nib/gradients.styl */
+
+/* line 154 : /home/jack/modules/nib/lib/nib/config.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/iconic.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/image.styl */
+
+/* line 15 : /home/jack/modules/nib/lib/nib/overflow.styl */
+
+/* line 3 : /home/jack/modules/nib/lib/nib/positions.styl */
+
+/* line 3 : /home/jack/modules/nib/lib/nib/reset.styl */
+
+/* line 5 : /home/jack/modules/nib/lib/nib/text/index.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/text/aliases.styl */
+
+/* line 2 : /home/jack/modules/nib/lib/nib/text/ellipsis.styl */
+
+/* line 11 : /home/jack/modules/nib/lib/nib/text/hide-text.styl */
+
+/* line 9 : /home/jack/modules/nib/lib/nib/text/replace-text.styl */
+
+/* line 557 : /home/jack/modules/nib/lib/nib/vendor.styl */
+
+/* line 557 : /home/jack/modules/nib/lib/nib/config.styl */
+
+/* line 12 : /home/jack/modules/nib/lib/nib/size.styl */
+
+/* line 3 : /home/jack/work/blog/public/styles/style.styl */
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: Arial,;
+/*'Microsoft YaHei',*/
+  Verdana: , "BitStream vera Sans", Tahoma, Helvetica, Sans-serif;
+  font-size: 14px;
 }
 
+/* line 8 : /home/jack/work/blog/public/styles/style.styl */
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
+/* line 11 : /home/jack/work/blog/public/styles/style.styl */
 .clearfix {
-  *zoom: 1;
+  zoom: 1;
 }
 
+/* line 23 : /home/jack/modules/nib/lib/nib/clearfix.styl */
 .clearfix:before,
 .clearfix:after {
-  display: table;
-  line-height: 0;
   content: "";
+  display: table;
 }
 
+/* line 27 : /home/jack/modules/nib/lib/nib/clearfix.styl */
 .clearfix:after {
   clear: both;
 }
-
