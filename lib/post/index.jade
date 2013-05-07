@@ -1,0 +1,10 @@
+extends ../views/layout
+
+block content
+  #title
+    h1 #{post.title}
+
+  .container
+    | !{post.html}
+
+  .comment

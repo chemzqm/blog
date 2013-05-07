@@ -84,7 +84,7 @@ section
             color:$seaGreen
 
 ul.listview
-  padding-left: 0px
+  padding: 0px
   li:nth-child(odd)
     background-color: #f9f9f9
   li
@@ -96,14 +96,17 @@ ul.listview
       text-decoration: none
       display: block
       transition: 0.25s
+      cursor: pointer
       &:hover
         color: $lightBlack
-        background-color: $lightSilver
-    .btn-group
+        background-color: darken(#fff, 5)
+    .btn-group, & .date
       position:absolute
       margin: 0
       right: 10px
       top: 0
+    .date
+      color: $silver
 
 #admin-list
   li

@@ -9,5 +9,5 @@ block content
     ul.listview
       each p in posts
         li 
-          span.title #{p.title} 
-          span.date #{p.create}
+          a.title(href="/view/post/#{p.id}") #{p.title} 
+          span.date #{moment(p.create).format("YY年MM月DD日")}
