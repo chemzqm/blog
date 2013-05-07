@@ -5,6 +5,7 @@ block content
     h1 #{post.title}
 
   .container
-    | !{post.html}
+    article.markdown
+      | !{post.html}
 
   .comment
