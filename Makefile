@@ -63,5 +63,6 @@ compile: $(STYLE_CSS) $(BUILD_CSS) $(BUILD_JS) $(BUILD)
 
 clean:
 	rm -f public/build/*
+	rm *.pid
 
 .PHONY: start stop clean
