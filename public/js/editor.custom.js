@@ -15,7 +15,7 @@ toolbar.forEach(function(v, i ,arr){
   }
 });
 editor.render();
-var preview = $('<div id="preview">').append('<div class="content"></div>').append('<div class="close fui-cross-16"></div>');
+var preview = $('<div id="preview">').append('<div class="content markdown"></div>').append('<div class="close fui-cross-16"></div>');
 $('.CodeMirror').append(preview);
 preview.find('.close').click(function(){
     preview.hide();
