@@ -6471,6 +6471,7 @@ var shortcuts = {
   link: 'Cmd-K',
   image: 'Cmd-Alt-I',
   quote: "Cmd-'",
+  preview: "Cmd-p",
   'ordered-list': 'Cmd-Alt-L',
   'unordered-list': 'Cmd-L'
 };

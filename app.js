@@ -20,7 +20,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser());
+  app.use(express.cookieParser())
   app.use(express.session( { secret : 'B1!k'}));
   app.use(index);
   app.use(post);

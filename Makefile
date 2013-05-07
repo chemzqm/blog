@@ -28,7 +28,8 @@ $(BUILD_CSS): $(CSS_FILES)
 $(BUILD_JS): $(JS_FILES)
 	@cat ${JS_LIB}/respond.js ${JS_LIB}/html5shiv.js > ${BUILD}/ie.js
 	@uglifyjs ${BUILD}/ie.js > ${BUILD}/ie.min.js
-	@uglifyjs ${JS_LIB}/editor.js > ${BUILD}/editor.min.js
+	@cat ${JS_LIB}/editor.js ${JS_LIB}/highlight.pack.js ${JS_LIB}/marked.js public/js/editor.custom.js > ${BUILD}/editor.js
+	@uglifyjs ${BUILD}/editor.js > ${BUILD}/editor.min.js
 	@notify-send "$? has changed. Reload"
 	@touch $@
 	sleep 0.500

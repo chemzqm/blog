@@ -23,8 +23,6 @@ $gray = #7F8C8D
 $lightGray = #95A5A6
 
 $maxWidth = 700px
-html
-  height:100%
 
 body
   font: Arial,/*'Microsoft YaHei',*/Verdana,"BitStream vera Sans",Tahoma,Helvetica,Sans-serif
@@ -34,8 +32,16 @@ body
 a, a:hover, a:focus
   color: $lightSeaGreen
 
+pre, code, tt
+  font-size: 12px
+  font-family: Consolas, "Liberation Mono", Courier, monospace
+
+//common
 .clearfix
   clearfix()
+
+.hidden
+  display: none
 
 .container
   max-width: $maxWidth - 20
@@ -157,6 +163,11 @@ h1, h2, h3
   &:hover
     background-color: $lightRed
 
+.btn-warning
+  background-color: $yellow
+  &:hover
+    background-color: $lightYellow
+
 a.btn
   text-decoration: none
   font-size: 1em
@@ -166,7 +177,9 @@ a.btn
     margin-right:10px
 
 .btn-group
-  margin:20px 0
+  margin: 10px 0
+  .btn + .btn
+    margin-left: 10px
 
 //form
 input[type="text"]:focus, input[type="password"]:focus
@@ -212,4 +225,41 @@ input[type="text"], input[type="password"], input[type="textarea"]
 
 //editor
 .editor-wrapper
-  margin: 30px 0
+  margin: 10px 0
+
+#preview
+  position: absolute
+  background-color: #fff
+  min-height: 450px
+  z-index: 999
+  display: none
+  left: 0
+  top: 0
+  width: 100%
+  .content
+    box-shadow: 0 0 10px #ddd
+    margin: 3px
+    border: 1px solid #cacaca
+    padding: 3px
+    max-height: 450px
+    overflow: auto
+  .close
+    position: absolute
+    top: 15px
+    right: 25px
+    cursor: pointer
+    transition: 0.25s
+    &:hover
+      transform: rotate(90deg)
+
+.markdown
+  line-height: 1.6
+
+.markdown code
+  white-space: nowrap
+  margin: 0 2px
+  padding: 0px 5px
+  border: 1px solid #eaeaea
+  background-color: #f8f8f8
+  border-radius: 3px
+
