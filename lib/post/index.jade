@@ -10,7 +10,7 @@ block content
     hr
     .comment-container
       img(class="avatar", width="48", height="48", src="https://secure.gravatar.com/avatar/2eacec38995663670f3cbdeb40539a93?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png")
-      form#comment(class="comment-form clearfix", action="/comment/#{post.id}", action="post")
+      form#comment(class="comment-form clearfix", action="/comment/#{post.id}", method="post")
         .content-bubble
           .bubble-inner
             .tabnav.clearfix
@@ -27,7 +27,7 @@ block content
               .drag-drop
                 | 将文件拖动到此处上传，或者
                 a(onclick="uploadfile()") 选择上传文件
-              .info
+              .info.hidden
                 .social-login
                   span 使用社交帐号登陆
                   span
@@ -47,10 +47,10 @@ block content
                 .control-group
                   label(for="c_site") 主页
                   input(id="c_site", type="url", placeholder="主页", name="site", tabindex="5")
-
-
             .preview.hidden
               | test
+        .form-actions
+          button.btn.primary(type="submit") 评论
 
   script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
   script(type="text/javascript")
@@ -67,6 +67,7 @@ block content
     //delegate focus of textarea
     $('#comment textarea').on('focus', function(){
       $(this).parent().addClass('focus');
+      $('#comment .info').show();
     });
     $('#comment textarea').on('blur', function(){
       $(this).parent().removeClass('focus');
