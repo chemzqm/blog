@@ -5,12 +5,12 @@ $seaGreen = #16A085
 $lightSeaGreen = #1ABC9C
 $green = #27AE60
 $lightGreen = #2ecc71
-$blue = #2980B9
+$blue = #259dff
 $lightBlue = #3498DB
 $purple = #8E44AD
 $lightPurple = #9B59B6
-$black = #2C3E50
-$lightBlack = #34495E
+$black = #353535
+$lightBlack = #7b838a
 $yellow = #F39C12
 $lightYellow = #F1C40F
 $orange = #D35400
@@ -71,9 +71,13 @@ body
   font-size: 14px
   color: $black
 
-a, a:hover, a:focus
-  color: $lightBlack
+a
+  color: $blue
+  text-decoration: none
   cursor: pointer
+
+a:hover, a:focus
+  text-decoration: underline
 
 pre, code, tt
   font-size: 12px
@@ -127,7 +131,7 @@ section
 #title
   text-align: center
   p
-    color: $gray
+    color: $lightBlack
 
 .bar
   margin-top: 55px
@@ -219,7 +223,7 @@ ul.listview
       display:inline-block
       padding-right: 10px
       &:hover
-        color: lighten($black, 20)
+        color: $blue
     .btn-group, & .date
       position:absolute
       margin: 0
@@ -465,7 +469,7 @@ div.dk_container
       overflow: auto
       outline: none
       position: relative
-      background-color: $black
+      background-color: #34495e
       border-radius: 5px
       margin: 0
       padding: 3px 3px 0
