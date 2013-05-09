@@ -683,7 +683,14 @@ input[type="textarea"] {
   border-radius: 3px;
 }
 
-/* line 399 : /home/jack/work/blog/public/styles/style.styl */
+/* line 398 : /home/jack/work/blog/public/styles/style.styl */
+.markdown blockquote {
+  border-left: 4px solid #ddd;
+  padding: 0 15px;
+  color: #777;
+}
+
+/* line 404 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container {
   display: inline-block;
   zoom: 1;
@@ -693,20 +700,20 @@ div.dk_container {
   margin-right: 10px;
 }
 
-/* line 406 : /home/jack/work/blog/public/styles/style.styl */
+/* line 411 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 407 : /home/jack/work/blog/public/styles/style.styl */
+/* line 412 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle {
   background-color: #1abc9c;
 }
 
-/* line 409 : /home/jack/work/blog/public/styles/style.styl */
+/* line 414 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle .select-icon {
   background-color: #16a085;
   border-left-color: transparent;
 }
 
-/* line 412 : /home/jack/work/blog/public/styles/style.styl */
+/* line 417 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open .dk_options {
   opacity: 1;
   -ms-filter: none;
@@ -715,7 +722,7 @@ div.dk_container.dk_open .dk_options {
   z-index: 999;
 }
 
-/* line 416 : /home/jack/work/blog/public/styles/style.styl */
+/* line 421 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle {
   display: block;
   position: relative;
@@ -739,18 +746,18 @@ div.dk_container > a.dk_toggle {
   backface-visibility: hidden;
 }
 
-/* line 429 : /home/jack/work/blog/public/styles/style.styl */
+/* line 434 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle:hover {
   background-color: #1dd2af;
   color: #fff;
 }
 
-/* line 432 : /home/jack/work/blog/public/styles/style.styl */
+/* line 437 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .dk_label {
   margin-right: 44px;
 }
 
-/* line 434 : /home/jack/work/blog/public/styles/style.styl */
+/* line 439 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .select-icon {
   background: #1abc9c url("../images/toggle.png") no-repeat right center;
   border-left: 2px solid rgba(52,73,94,0.15);
@@ -772,7 +779,7 @@ div.dk_container > a.dk_toggle .select-icon {
   backface-visibility: hidden;
 }
 
-/* line 445 : /home/jack/work/blog/public/styles/style.styl */
+/* line 450 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options {
   margin-top: 0px;
   top: 27px;
@@ -795,7 +802,7 @@ div.dk_container .dk_options {
   backface-visibility: hidden;
 }
 
-/* line 456 : /home/jack/work/blog/public/styles/style.styl */
+/* line 461 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options:before {
   left: auto;
   right: 12px;
@@ -810,7 +817,7 @@ div.dk_container .dk_options:before {
   -webkit-transform: rotate(360deg);
 }
 
-/* line 468 : /home/jack/work/blog/public/styles/style.styl */
+/* line 473 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner {
   overflow: auto;
   outline: none;
@@ -822,13 +829,13 @@ div.dk_container .dk_options .dk_options_inner {
   padding: 3px 3px 0;
 }
 
-/* line 476 : /home/jack/work/blog/public/styles/style.styl */
+/* line 481 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li {
   margin-bottom: 3px;
   line-height: 2em;
 }
 
-/* line 479 : /home/jack/work/blog/public/styles/style.styl */
+/* line 484 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a {
   padding: 0 2em;
   display: block;
@@ -839,14 +846,14 @@ div.dk_container .dk_options .dk_options_inner li a {
   text-decoration: none;
 }
 
-/* line 486 : /home/jack/work/blog/public/styles/style.styl */
+/* line 491 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a:hover {
   background-color: #1abc9c;
 }
 
-/* line 488 : /home/jack/work/blog/public/styles/style.styl */
+/* line 493 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 489 : /home/jack/work/blog/public/styles/style.styl */
+/* line 494 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background-color: #1abc9c;
 }
