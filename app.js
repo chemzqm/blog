@@ -12,7 +12,7 @@ var app = express();
 var index = require('index');
 var post = require('post');
 var admin = require('admin');
-var rss = require('rss');
+var xml = require('xml');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -25,7 +25,7 @@ app.configure(function(){
   app.use(index);
   app.use(post);
   app.use(admin);
-  app.use(rss);
+  app.use(xml);
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -45,27 +45,28 @@ var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
     console.log('... pid file: %s', pidfile);
   });
-});
 
-process.on('exit', function() {
-  fs.stat(pidfile, function(err, stats) {
-    if(stats && stats.isFile()){
-      fs.unlinkSync(pidfile);
-    }
+  process.on('exit', function() {
+    fs.stat(pidfile, function(err, stats) {
+      if(stats && stats.isFile()){
+        fs.unlinkSync(pidfile);
+      }
+    });
   });
-});
 
-server.on('close', function() {
-  process.nextTick(function() {
-    process.exit();
+  server.on('close', function() {
+    process.nextTick(function() {
+      process.exit();
+    });
   });
-});
 
-process.on('SIGTERM', function() {
-  return process.exit(0);
-});
+  process.on('SIGTERM', function() {
+    return process.exit(0);
+  });
 
-process.on('SIGINT', function() {
-  return process.exit(0);
+  process.on('SIGINT', function() {
+    return process.exit(0);
+  });
+
 });
 
