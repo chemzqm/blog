@@ -13,6 +13,7 @@ var index = require('index');
 var post = require('post');
 var admin = require('admin');
 var xml = require('xml');
+var validate = require('validate');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -23,6 +24,7 @@ app.configure(function(){
   app.use(express.cookieParser())
   app.use(express.session( { secret : 'B1!k'}));
   app.use(index);
+  app.use(validate);
   app.use(post);
   app.use(admin);
   app.use(xml);
