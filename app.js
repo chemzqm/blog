@@ -34,6 +34,38 @@ app.configure('development', function(){
 });
 
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+var pidfile = 'blog.pid';
+var server = http.createServer(app).listen(app.get('port'), function(){
+
+  fs.writeFile(pidfile, process.pid, function(err) {
+    if(err) {
+      console.log('... Cannot write pid file: %s', pidfile);
+      process.exit(1)
+    }
+    console.log("Express server listening on port " + app.get('port'));
+    console.log('... pid file: %s', pidfile);
+  });
 });
+
+process.on('exit', function() {
+  fs.stat(pidfile, function(err, stats) {
+    if(stats && stats.isFile()){
+      fs.unlinkSync(pidfile);
+    }
+  });
+});
+
+server.on('close', function() {
+  process.nextTick(function() {
+    process.exit();
+  });
+});
+
+process.on('SIGTERM', function() {
+  return process.exit(0);
+});
+
+process.on('SIGINT', function() {
+  return process.exit(0);
+});
+

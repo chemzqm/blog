@@ -42,8 +42,9 @@ $(BUILD): $(JADE_FILES)
 	curl -X POST http://localhost:35729/changed -d '{ "files": "index.html" }'
 
 blog.pid:
-	@node-dev app.js & echo "$$!" > blog.pid
+	@node-dev app.js &
 	@echo -e "${CHECK} server started..."
+	@sleep 0.500
 	@google-chrome http://localhost:$$PORT
 
 tiny-lr.pid:
