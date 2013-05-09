@@ -43,6 +43,35 @@ pre, code, tt
 .hidden
   display: none
 
+.right
+  float: right
+
+.left
+  float: left
+
+.success
+  border-radius: 6px
+  color: #fff
+  background-color: $lightGreen
+  padding: 8px 0 9px 10px
+  margin-bottom: 10px
+
+.ghost
+  position: relative
+  opacity:1
+  height:0
+  > div
+    position: absolute
+    transition: 0.3s ease-in-out
+    width: 100%
+    left: 0
+    top: 0
+    z-index: 999
+    &.hide
+      opacity:0
+      top: -20px
+
+
 .container
   max-width: $maxWidth - 20
   margin:0 auto
@@ -91,15 +120,19 @@ ul.listview
     line-height: 2.8
     list-style: none
     position: relative
+    .tag
+      border-radius: 5px
+      background-color: $lightYellow
+      padding: 5px 10px
+      color: #fff
     & > a
       color: $black
       text-decoration: none
-      display: block
-      transition: 0.25s
       cursor: pointer
+      display:inline-block
+      padding-right: 10px
       &:hover
-        color: $lightBlack
-        background-color: darken(#fff, 5)
+        color: lighten($black, 20)
     .btn-group, & .date
       position:absolute
       margin: 0
@@ -170,6 +203,11 @@ h1, h2, h3
   background-color: $yellow
   &:hover
     background-color: $lightYellow
+
+.btn-info
+  background-color: $blue
+  &:hover
+    background-color: $lightBlue
 
 a.btn
   text-decoration: none
@@ -265,4 +303,100 @@ input[type="text"], input[type="password"], input[type="textarea"]
   border: 1px solid #eaeaea
   background-color: #f8f8f8
   border-radius: 3px
+
+//ui-toggle
+div.dk_container
+  display: inline-block
+  zoom: 1
+  position: relative
+  cursor: pointer
+  outline: none
+  margin-right: 10px
+  &.dk_open
+    > a.dk_toggle
+      background-color: $lightSeaGreen
+      .select-icon
+        background-color: $seaGreen
+        border-left-color: transparent
+    .dk_options
+      opacity: 1
+      margin-top: 11px
+  > a.dk_toggle
+    display: block
+    position: relative
+    background-color: $lightSeaGreen
+    color: #fff
+    border-radius: 6px
+    overflow: hidden
+    padding: 0 2em
+    line-height: 2em
+    text-decoration: none
+    white-space: nowrap
+    transition: 0.25s
+    backface-visibility: hidden
+    &:hover
+      background-color: lighten($lightSeaGreen, 5)
+      color: #fff
+    .dk_label
+      margin-right: 44px
+    .select-icon
+      background: $lightSeaGreen url("../images/toggle.png") no-repeat right center
+      border-left: 2px solid rgba(52, 73, 94, 0.15)
+      border-radius: 0 6px 6px 0
+      height: 100%
+      position: absolute
+      right: 0
+      top: 0
+      width: 42px
+      transition: 0.25s
+      backface-visibility: hidden
+  .dk_options
+    margin-top: 0px
+    top: 27px
+    position: absolute
+    left: 0
+    opacity: 0
+    width: 100%
+    z-index: 10
+    display: none	9
+    transition: 0.3s ease-out
+    backface-visibility: hidden
+    &:before
+      left:auto
+      right:12px
+      content: ""
+      border-style: solid
+      border-width: 0 9px 9px 9px
+      border-color: transparent transparent #34495e transparent
+      height: 0px
+      position: absolute
+      top: -9px
+      width: 0px
+      -webkit-transform: rotate(360deg)
+    .dk_options_inner
+      overflow: auto
+      outline: none
+      position: relative
+      background-color: $black
+      border-radius: 5px
+      margin: 0
+      padding: 3px 3px 0
+      li
+        margin-bottom: 3px
+        line-height: 2em
+        a
+          padding:0 2em
+          display: block
+          border-radius: 3px
+          text-indent: -4px
+          color: white
+          text-decoration: none
+          &:hover
+            background-color: $lightSeaGreen
+        &.dk_option_current
+          a
+            background-color: $lightSeaGreen
+
+
+
 

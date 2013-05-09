@@ -14,6 +14,11 @@ toolbar.forEach(function(v, i ,arr){
     }
   }
 });
+
+setInterval(function(){
+    $('#editor').val(editor.codemirror.getValue());
+}, 1000);
+
 editor.render();
 var preview = $('<div id="preview">').append('<div class="content markdown"></div>').append('<div class="close fui-cross-16"></div>');
 $('.CodeMirror').append(preview);

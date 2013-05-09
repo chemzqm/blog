@@ -2,20 +2,45 @@ extends ../views/layout
 
 block content
   .container
-    div.btn-group
-      a.btn.btn-primary(href="/post") 
+    div.btn-group.clearfix
+      a.btn.btn-primary.left(href="/post") 
         span.icon.fui-plus-16
         |  新建
-      a.btn.btn-primary(href="/comments") 
+      a.btn.btn-primary.left(href="/comments") 
         span.icon.fui-settings-16
-        |  评论管理
-        
+        |  评论
+      .right
+        select#filter(value="all", tabindex="1", name="filter")
+          option(value="all") 全部
+          option(value="hidden") 草稿
 
-    div#admin-list
+    div#post_list
       ul.listview
         each p in posts
-          li
+          if(!p.hide)
+            listclass = 'publish'
+          else
+            listclass = ''
+          li(class=listclass)
             a(href="/post/edit/#{p.id}") #{p.title}
+            if(p.hide)
+              span.tag 草稿
             .btn-group
               a.btn.btn-danger(href="/post/remove/#{p.id}") 删除
+
+  script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+  script(type="text/javascript", src="/js/lib/dropkick-1.0.0.js")
+  script(type="text/javascript")
+    $(function () {
+      $('#filter').dropkick({
+        change: function(){
+          var val = $(this).val();
+          if(val === 'all'){
+            $('#post_list li.publish').show();
+          }else{
+            $('#post_list li.publish').hide();
+          }
+        }
+      });
+    });
 

@@ -2,12 +2,41 @@ extends ../views/layout
 
 block content
   div.container
-    form(action="/post",method="post")
+    .ghost
+      .success.hide
+    form#post_form(action="post",method="post")
       div.editor-wrapper
+        input(type="hidden",value="",name="id")
+        input(type="hidden",value="1",name="hide")
         input.title(type="text",name="title",placeholder="title")
         textarea#editor(name="content", "Content here...")
         .btn-group
-          input.btn.btn-block(type="submit", value="新建")
+          input.btn.btn-block(type="submit", value="发布")
           a.btn.btn-warning(href="/admin") 取消
+          input.btn.btn-info(type="submit", value="存为草稿")
   script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+  script(type="text/javascript", src="/js/lib/jquery.form.js")
   script(type="text/javascript", src="/build/editor.min.js")
+  script(type="text/javascript")
+    $('#post_form .btn-block').on('click', function(){
+      $('#post_form [name="hide"]').val(0);
+    });
+    $('#post_form .btn-info').on('click', function(){
+      $('#post_form [name="hide"]').val(1);
+    });
+    //auto save
+    setInterval(function(){
+      if($('[name="title"]').val() && $('[name="content"]').val()){
+        $('#post_form').ajaxSubmit(function(data) {
+          if(data.success){
+            $('[name="id"]').val(data.id);
+            var d = new Date();
+            var time = d.getHours() + ':' + d.getMinutes();
+            $('.ghost .success').html("自动保存于 " + time).removeClass('hide');
+            setTimeout(function(){
+              $('.ghost .success').addClass('hide');
+            }, 5000);
+          }
+        });
+      }
+    }, 5*60*1000);
