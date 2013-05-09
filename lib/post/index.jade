@@ -7,5 +7,72 @@ block content
   .container
     article.markdown
       | !{post.html}
+    hr
+    .comment-container
+      img(class="avatar", width="48", height="48", src="https://secure.gravatar.com/avatar/2eacec38995663670f3cbdeb40539a93?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png")
+      form#comment(class="comment-form clearfix", action="/comment/#{post.id}", action="post")
+        .content-bubble
+          .bubble-inner
+            .tabnav.clearfix
+              ul.tabs.left
+                li.active(onclick="showComment()") 评论
+                li(onclick="showPreview()") 预览
+              span.right
+                | 评论通过
+                a(href="http://github.github.com/github-flavored-markdown/") GitHub Flavored Markdown
+                | 进行转换
+            .write-content
+              textarea(name="content", tabindex="1")
+                | 
+              .drag-drop
+                | 将文件拖动到此处上传，或者
+                a(onclick="uploadfile()") 选择上传文件
+              .info
+                .social-login
+                  span 使用社交帐号登陆
+                  span
+                    a(class="weibo", href="/login/weibo", rel="nofollow") 微博
+                    a(class="qq", href="/login/qq", rel="nofollow") qq
+                .control-group
+                  label(for="c_name") 大名
+                  input(id="c_name",type="text", placeholder="姓名", name="name", tabindex="2")
+                  span.hint (必填)
+                .control-group
+                  label(for="c_validate") 1+5=
+                  input(id="c_validate", type="text", placeholder="左边计算结果", name="validate", tabindex="5")
+                  span.hint (必填)
+                .control-group
+                  label(for="c_email") 邮箱
+                  input(id="c_email", type="email", placeholder="邮箱", name="validate", tabindex="5")
+                .control-group
+                  label(for="c_site") 主页
+                  input(id="c_site", type="url", placeholder="主页", name="site", tabindex="4")
 
-  .comment
+
+            .preview.hidden
+              | test
+
+  script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+  script(type="text/javascript")
+    //switch preview and comment
+    $('#comment .tabs').on('click', 'li', function(){
+      $(this).addClass('active').siblings('li').removeClass('active');
+    })
+    function showComment(){
+      $('#comment .write-content').show().next('.preview').hide();
+    }
+    function showPreview(){
+      $('#comment .preview').show().prev('.write-content').hide();
+    }
+    //delegate focus of textarea
+    $('#comment textarea').on('focus', function(){
+      $(this).parent().addClass('focus');
+    });
+    $('#comment textarea').on('blur', function(){
+      $(this).parent().removeClass('focus');
+    });
+    //auto height of textarea
+    $('#comment textarea').on('keyup', function(){
+      var h = $(this).height();
+      $(this).height(h + $(this).scrollTop());
+    });
