@@ -4,12 +4,12 @@ NODE_PATH := lib:$(PATH)
 CHECK=\033[32m✔\033[39m
 BUILD ?= public/build
 JS_LIB ?= public/js/lib
-CSS_FILES ?= $(shell find public/styles -name '*.css')
-JS_FILES ?= $(shell find public/js -name '*.js')
-JADE_FILES ?= $(shell find lib -name '*.jade')
+CSS_FILES = $(shell find public/styles -name '*.css')
+JS_FILES = $(shell find public/js -name '*.js')
+JADE_FILES = $(shell find lib -name '*.jade')
 STYLE_CSS ?= public/styles/style.css
-BUILD_CSS ?= public/build/build.min.css
-BUILD_JS ?= public/build/build.min.js
+BUILD_CSS = public/build/build.min.css
+BUILD_JS = public/build/build.min.js
 
 start: blog.pid tiny-lr.pid
 
