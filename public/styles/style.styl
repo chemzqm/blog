@@ -23,6 +23,48 @@ $gray = #7F8C8D
 $lightGray = #95A5A6
 
 $maxWidth = 700px
+::-moz-selection
+  background: #b3d4fc
+  text-shadow: none
+
+::selection
+  background: #b3d4fc
+  text-shadow: none
+/*
+ * Image replacement
+ */
+
+.ir
+  background-color: transparent
+  border: 0
+  overflow: hidden
+  /* IE 6/7 fallback */
+  *text-indent: -9999px
+
+.ir:before 
+  content: ""
+  display: block
+  width: 0
+  height: 150%
+
+
+hr
+  display: block
+  height: 1px
+  border: 0
+  border-top: 1px solid #ccc
+  margin: 1em 0
+  padding: 0
+
+img
+  vertical-align: middle
+
+fieldset
+  border: 0
+  margin: 0
+  padding: 0
+
+
 
 body
   font: Arial,/*'Microsoft YaHei',*/Verdana,"BitStream vera Sans",Tahoma,Helvetica,Sans-serif

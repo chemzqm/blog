@@ -41,7 +41,63 @@
 
 /* line 12 : /home/jack/modules/nib/lib/nib/size.styl */
 
-/* line 27 : /home/jack/work/blog/public/styles/style.styl */
+/* line 26 : /home/jack/work/blog/public/styles/style.styl */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/* line 30 : /home/jack/work/blog/public/styles/style.styl */
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/* line 33 : /home/jack/work/blog/public/styles/style.styl */
+/*
+ * Image replacement
+ */
+
+/* line 37 : /home/jack/work/blog/public/styles/style.styl */
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+/* IE 6/7 fallback */
+  *text-indent: -9999px;
+}
+
+/* line 44 : /home/jack/work/blog/public/styles/style.styl */
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%;
+}
+
+/* line 51 : /home/jack/work/blog/public/styles/style.styl */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* line 59 : /home/jack/work/blog/public/styles/style.styl */
+img {
+  vertical-align: middle;
+}
+
+/* line 62 : /home/jack/work/blog/public/styles/style.styl */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 69 : /home/jack/work/blog/public/styles/style.styl */
 body {
   font: Arial,;
 /*'Microsoft YaHei',*/
@@ -50,14 +106,14 @@ body {
   color: #2c3e50;
 }
 
-/* line 32 : /home/jack/work/blog/public/styles/style.styl */
+/* line 74 : /home/jack/work/blog/public/styles/style.styl */
 a,
 a:hover,
 a:focus {
   color: #1abc9c;
 }
 
-/* line 35 : /home/jack/work/blog/public/styles/style.styl */
+/* line 77 : /home/jack/work/blog/public/styles/style.styl */
 pre,
 code,
 tt {
@@ -65,7 +121,7 @@ tt {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 
-/* line 40 : /home/jack/work/blog/public/styles/style.styl */
+/* line 82 : /home/jack/work/blog/public/styles/style.styl */
 .clearfix {
   zoom: 1;
 }
@@ -82,22 +138,22 @@ tt {
   clear: both;
 }
 
-/* line 43 : /home/jack/work/blog/public/styles/style.styl */
+/* line 85 : /home/jack/work/blog/public/styles/style.styl */
 .hidden {
   display: none;
 }
 
-/* line 46 : /home/jack/work/blog/public/styles/style.styl */
+/* line 88 : /home/jack/work/blog/public/styles/style.styl */
 .right {
   float: right;
 }
 
-/* line 49 : /home/jack/work/blog/public/styles/style.styl */
+/* line 91 : /home/jack/work/blog/public/styles/style.styl */
 .left {
   float: left;
 }
 
-/* line 52 : /home/jack/work/blog/public/styles/style.styl */
+/* line 94 : /home/jack/work/blog/public/styles/style.styl */
 .success {
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -107,7 +163,7 @@ tt {
   margin-bottom: 10px;
 }
 
-/* line 59 : /home/jack/work/blog/public/styles/style.styl */
+/* line 101 : /home/jack/work/blog/public/styles/style.styl */
 .ghost {
   position: relative;
   opacity: 1;
@@ -116,7 +172,7 @@ tt {
   height: 0;
 }
 
-/* line 63 : /home/jack/work/blog/public/styles/style.styl */
+/* line 105 : /home/jack/work/blog/public/styles/style.styl */
 .ghost > div {
   position: absolute;
   -webkit-transition: 0.3s ease-in-out;
@@ -130,7 +186,7 @@ tt {
   z-index: 999;
 }
 
-/* line 70 : /home/jack/work/blog/public/styles/style.styl */
+/* line 112 : /home/jack/work/blog/public/styles/style.styl */
 .ghost > div.hide {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -138,31 +194,31 @@ tt {
   top: -20px;
 }
 
-/* line 75 : /home/jack/work/blog/public/styles/style.styl */
+/* line 117 : /home/jack/work/blog/public/styles/style.styl */
 .container {
   max-width: 680px;
   margin: 0 auto;
   padding-left: 20px;
 }
 
-/* line 80 : /home/jack/work/blog/public/styles/style.styl */
+/* line 122 : /home/jack/work/blog/public/styles/style.styl */
 section {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background-color: #ecf0f1;
 }
 
-/* line 84 : /home/jack/work/blog/public/styles/style.styl */
+/* line 126 : /home/jack/work/blog/public/styles/style.styl */
 #title {
   text-align: center;
 }
 
-/* line 86 : /home/jack/work/blog/public/styles/style.styl */
+/* line 128 : /home/jack/work/blog/public/styles/style.styl */
 #title p {
   color: #7f8c8d;
 }
 
-/* line 89 : /home/jack/work/blog/public/styles/style.styl */
+/* line 131 : /home/jack/work/blog/public/styles/style.styl */
 #header {
   font-size: 1.3em;
   width: 100%;
@@ -171,19 +227,19 @@ section {
   background-color: #2c3e50;
 }
 
-/* line 95 : /home/jack/work/blog/public/styles/style.styl */
+/* line 137 : /home/jack/work/blog/public/styles/style.styl */
 #header .nav {
   max-width: 700px;
   margin: 0 auto;
 }
 
-/* line 98 : /home/jack/work/blog/public/styles/style.styl */
+/* line 140 : /home/jack/work/blog/public/styles/style.styl */
 #header .nav ul {
   margin: 0;
   padding: 0;
 }
 
-/* line 101 : /home/jack/work/blog/public/styles/style.styl */
+/* line 143 : /home/jack/work/blog/public/styles/style.styl */
 #header .nav ul li {
   list-style: none;
   float: left;
@@ -191,7 +247,7 @@ section {
   padding: 0;
 }
 
-/* line 106 : /home/jack/work/blog/public/styles/style.styl */
+/* line 148 : /home/jack/work/blog/public/styles/style.styl */
 #header .nav ul li a {
   display: block;
   padding: 10px 20px;
@@ -200,30 +256,30 @@ section {
   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 }
 
-/* line 112 : /home/jack/work/blog/public/styles/style.styl */
+/* line 154 : /home/jack/work/blog/public/styles/style.styl */
 #header .nav ul li a:hover,
 #header .nav ul li a.active {
   color: #16a085;
 }
 
-/* line 115 : /home/jack/work/blog/public/styles/style.styl */
+/* line 157 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview {
   padding: 0px;
 }
 
-/* line 117 : /home/jack/work/blog/public/styles/style.styl */
+/* line 159 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-/* line 119 : /home/jack/work/blog/public/styles/style.styl */
+/* line 161 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li {
   line-height: 2.8;
   list-style: none;
   position: relative;
 }
 
-/* line 123 : /home/jack/work/blog/public/styles/style.styl */
+/* line 165 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li .tag {
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -232,7 +288,7 @@ ul.listview li .tag {
   color: #fff;
 }
 
-/* line 128 : /home/jack/work/blog/public/styles/style.styl */
+/* line 170 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li > a {
   color: #2c3e50;
   text-decoration: none;
@@ -241,12 +297,12 @@ ul.listview li > a {
   padding-right: 10px;
 }
 
-/* line 134 : /home/jack/work/blog/public/styles/style.styl */
+/* line 176 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li > a:hover {
   color: #507192;
 }
 
-/* line 136 : /home/jack/work/blog/public/styles/style.styl */
+/* line 178 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li .btn-group,
 ul.listview li .date {
   position: absolute;
@@ -255,32 +311,32 @@ ul.listview li .date {
   top: 0;
 }
 
-/* line 141 : /home/jack/work/blog/public/styles/style.styl */
+/* line 183 : /home/jack/work/blog/public/styles/style.styl */
 ul.listview li .date {
   color: #bdc3c7;
 }
 
-/* line 144 : /home/jack/work/blog/public/styles/style.styl */
+/* line 186 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 145 : /home/jack/work/blog/public/styles/style.styl */
+/* line 187 : /home/jack/work/blog/public/styles/style.styl */
 #admin-list li {
   border-top: 1px solid #ddd;
 }
 
-/* line 150 : /home/jack/work/blog/public/styles/style.styl */
+/* line 192 : /home/jack/work/blog/public/styles/style.styl */
 h1 {
   font-size: 32px;
   margin: 10px 0;
 }
 
-/* line 153 : /home/jack/work/blog/public/styles/style.styl */
+/* line 195 : /home/jack/work/blog/public/styles/style.styl */
 h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 2px;
 }
 
-/* line 158 : /home/jack/work/blog/public/styles/style.styl */
+/* line 200 : /home/jack/work/blog/public/styles/style.styl */
 h3 {
   font-size: 24px;
   font-weight: 700;
@@ -288,26 +344,26 @@ h3 {
   margin-top: 2px;
 }
 
-/* line 164 : /home/jack/work/blog/public/styles/style.styl */
+/* line 206 : /home/jack/work/blog/public/styles/style.styl */
 h4 {
   font-size: 18px;
   font-weight: 500;
   margin-top: 4px;
 }
 
-/* line 169 : /home/jack/work/blog/public/styles/style.styl */
+/* line 211 : /home/jack/work/blog/public/styles/style.styl */
 h1,
 h2,
 h3 {
   line-height: 40px;
 }
 
-/* line 172 : /home/jack/work/blog/public/styles/style.styl */
+/* line 214 : /home/jack/work/blog/public/styles/style.styl */
 .control-group {
   margin: 1em 0;
 }
 
-/* line 176 : /home/jack/work/blog/public/styles/style.styl */
+/* line 218 : /home/jack/work/blog/public/styles/style.styl */
 .btn {
   display: inline-block;
   border: none;
@@ -325,89 +381,89 @@ h3 {
   padding: 0 1em;
 }
 
-/* line 187 : /home/jack/work/blog/public/styles/style.styl */
+/* line 229 : /home/jack/work/blog/public/styles/style.styl */
 .btn-block {
   background-color: #2c3e50;
 }
 
-/* line 189 : /home/jack/work/blog/public/styles/style.styl */
+/* line 231 : /home/jack/work/blog/public/styles/style.styl */
 .btn-block:hover {
   background-color: #34495e;
 }
 
-/* line 192 : /home/jack/work/blog/public/styles/style.styl */
+/* line 234 : /home/jack/work/blog/public/styles/style.styl */
 .btn-primary {
   background-color: #16a085;
 }
 
-/* line 194 : /home/jack/work/blog/public/styles/style.styl */
+/* line 236 : /home/jack/work/blog/public/styles/style.styl */
 .btn-primary:hover {
   background-color: #1abc9c;
 }
 
-/* line 197 : /home/jack/work/blog/public/styles/style.styl */
+/* line 239 : /home/jack/work/blog/public/styles/style.styl */
 .btn-danger {
   background-color: #c0392b;
 }
 
-/* line 199 : /home/jack/work/blog/public/styles/style.styl */
+/* line 241 : /home/jack/work/blog/public/styles/style.styl */
 .btn-danger:hover {
   background-color: #e74c3c;
 }
 
-/* line 202 : /home/jack/work/blog/public/styles/style.styl */
+/* line 244 : /home/jack/work/blog/public/styles/style.styl */
 .btn-warning {
   background-color: #f39c12;
 }
 
-/* line 204 : /home/jack/work/blog/public/styles/style.styl */
+/* line 246 : /home/jack/work/blog/public/styles/style.styl */
 .btn-warning:hover {
   background-color: #f1c40f;
 }
 
-/* line 207 : /home/jack/work/blog/public/styles/style.styl */
+/* line 249 : /home/jack/work/blog/public/styles/style.styl */
 .btn-info {
   background-color: #2980b9;
 }
 
-/* line 209 : /home/jack/work/blog/public/styles/style.styl */
+/* line 251 : /home/jack/work/blog/public/styles/style.styl */
 .btn-info:hover {
   background-color: #3498db;
 }
 
-/* line 212 : /home/jack/work/blog/public/styles/style.styl */
+/* line 254 : /home/jack/work/blog/public/styles/style.styl */
 a.btn {
   text-decoration: none;
   font-size: 1em;
 }
 
-/* line 215 : /home/jack/work/blog/public/styles/style.styl */
+/* line 257 : /home/jack/work/blog/public/styles/style.styl */
 a.btn:hover {
   color: #fff;
 }
 
-/* line 217 : /home/jack/work/blog/public/styles/style.styl */
+/* line 259 : /home/jack/work/blog/public/styles/style.styl */
 a.btn .icon {
   margin-right: 10px;
 }
 
-/* line 220 : /home/jack/work/blog/public/styles/style.styl */
+/* line 262 : /home/jack/work/blog/public/styles/style.styl */
 .btn-group {
   margin: 10px 0;
 }
 
-/* line 222 : /home/jack/work/blog/public/styles/style.styl */
+/* line 264 : /home/jack/work/blog/public/styles/style.styl */
 .btn-group .btn + .btn {
   margin-left: 10px;
 }
 
-/* line 226 : /home/jack/work/blog/public/styles/style.styl */
+/* line 268 : /home/jack/work/blog/public/styles/style.styl */
 input[type="text"]:focus,
 input[type="password"]:focus {
   border-color: #16a085;
 }
 
-/* line 229 : /home/jack/work/blog/public/styles/style.styl */
+/* line 271 : /home/jack/work/blog/public/styles/style.styl */
 input[type="text"],
 input[type="password"],
 input[type="textarea"] {
@@ -420,23 +476,23 @@ input[type="textarea"] {
   border-radius: 6px;
 }
 
-/* line 238 : /home/jack/work/blog/public/styles/style.styl */
+/* line 280 : /home/jack/work/blog/public/styles/style.styl */
 #login_form {
   max-width: 360px;
   margin: 40px auto;
 }
 
-/* line 241 : /home/jack/work/blog/public/styles/style.styl */
+/* line 283 : /home/jack/work/blog/public/styles/style.styl */
 #login_form input:focus + .login-field-icon {
   color: #16a085;
 }
 
-/* line 243 : /home/jack/work/blog/public/styles/style.styl */
+/* line 285 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .control-group {
   position: relative;
 }
 
-/* line 245 : /home/jack/work/blog/public/styles/style.styl */
+/* line 287 : /home/jack/work/blog/public/styles/style.styl */
 #login_form input[type="text"],
 #login_form input[type="password"] {
   font-size: 17px;
@@ -446,7 +502,7 @@ input[type="textarea"] {
   width: 100%;
 }
 
-/* line 251 : /home/jack/work/blog/public/styles/style.styl */
+/* line 293 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .login-field-icon {
   color: #bdc3c7;
   position: absolute;
@@ -463,12 +519,12 @@ input[type="textarea"] {
   backface-visibility: hidden;
 }
 
-/* line 258 : /home/jack/work/blog/public/styles/style.styl */
+/* line 300 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .btn {
   width: 100%;
 }
 
-/* line 261 : /home/jack/work/blog/public/styles/style.styl */
+/* line 303 : /home/jack/work/blog/public/styles/style.styl */
 #form {
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -477,12 +533,12 @@ input[type="textarea"] {
   background-color: #ecf0f1;
 }
 
-/* line 268 : /home/jack/work/blog/public/styles/style.styl */
+/* line 310 : /home/jack/work/blog/public/styles/style.styl */
 .editor-wrapper {
   margin: 10px 0;
 }
 
-/* line 271 : /home/jack/work/blog/public/styles/style.styl */
+/* line 313 : /home/jack/work/blog/public/styles/style.styl */
 #preview {
   position: absolute;
   background-color: #fff;
@@ -494,7 +550,7 @@ input[type="textarea"] {
   width: 100%;
 }
 
-/* line 280 : /home/jack/work/blog/public/styles/style.styl */
+/* line 322 : /home/jack/work/blog/public/styles/style.styl */
 #preview .content {
   -webkit-box-shadow: 0 0 10px #ddd;
   box-shadow: 0 0 10px #ddd;
@@ -505,7 +561,7 @@ input[type="textarea"] {
   overflow: auto;
 }
 
-/* line 287 : /home/jack/work/blog/public/styles/style.styl */
+/* line 329 : /home/jack/work/blog/public/styles/style.styl */
 #preview .close {
   position: absolute;
   top: 15px;
@@ -518,7 +574,7 @@ input[type="textarea"] {
   transition: 0.25s;
 }
 
-/* line 293 : /home/jack/work/blog/public/styles/style.styl */
+/* line 335 : /home/jack/work/blog/public/styles/style.styl */
 #preview .close:hover {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -527,12 +583,12 @@ input[type="textarea"] {
   transform: rotate(90deg);
 }
 
-/* line 296 : /home/jack/work/blog/public/styles/style.styl */
+/* line 338 : /home/jack/work/blog/public/styles/style.styl */
 .markdown {
   line-height: 1.6;
 }
 
-/* line 299 : /home/jack/work/blog/public/styles/style.styl */
+/* line 341 : /home/jack/work/blog/public/styles/style.styl */
 .markdown code {
   white-space: nowrap;
   margin: 0 2px;
@@ -543,7 +599,7 @@ input[type="textarea"] {
   border-radius: 3px;
 }
 
-/* line 308 : /home/jack/work/blog/public/styles/style.styl */
+/* line 350 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container {
   display: inline-block;
   zoom: 1;
@@ -553,20 +609,20 @@ div.dk_container {
   margin-right: 10px;
 }
 
-/* line 315 : /home/jack/work/blog/public/styles/style.styl */
+/* line 357 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 316 : /home/jack/work/blog/public/styles/style.styl */
+/* line 358 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle {
   background-color: #1abc9c;
 }
 
-/* line 318 : /home/jack/work/blog/public/styles/style.styl */
+/* line 360 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle .select-icon {
   background-color: #16a085;
   border-left-color: transparent;
 }
 
-/* line 321 : /home/jack/work/blog/public/styles/style.styl */
+/* line 363 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open .dk_options {
   opacity: 1;
   -ms-filter: none;
@@ -574,7 +630,7 @@ div.dk_container.dk_open .dk_options {
   margin-top: 11px;
 }
 
-/* line 324 : /home/jack/work/blog/public/styles/style.styl */
+/* line 366 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle {
   display: block;
   position: relative;
@@ -598,18 +654,18 @@ div.dk_container > a.dk_toggle {
   backface-visibility: hidden;
 }
 
-/* line 337 : /home/jack/work/blog/public/styles/style.styl */
+/* line 379 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle:hover {
   background-color: #1dd2af;
   color: #fff;
 }
 
-/* line 340 : /home/jack/work/blog/public/styles/style.styl */
+/* line 382 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .dk_label {
   margin-right: 44px;
 }
 
-/* line 342 : /home/jack/work/blog/public/styles/style.styl */
+/* line 384 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .select-icon {
   background: #1abc9c url("../images/toggle.png") no-repeat right center;
   border-left: 2px solid rgba(52,73,94,0.15);
@@ -631,7 +687,7 @@ div.dk_container > a.dk_toggle .select-icon {
   backface-visibility: hidden;
 }
 
-/* line 353 : /home/jack/work/blog/public/styles/style.styl */
+/* line 395 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options {
   margin-top: 0px;
   top: 27px;
@@ -654,7 +710,7 @@ div.dk_container .dk_options {
   backface-visibility: hidden;
 }
 
-/* line 364 : /home/jack/work/blog/public/styles/style.styl */
+/* line 406 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options:before {
   left: auto;
   right: 12px;
@@ -669,7 +725,7 @@ div.dk_container .dk_options:before {
   -webkit-transform: rotate(360deg);
 }
 
-/* line 376 : /home/jack/work/blog/public/styles/style.styl */
+/* line 418 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner {
   overflow: auto;
   outline: none;
@@ -681,13 +737,13 @@ div.dk_container .dk_options .dk_options_inner {
   padding: 3px 3px 0;
 }
 
-/* line 384 : /home/jack/work/blog/public/styles/style.styl */
+/* line 426 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li {
   margin-bottom: 3px;
   line-height: 2em;
 }
 
-/* line 387 : /home/jack/work/blog/public/styles/style.styl */
+/* line 429 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a {
   padding: 0 2em;
   display: block;
@@ -698,14 +754,14 @@ div.dk_container .dk_options .dk_options_inner li a {
   text-decoration: none;
 }
 
-/* line 394 : /home/jack/work/blog/public/styles/style.styl */
+/* line 436 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a:hover {
   background-color: #1abc9c;
 }
 
-/* line 396 : /home/jack/work/blog/public/styles/style.styl */
+/* line 438 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 397 : /home/jack/work/blog/public/styles/style.styl */
+/* line 439 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background-color: #1abc9c;
 }
