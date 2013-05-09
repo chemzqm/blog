@@ -19,6 +19,7 @@ $(STYLE_CSS): public/styles/style.styl
 
 
 $(BUILD_CSS): $(CSS_FILES)
+	@mkdir -p ${BUILD}
 	@cat $^ > public/build/build.css
 	@cssmin public/build/build.css > $@
 	@notify-send "$? has changed. Reload"
