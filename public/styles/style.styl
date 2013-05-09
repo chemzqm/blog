@@ -72,7 +72,8 @@ body
   color: $black
 
 a, a:hover, a:focus
-  color: $lightSeaGreen
+  color: $lightBlack
+  cursor: pointer
 
 pre, code, tt
   font-size: 12px
@@ -128,12 +129,21 @@ section
   p
     color: $gray
 
+.bar
+  margin-top: 55px
+  height: 0px
+  font-size: 0px
+
 #header
+  border-bottom: 1px solid #ddd
+  box-shadow: 0 0 4px #eee
+  position: fixed
   font-size: 1.3em
   width: 100%
   top: 0
   left: 0
-  background-color: $black
+  z-index: 10
+  background-color: #fff
   .nav
     max-width: $maxWidth
     margin: 0 auto
@@ -148,27 +158,46 @@ section
         a
           display:block
           padding: 10px 20px
-          color: #fff
+          color: #7B838A
           text-decoration: none
-          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
-          &:hover,&.active
-            color:$seaGreen
+          &:hover
+            text-decoration: underline
+          &.active
+            font-weight: bold
+            color:#353535
 
-.social
-  a
-    border-radius: 50%
-    display: inline-block
-    vertical-align: middle
-    zoom: 1
-    *text-indent: -9999px
-    text-indent: 100%
-    white-space: nowrap
-    overflow: hidden
-    margin-right: 15px
-    opacity: 0.5
-    width: 28px
-    height: 28px
-    -webkit-transition: 0.3s
+#header
+  .social
+    margin: 5px 0
+    a
+      border-radius: 50%
+      display: inline-block
+      vertical-align: middle
+      zoom: 1
+      *text-indent: -9999px
+      text-indent: 100%
+      white-space: nowrap
+      overflow: hidden
+      margin-right: 15px
+      opacity: 0.5
+      width: 28px
+      height: 28px
+      -webkit-transition: 0.3s
+      &.rss
+        background: url('/images/social/rss.png') center no-repeat #ef7522
+        border: 1px solid #ef7522
+        &:hover
+          border: 1px solid #cf5d0f
+      &.github
+        background: url('/images/social/github.png') center no-repeat #afb6ca
+        border: 1px solid #afb6ca
+        &:hover
+          border: 1px solid #909ab6
+      &.weibo
+        background: url('/images/social/weibo.png') center no-repeat #fff
+        border: 1px solid $red
+      &:hover
+        opacity: 1
 
 ul.listview
   padding: 0px
