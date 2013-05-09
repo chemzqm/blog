@@ -22,7 +22,8 @@
     "jade": "~0.30.0",
     "moment": "~2.0.0",
     "color-marked": "~0.3.0",
-    "ejs": "~0.8.4"
+    "ejs": "~0.8.4",
+    "canvas": "~1.0.2"
   },
   "devDependencies": {
     "tiny-lr": "~0.0.4",
