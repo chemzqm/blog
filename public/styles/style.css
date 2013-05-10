@@ -1006,8 +1006,8 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background-color: #fff;
 }
 
-/* line 571 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .write-content {
+/* line 572 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox {
   margin: 0 10px 10px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1015,20 +1015,31 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border: 1px solid #ccc;
 }
 
-/* line 576 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .write-content.focus {
+/* line 577 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox.focus {
   border-color: #51a7e8;
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
 }
 
-/* line 579 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .write-content.focus textarea {
+/* line 580 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox.focus textarea {
   border-bottom-color: #51a7e8;
 }
 
-/* line 581 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .write-content textarea {
+/* line 582 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox.dragover {
+  -webkit-box-shadow: #c9ff00 0 0 3px;
+  box-shadow: #c9ff00 0 0 3px;
+}
+
+/* line 584 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox.dragover textarea {
+  border-bottom-color: #c9ff00;
+}
+
+/* line 586 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox textarea {
   min-height: 58px;
   border-width: 0;
   outline: none;
@@ -1042,22 +1053,22 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   resize: vertical;
 }
 
-/* line 591 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .write-content .drag-drop {
+/* line 596 : /home/jack/work/blog/public/styles/style.styl */
+#dropbox .drag-drop {
   line-height: 1.6;
   color: #aaa;
   padding: 0 8px;
 }
 
-/* line 595 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .tabnav {
+/* line 600 : /home/jack/work/blog/public/styles/style.styl */
+.tabnav {
   margin: 10px 0;
   border-bottom: 1px solid #ddd;
   height: 35px;
 }
 
-/* line 599 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .tabnav span.right {
+/* line 604 : /home/jack/work/blog/public/styles/style.styl */
+.tabnav span.right {
   display: inline-block;
   margin-top: 12px;
   margin-right: 14px;
@@ -1065,15 +1076,15 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   color: #666;
 }
 
-/* line 605 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .tabnav ul {
+/* line 610 : /home/jack/work/blog/public/styles/style.styl */
+.tabnav ul {
   margin: 0;
   padding-left: 12px;
   display: inline-block;
 }
 
-/* line 609 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .tabnav ul>li {
+/* line 614 : /home/jack/work/blog/public/styles/style.styl */
+.tabnav ul>li {
   display: inline-block;
   line-height: 35px;
   padding: 0 12px;
@@ -1083,8 +1094,8 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   margin: 0;
 }
 
-/* line 617 : /home/jack/work/blog/public/styles/style.styl */
-.comment-container .content-bubble .bubble-inner .tabnav ul>li.active {
+/* line 622 : /home/jack/work/blog/public/styles/style.styl */
+.tabnav ul>li.active {
   border-color: #ddd;
   -webkit-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0;
@@ -1092,13 +1103,13 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-bottom-color: #fff;
 }
 
-/* line 623 : /home/jack/work/blog/public/styles/style.styl */
+/* line 628 : /home/jack/work/blog/public/styles/style.styl */
 .social-login {
   color: #333;
   margin: 5px 8px;
 }
 
-/* line 626 : /home/jack/work/blog/public/styles/style.styl */
+/* line 631 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a {
   display: inline-block;
   color: #777;
@@ -1114,18 +1125,62 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   overflow: hidden;
 }
 
-/* line 635 : /home/jack/work/blog/public/styles/style.styl */
+/* line 640 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.weibo {
   background-position: 0 0;
 }
 
-/* line 637 : /home/jack/work/blog/public/styles/style.styl */
+/* line 642 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.qq {
   background-position: 0 -192px;
 }
 
-/* line 639 : /home/jack/work/blog/public/styles/style.styl */
+/* line 644 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a:hover {
   color: #333;
   text-decoration: none;
+}
+
+/* line 648 : /home/jack/work/blog/public/styles/style.styl */
+
+/* line 649 : /home/jack/work/blog/public/styles/style.styl */
+#messages.error {
+  background-color: #c0392b;
+  padding: 0 10px;
+  line-height: 1.6;
+  -webkit-transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -o-transition: 0.5s ease-in;
+  -ms-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+
+/* line 655 : /home/jack/work/blog/public/styles/style.styl */
+#messages.hide {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+/* line 659 : /home/jack/work/blog/public/styles/style.styl */
+#progress p {
+  width: 240px;
+  padding: 2px 5px;
+  margin: 2px 0;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #eee url("../images/progress.png") 100% 0 repeat-y;
+}
+
+/* line 665 : /home/jack/work/blog/public/styles/style.styl */
+#progress p.failed {
+  background: #c00 none 0 0 no-repeat;
 }

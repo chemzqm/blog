@@ -10,6 +10,8 @@ block content
     hr
     .comment-container
       img(class="avatar", width="48", height="48", src="https://secure.gravatar.com/avatar/2eacec38995663670f3cbdeb40539a93?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png")
+      form#upload.hidden(action="/uploadimg", method="post", enctype="multipart/form-data")
+        input#fileselect.hidden(type="file", name="filename", multiple="multiple", accept="image/*")
       form#comment(class="comment-form clearfix", action="/comment/#{post.id}", method="post")
         .content-bubble
           .bubble-inner
@@ -21,12 +23,14 @@ block content
                 | 评论通过
                 a(href="http://github.github.com/github-flavored-markdown/") GitHub Flavored Markdown
                 | 进行转换
-            .write-content
+            #dropbox.write-content
               textarea(name="content", tabindex="1")
                 | 
               .drag-drop
                 | 将文件拖动到此处上传，或者
-                a(onclick="uploadfile()") 选择上传文件
+                a#fileupload 选择上传文件
+              #messages.error
+              #progress
               .info.hidden
                 .social-login
                   span 使用社交帐号登陆
@@ -50,9 +54,10 @@ block content
             .preview.hidden
               | test
         .form-actions
-          button.btn.primary(type="submit") 评论
+          button.btn.primary(type="submit", tabindex="6") 评论
 
   script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+  script(type="text/javascript", src="/js/filedrag.js")
   script(type="text/javascript")
     //switch preview and comment
     $('#comment .tabs').on('click', 'li', function(){
