@@ -1,5 +1,6 @@
 node_modules
 public/build
 public/upload
+password
 *.log
 *.pid
