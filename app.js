@@ -3,11 +3,13 @@
  */
 
 var express = require('express')
+  , mongoStore = require('connect-mongo')(express)
   , http = require('http')
   , fs = require ('fs')
   , path = require('path');
 
 var app = express();
+var config = require('config');
 
 var index = require('index');
 var post = require('post');
@@ -21,7 +23,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.use(express.compress({
     filter: function (req, res) {
-      return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
+      return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
     },
     level: 9
   }));
@@ -35,7 +37,14 @@ app.configure(function(){
   app.use(express.bodyParser({ uploadDir :'./public/upload/'}));
   app.use(express.methodOverride());
   app.use(express.cookieParser())
-  app.use(express.session( { secret : 'B1!k'}));
+  // express/mongo session storage
+  app.use(express.session({
+    secret: 'my!blog',
+    store: new mongoStore({
+      url: config.get('db uri'),
+      collection : 'sessions'
+    })
+  }));
   app.use(index);
   app.use(upload);
   app.use(validate);
