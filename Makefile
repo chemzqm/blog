@@ -43,6 +43,7 @@ $(BUILD): $(JADE_FILES)
 	curl -X POST http://localhost:35729/changed -d '{ "files": "index.html" }'
 
 blog.pid:
+	@mkdir -p public/upload
 	@node-dev app.js &
 	@echo -e "${CHECK} server started..."
 	@sleep 0.500
