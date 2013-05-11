@@ -12,7 +12,7 @@ block content
       img(class="avatar", width="48", height="48", src="https://secure.gravatar.com/avatar/2eacec38995663670f3cbdeb40539a93?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png")
       form#upload.hidden(action="/uploadimg", method="post", enctype="multipart/form-data")
         input#fileselect.hidden(type="file", name="filename", multiple="multiple", accept="image/*")
-      form#comment(class="comment-form clearfix", action="/comment/#{post.id}", method="post")
+      form#comment(class="comment-form clearfix", action="/comment/add/#{post.id}", method="post")
         .content-bubble
           .bubble-inner
             .tabnav.clearfix
@@ -39,11 +39,11 @@ block content
                     a(class="qq", href="/login/qq", rel="nofollow") qq
                 .control-group
                   label(for="c_name") 大名
-                  input(id="c_name", type="text", placeholder="姓名", name="name", tabindex="2")
+                  input(id="c_name", type="text", placeholder="姓名", name="name", tabindex="2", required="required")
                   span.hint (必填)
                 .control-group
                   img.vertify(src="/vertifyimg?#{new Date().getTime()}")
-                  input(id="c_validate", type="number", placeholder="左边计算结果", name="validate", tabindex="3")
+                  input(id="c_validate", type="number", placeholder="左边计算结果", name="validate", tabindex="3", , required="required")
                   span.hint (必填)
                 .control-group
                   label(for="c_email") 邮箱
@@ -52,37 +52,53 @@ block content
                   label(for="c_site") 主页
                   input(id="c_site", type="url", placeholder="主页", name="site", tabindex="5")
             .preview.hidden
-              | test
+              .markdown
         .form-actions
-          button.btn.primary(type="submit", tabindex="6") 评论
+          button#submit.btn.primary(type="submit", tabindex="6") 评论
 
   script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+  script(type="text/javascript", src="/js/lib/highlight.pack.js")
+  script(type="text/javascript", src="/js/lib/marked.js")
+  script(type="text/javascript", src="/js/lib/jquery.form.js")
   script(type="text/javascript", src="/js/filedrag.js")
   script(type="text/javascript")
     //switch preview and comment
     $('#comment .tabs').on('click', 'li', function(){
       $(this).addClass('active').siblings('li').removeClass('active');
-    })
+    });
+    var textarea = $('#comment textarea');
+    var info = $('#comment .info');
+    var preview = $('#comment .preview')
     function showComment(){
       $('#comment .write-content').show().next('.preview').hide();
     }
     function showPreview(){
-      $('#comment .preview').show().prev('.write-content').hide();
+      preview.show().prev('.write-content').hide();
+      var source = textarea.val();
+      preview.find('.markdown').html(marked(source));
     }
     //delegate focus of textarea
-    $('#comment textarea').on('focus', function(){
+    textarea.on('focus', function(){
       $(this).parent().addClass('focus');
-      $('#comment .info').show();
+      info.show();
     });
-    $('#comment textarea').on('blur', function(){
+    textarea.on('blur', function(){
       $(this).parent().removeClass('focus');
     });
     //auto height of textarea
-    $('#comment textarea').on('keyup', function(){
+    textarea.on('keyup', function(){
       var h = $(this).height();
       $(this).height(h + $(this).scrollTop());
     });
     //change vertify code
     $('#comment .vertify').click(function(){
       this.src = '/vertifyimg?' + new Date().getTime();
+    });
+    //form submit
+    $('#submit').on('click', function(){
+      info.show();
+    });
+    $('#comment').ajaxForm({
+      beforeSubmit: function(arr, $form, options){
+      }
     });
