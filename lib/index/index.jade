@@ -8,7 +8,6 @@ block content
   .container
     ul.listview
       each p in posts
-        if(! p.hide)
-          li 
-            a.title(href="/view/post/#{p.id}") #{p.title} 
-            span.date #{moment(p.create).format("YY年MM月DD日")}
+        li
+          a.title(href="/view/post/#{p.id}") #{p.title} 
+          span.date #{moment(p.create).format("YY年MM月DD日")}

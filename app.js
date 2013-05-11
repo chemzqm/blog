@@ -28,7 +28,7 @@ app.configure(function(){
     level: 9
   }));
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
-  var env = app.get(env);
+  var env = app.get('env');
   if(env === 'development'){
     app.use(express.logger('dev'));
   }else if(env === 'production'){
