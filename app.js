@@ -20,7 +20,12 @@ var upload = require ('upload')
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
-  app.use(express.logger('dev'));
+  var env = app.get(env);
+  if(env === 'development'){
+    app.use(express.logger('dev'));
+  }else if(env === 'production'){
+    app.use(express.logger());
+  }
   app.use(express.bodyParser({ uploadDir :'./public/upload/'}));
   app.use(express.methodOverride());
   app.use(express.cookieParser())
