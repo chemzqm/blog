@@ -23,7 +23,9 @@
     "moment": "~2.0.0",
     "color-marked": "~0.3.0",
     "ejs": "~0.8.4",
-    "canvas": "~1.0.2"
+    "canvas": "~1.0.2",
+    "connect-mongo": "~0.3.2",
+    "crypto": "0.0.3"
   },
   "devDependencies": {
     "tiny-lr": "~0.0.4",
