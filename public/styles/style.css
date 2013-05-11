@@ -614,28 +614,33 @@ input[type="textarea"] {
   margin-right: 7px;
 }
 
-/* line 352 : /home/jack/work/blog/public/styles/style.styl */
+/* line 351 : /home/jack/work/blog/public/styles/style.styl */
+#comment .preview {
+  padding: 0 12px;
+}
+
+/* line 354 : /home/jack/work/blog/public/styles/style.styl */
 .form-actions {
   margin-top: 12px;
   margin-left: 80px;
 }
 
-/* line 356 : /home/jack/work/blog/public/styles/style.styl */
+/* line 358 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 357 : /home/jack/work/blog/public/styles/style.styl */
+/* line 359 : /home/jack/work/blog/public/styles/style.styl */
 .control-group label {
   font-size: 14px;
   display: inline-block;
   margin: 0 10px;
 }
 
-/* line 361 : /home/jack/work/blog/public/styles/style.styl */
+/* line 363 : /home/jack/work/blog/public/styles/style.styl */
 .control-group .hint {
   color: #aaa;
   margin-left: 6px;
 }
 
-/* line 364 : /home/jack/work/blog/public/styles/style.styl */
+/* line 366 : /home/jack/work/blog/public/styles/style.styl */
 .control-group input[type="text"],
 .control-group input[type="password"],
 .control-group input[type="email"],
@@ -653,7 +658,7 @@ input[type="textarea"] {
   border-radius: 3px;
 }
 
-/* line 372 : /home/jack/work/blog/public/styles/style.styl */
+/* line 374 : /home/jack/work/blog/public/styles/style.styl */
 .control-group input[type="text"]:focus,
 .control-group input[type="password"]:focus,
 .control-group input[type="email"]:focus,
@@ -664,23 +669,23 @@ input[type="textarea"] {
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
 }
 
-/* line 376 : /home/jack/work/blog/public/styles/style.styl */
+/* line 378 : /home/jack/work/blog/public/styles/style.styl */
 #login_form {
   max-width: 360px;
   margin: 40px auto;
 }
 
-/* line 379 : /home/jack/work/blog/public/styles/style.styl */
+/* line 381 : /home/jack/work/blog/public/styles/style.styl */
 #login_form input:focus + .login-field-icon {
   color: #16a085;
 }
 
-/* line 381 : /home/jack/work/blog/public/styles/style.styl */
+/* line 383 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .control-group {
   position: relative;
 }
 
-/* line 383 : /home/jack/work/blog/public/styles/style.styl */
+/* line 385 : /home/jack/work/blog/public/styles/style.styl */
 #login_form input[type="text"],
 #login_form input[type="password"] {
   font-size: 17px;
@@ -690,7 +695,7 @@ input[type="textarea"] {
   width: 100%;
 }
 
-/* line 389 : /home/jack/work/blog/public/styles/style.styl */
+/* line 391 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .login-field-icon {
   color: #bdc3c7;
   position: absolute;
@@ -707,12 +712,12 @@ input[type="textarea"] {
   backface-visibility: hidden;
 }
 
-/* line 396 : /home/jack/work/blog/public/styles/style.styl */
+/* line 398 : /home/jack/work/blog/public/styles/style.styl */
 #login_form .btn {
   width: 100%;
 }
 
-/* line 399 : /home/jack/work/blog/public/styles/style.styl */
+/* line 401 : /home/jack/work/blog/public/styles/style.styl */
 #form {
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -721,12 +726,12 @@ input[type="textarea"] {
   background-color: #ecf0f1;
 }
 
-/* line 406 : /home/jack/work/blog/public/styles/style.styl */
+/* line 408 : /home/jack/work/blog/public/styles/style.styl */
 .editor-wrapper {
   margin: 10px 0;
 }
 
-/* line 409 : /home/jack/work/blog/public/styles/style.styl */
+/* line 411 : /home/jack/work/blog/public/styles/style.styl */
 #preview {
   position: absolute;
   background-color: #fff;
@@ -738,7 +743,7 @@ input[type="textarea"] {
   width: 100%;
 }
 
-/* line 418 : /home/jack/work/blog/public/styles/style.styl */
+/* line 420 : /home/jack/work/blog/public/styles/style.styl */
 #preview .content {
   -webkit-box-shadow: 0 0 10px #ddd;
   box-shadow: 0 0 10px #ddd;
@@ -749,7 +754,7 @@ input[type="textarea"] {
   overflow: auto;
 }
 
-/* line 425 : /home/jack/work/blog/public/styles/style.styl */
+/* line 427 : /home/jack/work/blog/public/styles/style.styl */
 #preview .close {
   position: absolute;
   top: 15px;
@@ -762,7 +767,7 @@ input[type="textarea"] {
   transition: 0.25s;
 }
 
-/* line 431 : /home/jack/work/blog/public/styles/style.styl */
+/* line 433 : /home/jack/work/blog/public/styles/style.styl */
 #preview .close:hover {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -771,12 +776,12 @@ input[type="textarea"] {
   transform: rotate(90deg);
 }
 
-/* line 434 : /home/jack/work/blog/public/styles/style.styl */
+/* line 436 : /home/jack/work/blog/public/styles/style.styl */
 .markdown {
   line-height: 1.6;
 }
 
-/* line 437 : /home/jack/work/blog/public/styles/style.styl */
+/* line 439 : /home/jack/work/blog/public/styles/style.styl */
 .markdown code {
   white-space: nowrap;
   margin: 0 2px;
@@ -787,14 +792,14 @@ input[type="textarea"] {
   border-radius: 3px;
 }
 
-/* line 445 : /home/jack/work/blog/public/styles/style.styl */
+/* line 447 : /home/jack/work/blog/public/styles/style.styl */
 .markdown blockquote {
   border-left: 4px solid #ddd;
   padding: 0 15px;
   color: #777;
 }
 
-/* line 451 : /home/jack/work/blog/public/styles/style.styl */
+/* line 453 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container {
   display: inline-block;
   zoom: 1;
@@ -804,20 +809,20 @@ div.dk_container {
   margin-right: 10px;
 }
 
-/* line 458 : /home/jack/work/blog/public/styles/style.styl */
+/* line 460 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 459 : /home/jack/work/blog/public/styles/style.styl */
+/* line 461 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle {
   background-color: #1abc9c;
 }
 
-/* line 461 : /home/jack/work/blog/public/styles/style.styl */
+/* line 463 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle .select-icon {
   background-color: #16a085;
   border-left-color: transparent;
 }
 
-/* line 464 : /home/jack/work/blog/public/styles/style.styl */
+/* line 466 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container.dk_open .dk_options {
   opacity: 1;
   -ms-filter: none;
@@ -826,7 +831,7 @@ div.dk_container.dk_open .dk_options {
   z-index: 999;
 }
 
-/* line 468 : /home/jack/work/blog/public/styles/style.styl */
+/* line 470 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle {
   display: block;
   position: relative;
@@ -850,18 +855,18 @@ div.dk_container > a.dk_toggle {
   backface-visibility: hidden;
 }
 
-/* line 481 : /home/jack/work/blog/public/styles/style.styl */
+/* line 483 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle:hover {
   background-color: #1dd2af;
   color: #fff;
 }
 
-/* line 484 : /home/jack/work/blog/public/styles/style.styl */
+/* line 486 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .dk_label {
   margin-right: 44px;
 }
 
-/* line 486 : /home/jack/work/blog/public/styles/style.styl */
+/* line 488 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .select-icon {
   background: #1abc9c url("../images/toggle.png") no-repeat right center;
   border-left: 2px solid rgba(52,73,94,0.15);
@@ -883,7 +888,7 @@ div.dk_container > a.dk_toggle .select-icon {
   backface-visibility: hidden;
 }
 
-/* line 497 : /home/jack/work/blog/public/styles/style.styl */
+/* line 499 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options {
   margin-top: 0px;
   top: 27px;
@@ -906,7 +911,7 @@ div.dk_container .dk_options {
   backface-visibility: hidden;
 }
 
-/* line 508 : /home/jack/work/blog/public/styles/style.styl */
+/* line 510 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options:before {
   left: auto;
   right: 12px;
@@ -921,7 +926,7 @@ div.dk_container .dk_options:before {
   -webkit-transform: rotate(360deg);
 }
 
-/* line 520 : /home/jack/work/blog/public/styles/style.styl */
+/* line 522 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner {
   overflow: auto;
   outline: none;
@@ -933,13 +938,13 @@ div.dk_container .dk_options .dk_options_inner {
   padding: 3px 3px 0;
 }
 
-/* line 528 : /home/jack/work/blog/public/styles/style.styl */
+/* line 530 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li {
   margin-bottom: 3px;
   line-height: 2em;
 }
 
-/* line 531 : /home/jack/work/blog/public/styles/style.styl */
+/* line 533 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a {
   padding: 0 2em;
   display: block;
@@ -950,24 +955,24 @@ div.dk_container .dk_options .dk_options_inner li a {
   text-decoration: none;
 }
 
-/* line 538 : /home/jack/work/blog/public/styles/style.styl */
+/* line 540 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a:hover {
   background-color: #1abc9c;
 }
 
-/* line 540 : /home/jack/work/blog/public/styles/style.styl */
+/* line 542 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 541 : /home/jack/work/blog/public/styles/style.styl */
+/* line 543 : /home/jack/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background-color: #1abc9c;
 }
 
-/* line 544 : /home/jack/work/blog/public/styles/style.styl */
+/* line 546 : /home/jack/work/blog/public/styles/style.styl */
 .comment-container {
   margin: 20px 0;
 }
 
-/* line 546 : /home/jack/work/blog/public/styles/style.styl */
+/* line 548 : /home/jack/work/blog/public/styles/style.styl */
 .comment-container img.avatar {
   position: relative;
   float: left;
@@ -975,7 +980,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-radius: 3px;
 }
 
-/* line 550 : /home/jack/work/blog/public/styles/style.styl */
+/* line 552 : /home/jack/work/blog/public/styles/style.styl */
 .comment-container .content-bubble {
   position: relative;
   margin-left: 60px;
@@ -985,7 +990,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-radius: 3px;
 }
 
-/* line 556 : /home/jack/work/blog/public/styles/style.styl */
+/* line 558 : /home/jack/work/blog/public/styles/style.styl */
 .comment-container .content-bubble:before {
   content: "";
   display: block;
@@ -999,14 +1004,14 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   top: 15px;
 }
 
-/* line 567 : /home/jack/work/blog/public/styles/style.styl */
+/* line 569 : /home/jack/work/blog/public/styles/style.styl */
 .comment-container .content-bubble .bubble-inner {
   min-height: 32px;
   border: 1px solid #cacaca;
   background-color: #fff;
 }
 
-/* line 572 : /home/jack/work/blog/public/styles/style.styl */
+/* line 574 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox {
   margin: 0 10px 10px;
   -webkit-border-radius: 3px;
@@ -1015,30 +1020,30 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border: 1px solid #ccc;
 }
 
-/* line 577 : /home/jack/work/blog/public/styles/style.styl */
+/* line 579 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox.focus {
   border-color: #51a7e8;
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
 }
 
-/* line 580 : /home/jack/work/blog/public/styles/style.styl */
+/* line 582 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox.focus textarea {
   border-bottom-color: #51a7e8;
 }
 
-/* line 582 : /home/jack/work/blog/public/styles/style.styl */
+/* line 584 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox.dragover {
   -webkit-box-shadow: #c9ff00 0 0 3px;
   box-shadow: #c9ff00 0 0 3px;
 }
 
-/* line 584 : /home/jack/work/blog/public/styles/style.styl */
+/* line 586 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox.dragover textarea {
   border-bottom-color: #c9ff00;
 }
 
-/* line 586 : /home/jack/work/blog/public/styles/style.styl */
+/* line 588 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox textarea {
   min-height: 58px;
   border-width: 0;
@@ -1053,21 +1058,21 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   resize: vertical;
 }
 
-/* line 596 : /home/jack/work/blog/public/styles/style.styl */
+/* line 598 : /home/jack/work/blog/public/styles/style.styl */
 #dropbox .drag-drop {
   line-height: 1.6;
   color: #aaa;
   padding: 0 8px;
 }
 
-/* line 600 : /home/jack/work/blog/public/styles/style.styl */
+/* line 602 : /home/jack/work/blog/public/styles/style.styl */
 .tabnav {
   margin: 10px 0;
   border-bottom: 1px solid #ddd;
   height: 35px;
 }
 
-/* line 604 : /home/jack/work/blog/public/styles/style.styl */
+/* line 606 : /home/jack/work/blog/public/styles/style.styl */
 .tabnav span.right {
   display: inline-block;
   margin-top: 12px;
@@ -1076,14 +1081,14 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   color: #666;
 }
 
-/* line 610 : /home/jack/work/blog/public/styles/style.styl */
+/* line 612 : /home/jack/work/blog/public/styles/style.styl */
 .tabnav ul {
   margin: 0;
   padding-left: 12px;
   display: inline-block;
 }
 
-/* line 614 : /home/jack/work/blog/public/styles/style.styl */
+/* line 616 : /home/jack/work/blog/public/styles/style.styl */
 .tabnav ul>li {
   display: inline-block;
   line-height: 35px;
@@ -1094,7 +1099,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   margin: 0;
 }
 
-/* line 622 : /home/jack/work/blog/public/styles/style.styl */
+/* line 624 : /home/jack/work/blog/public/styles/style.styl */
 .tabnav ul>li.active {
   border-color: #ddd;
   -webkit-border-radius: 3px 3px 0 0;
@@ -1103,13 +1108,13 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-bottom-color: #fff;
 }
 
-/* line 628 : /home/jack/work/blog/public/styles/style.styl */
+/* line 630 : /home/jack/work/blog/public/styles/style.styl */
 .social-login {
   color: #333;
   margin: 5px 8px;
 }
 
-/* line 631 : /home/jack/work/blog/public/styles/style.styl */
+/* line 633 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a {
   display: inline-block;
   color: #777;
@@ -1125,25 +1130,25 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   overflow: hidden;
 }
 
-/* line 640 : /home/jack/work/blog/public/styles/style.styl */
+/* line 642 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.weibo {
   background-position: 0 0;
 }
 
-/* line 642 : /home/jack/work/blog/public/styles/style.styl */
+/* line 644 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.qq {
   background-position: 0 -192px;
 }
 
-/* line 644 : /home/jack/work/blog/public/styles/style.styl */
+/* line 646 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a:hover {
   color: #333;
   text-decoration: none;
 }
 
-/* line 648 : /home/jack/work/blog/public/styles/style.styl */
+/* line 650 : /home/jack/work/blog/public/styles/style.styl */
 
-/* line 649 : /home/jack/work/blog/public/styles/style.styl */
+/* line 651 : /home/jack/work/blog/public/styles/style.styl */
 #messages.error {
   background-color: #c0392b;
   padding: 0 10px;
@@ -1158,7 +1163,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   filter: none;
 }
 
-/* line 655 : /home/jack/work/blog/public/styles/style.styl */
+/* line 657 : /home/jack/work/blog/public/styles/style.styl */
 #messages.hide {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -1170,8 +1175,13 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   transform: translateY(-100%);
 }
 
-/* line 659 : /home/jack/work/blog/public/styles/style.styl */
-#progress p {
+/* line 661 : /home/jack/work/blog/public/styles/style.styl */
+#progress {
+  padding: 8px;
+}
+
+/* line 663 : /home/jack/work/blog/public/styles/style.styl */
+#progress > p {
   width: 240px;
   padding: 2px 5px;
   margin: 2px 0;
@@ -1180,7 +1190,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background: #eee url("../images/progress.png") 100% 0 repeat-y;
 }
 
-/* line 665 : /home/jack/work/blog/public/styles/style.styl */
-#progress p.failed {
+/* line 669 : /home/jack/work/blog/public/styles/style.styl */
+#progress > p.failure {
   background: #c00 none 0 0 no-repeat;
 }

@@ -348,6 +348,8 @@ input[type="text"], input[type="password"], input[type="textarea"]
   img.vertify
     margin-left: 8px
     margin-right: 7px
+  .preview
+    padding: 0 12px
 
 .form-actions
   margin-top: 12px
@@ -656,14 +658,16 @@ div.dk_container
     opacity: 0
     transform: translateY(-100%)
 
-#progress p
-  width: 240px
-  padding: 2px 5px
-  margin: 2px 0
-  border-radius: 5px
-  background: #eee url("../images/progress.png") 100% 0 repeat-y
-  &.failed
-    background: #c00 none 0 0 no-repeat
+#progress 
+  padding: 8px
+  > p
+    width: 240px
+    padding: 2px 5px
+    margin: 2px 0
+    border-radius: 5px
+    background: #eee url("../images/progress.png") 100% 0 repeat-y
+    &.failure
+      background: #c00 none 0 0 no-repeat
 
 
 
