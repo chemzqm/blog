@@ -19,6 +19,12 @@ var upload = require ('upload')
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
+  app.use(express.compress({
+    filter: function (req, res) {
+      return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
+    },
+    level: 9
+  }));
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
   var env = app.get(env);
   if(env === 'development'){
