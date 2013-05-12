@@ -63,10 +63,6 @@ block content
                   input(id="c_name", type="text", placeholder="姓名", name="author", tabindex="2", required="required")
                   span.hint (必填)
                 .control-group
-                  img.vertify(src="/vertifyimg?#{new Date().getTime()}")
-                  input(id="c_validate", type="number", placeholder="左边计算结果", name="validate", tabindex="3", , required="required")
-                  span.hint (必填)
-                .control-group
                   label(for="c_email") 邮箱
                   input(id="c_email", type="email", placeholder="邮箱", name="email", tabindex="4")
                 .control-group
@@ -110,10 +106,6 @@ block content
     textarea.on('keyup', function(){
       var h = $(this).height();
       $(this).height(h + $(this).scrollTop());
-    });
-    //change vertify code
-    $('#comment .vertify').click(function(){
-      this.src = '/vertifyimg?' + new Date().getTime();
     });
     //form submit
     $('#submit').on('click', function(){
