@@ -41,18 +41,15 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 
     // fetch FileList object
     var files = e.target.files || e.dataTransfer.files;
-    //check file size
     for (var i = 0, f; i < files.length ; i++) {
       f = files[i];
+      //check file size
       if(f.size > 2*1024*1024){
         output(
           "文件不得大于2Mb"
         );
         return;
       }
-    }
-    for (var i = 0, f; i < files.length ; i++) {
-      f = files[i];
       //parseFile(f);
       uploadFile(f);
     }
