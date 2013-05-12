@@ -6,8 +6,9 @@ block content
       .success.hide
     form#post_form(action="post",method="post")
       div.editor-wrapper
-        input(type="hidden",value="",name="id")
-        input(type="hidden",value="1",name="hide")
+        input(type="hidden", value="", name="id")
+        input(type="hidden", value="1", name="hide")
+        input(type="hidden", name="_csrf", value="#{csrf}")
         input.title(type="text",name="title",placeholder="title")
         textarea#editor(name="content", "Content here...")
         .btn-group

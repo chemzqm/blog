@@ -12,7 +12,7 @@ var app = express();
 var config = require('config');
 
 var modules = ['admin', 'post', 'index', 'comment',
-  'xml', 'validate', 'upload', 'login']
+  'xml', 'validate', 'upload', 'login'];
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
