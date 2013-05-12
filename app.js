@@ -31,7 +31,7 @@ app.configure(function(){
   }
   app.use(express.bodyParser({ uploadDir :'./public/upload/'}));
   app.use(express.methodOverride());
-  app.use(express.cookieParser())
+  app.use(express.cookieParser());
   // express/mongo session storage
   app.use(express.session({
     secret: 'my!blog',
@@ -40,6 +40,7 @@ app.configure(function(){
       collection : 'sessions'
     })
   }));
+  app.use(express.csrf());
   modules.forEach(function(m) {
     app.use(require(m));
   });
@@ -71,9 +72,9 @@ function getErrors (err) {
   return errs;
 }
 
-var pidfile = 'blog.pid';
 var server = http.createServer(app).listen(app.get('port'), function(){
 
+  var pidfile = 'blog.pid';
   fs.writeFile(pidfile, process.pid, function(err) {
     if(err) {
       console.log('... Cannot write pid file: %s', pidfile);

@@ -57,6 +57,7 @@ block content
                   span
                     a(class="weibo", href="/login/weibo", rel="nofollow") 微博
                     a(class="qq", href="/login/qq", rel="nofollow") qq
+                input(type="hidden", name="_csrf", value="#{csrf}")
                 .control-group
                   label(for="c_name") 大名
                   input(id="c_name", type="text", placeholder="姓名", name="author", tabindex="2", required="required")
