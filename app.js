@@ -11,13 +11,8 @@ var express = require('express')
 var app = express();
 var config = require('config');
 
-var index = require('index');
-var post = require('post');
-var admin = require('admin');
-var xml = require('xml');
-var validate = require('validate');
-var upload = require ('upload')
-var login = require ('login')
+var modules = ['admin', 'post', 'index', 'comment',
+  'xml', 'validate', 'upload', 'login']
 
 
 
@@ -47,13 +42,9 @@ app.configure(function(){
       collection : 'sessions'
     })
   }));
-  app.use(index);
-  app.use(login);
-  app.use(upload);
-  app.use(validate);
-  app.use(post);
-  app.use(admin);
-  app.use(xml);
+  modules.forEach(function(m) {
+    app.use(require(m));
+  });
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
