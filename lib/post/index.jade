@@ -122,6 +122,11 @@ block content
     });
     $('#comment').ajaxForm({
       beforeSubmit: function(arr, $form, options){
+        arr.push({
+          name:'location',
+          type:'hidden',
+          value: window.location.href
+        });
       },
       success: function(data){
         if(data.success === true){
