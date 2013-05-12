@@ -100,5 +100,13 @@ block content
     });
     $('#comment').ajaxForm({
       beforeSubmit: function(arr, $form, options){
+      },
+      success: function(data){
+        if(data.success === true){
+          window.location.reload();
+        }
+        if (data.success === false && data.error ) {
+          return $('#messages').html(data.error.toString()).slideDown();
+        }
       }
     });
