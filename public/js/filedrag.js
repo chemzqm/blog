@@ -127,9 +127,9 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
       fd.append('uploadingFile', file);
       fd.append('date', (new Date()).toString());
       xhr.open("POST", $id("upload").action);
-      xhr.setRequestHeader("X_FILENAME", file.name);
+      var _csrf = $('input[name="_csrf"]').val();
+      xhr.setRequestHeader("x-csrf-token", _csrf);
       xhr.send(fd);
-
     }
 
   }
