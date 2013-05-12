@@ -22,13 +22,12 @@ block content
               else
                 | #{c.author}
             span.time #{moment(c.date).fromNow()}
+            span.reply
+              a(href="javascript:void(0)") 
+                span.ds-ui-icon.ds-ui-reply
+                span 回复
             .markdown
               | !{marked(c.body)}
-            .bottom
-              span.reply
-                a(href="javascript:void(0)") 
-                  span.ds-ui-icon.ds-ui-reply
-                  span 回复
     .comment-container
       img(class="avatar", width="48", height="48", src="https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=48&r=pg&d=mm")
       form#upload.hidden(action="/uploadimg", method="post", enctype="multipart/form-data")
@@ -101,6 +100,15 @@ block content
     });
     textarea.on('blur', function(){
       $(this).parent().removeClass('focus');
+    });
+    //reply
+    $('.comments').on('click', '.reply', function(){
+      var name = $(this).parents('li').find('.name').html();
+      name = name.replace(/<[^>]*?>/g, '');
+      var val = textarea.val();
+      textarea.focus();
+      textarea.val(val + '@' + name + ' ');
+      textarea[0].scrollIntoView();
     });
     //auto height of textarea
     textarea.on('keyup', function(){

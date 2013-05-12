@@ -385,7 +385,7 @@ ul.comments
       background: #f5f5f5
       .content
         .reply
-          display: inline
+          visibility: visible
     position: relative
     list-style: none
     padding: 15px 20px 15px 30px
@@ -404,15 +404,13 @@ ul.comments
       padding: 3px 5px
     .left img
       border-radius: 3px
-    .time
-      font-size: 10px
-      color: #999
     .content
       margin-left: 60px
+      .time
+        color: #999
       .reply
-        display: none
+        visibility: hidden
         a
-          font-size: 12px
           color: #999
           &:hover
             .ds-ui-icon
@@ -420,10 +418,10 @@ ul.comments
             text-decoration: none
             color: #555
       > span
+        font-size: 12px
         margin-right: 10px
       .name
         font-weight: 700
-        font-size: 12px
         color: black
 
 #comment
