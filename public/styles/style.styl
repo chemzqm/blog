@@ -73,7 +73,7 @@ body
   color: $black
 
 a
-  color: $blue
+  color: #2C3E50
   text-decoration: none
   cursor: pointer
 
@@ -146,7 +146,6 @@ section
     height: 0px
     font-size: 0px
   border-bottom: 1px solid #ddd
-  background-image: linear-gradient(#f9f9f9, #f3f3f3)
   box-shadow: 0 0 4px #eee
   position: fixed
   font-size: 1.3em
@@ -154,7 +153,7 @@ section
   top: 0
   left: 0
   z-index: 10
-  background-color: #fff
+  background-color: #2c3e50
   .nav
     max-width: $maxWidth
     margin: 0 auto
@@ -169,13 +168,12 @@ section
         a
           display:block
           padding: 10px 20px
-          color: #7B838A
+          color: #fff
           text-decoration: none
           &:hover
             text-decoration: underline
           &.active
             font-weight: bold
-            color:#353535
 
 #header
   .social
@@ -215,6 +213,7 @@ section
   padding: 30px
   .title
     margin: 10px 0px
+    color: #2C3E50
     line-height: 1em
     font-weight: bold
     font-family: Pmingliu,Mingliu
@@ -349,6 +348,22 @@ a.btn
   .btn + .btn
     margin-left: 10px
 
+//icon
+.ds-ui-icon
+  width: 18px
+  height: 13px
+  opacity: 0.6
+  vertical-align: middle
+  display: inline-block
+  overflow: hidden
+  background: transparent url(../images/sprites.png) no-repeat
+  transition: opacity 0.15s linear
+
+.ds-ui-reply
+  background-position: 0 -104px
+  position: relative
+  top: -1px
+
 //form
 input[type="text"]:focus, input[type="password"]:focus
   border-color: $seaGreen
@@ -359,6 +374,57 @@ input[type="text"], input[type="password"], input[type="textarea"]
   border: 2px solid $lightSilver
   color: $black
   border-radius: 6px
+
+ul.comments
+  padding: 0px
+  h1, & h2, & h3
+    font-size: 1.5em
+    line-height: 2em
+  li
+    &:hover
+      background: #f5f5f5
+      .content
+        .reply
+          display: inline
+    position: relative
+    list-style: none
+    padding: 15px 20px 15px 30px
+    border-bottom: 1px solid #E2E2E2
+    &:last-child
+      border-bottom-width: 0px
+    .floor
+      position: absolute
+      right: 20px
+      top: 20px
+      font-size: 10px
+      line-height: 10px
+      display: inline-block
+      background-color: #BBB
+      color: #FFF
+      padding: 3px 5px
+    .left img
+      border-radius: 3px
+    .time
+      font-size: 10px
+      color: #999
+    .content
+      margin-left: 60px
+      .reply
+        display: none
+        a
+          font-size: 12px
+          color: #999
+          &:hover
+            .ds-ui-icon
+              opacity: 1
+            text-decoration: none
+            color: #555
+      > span
+        margin-right: 10px
+      .name
+        font-weight: 700
+        font-size: 12px
+        color: black
 
 #comment
   label
