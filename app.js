@@ -56,7 +56,7 @@ app.configure('development', function(){
         error: errs
       });
     }
-    next();
+    next(err);
   })
   app.use(express.errorHandler());
 });
