@@ -14,8 +14,6 @@ var config = require('config');
 var modules = ['admin', 'post', 'index', 'comment',
   'xml', 'validate', 'upload', 'login']
 
-
-
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.use(express.compress({
@@ -49,9 +47,29 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
+  app.use(function (err, req, res, next) {
+    if (req.xhr) {
+      var errs = getErrors(err);
+      return res.json(200, {
+        success: false,
+        error: errs
+      });
+    }
+    next();
+  })
   app.use(express.errorHandler());
 });
 
+function getErrors (err) {
+  if ( err.name !== 'ValidationError' ) {
+    return err.message;
+  }
+  var errs = [];
+  for(var i in err.errors){
+    errs.push(err.errors[i].type);
+  }
+  return errs;
+}
 
 var pidfile = 'blog.pid';
 var server = http.createServer(app).listen(app.get('port'), function(){
