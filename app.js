@@ -17,6 +17,8 @@ var admin = require('admin');
 var xml = require('xml');
 var validate = require('validate');
 var upload = require ('upload')
+var login = require ('login')
+
 
 
 app.configure(function(){
@@ -46,6 +48,7 @@ app.configure(function(){
     })
   }));
   app.use(index);
+  app.use(login);
   app.use(upload);
   app.use(validate);
   app.use(post);
