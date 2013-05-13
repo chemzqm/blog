@@ -11,4 +11,4 @@ block content
           .meta
             span #{moment(p.create).format("YY-MM-DD")}
           .markdown
-            | !{marked(p.content)}
+            | !{filter(p.content, p.id)}
