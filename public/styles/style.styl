@@ -625,26 +625,23 @@ div.dk_container
     float: left
     border-radius: 3px
   .content-bubble
+    overflow: visible
     position: relative
     margin-left: 60px
-    padding: 3px
-    background-color: #eee
     border-radius: 3px
     &:before
       content: ""
       display: block
       height: 0
       width: 0
-      border: 10px solid #EEE
+      border: 10px solid #fff
       border-width: 10px 10px 10px 0
-      border-color: rgba(238,238,238,0) #eee rgba(238,238,238,0) rgba(238,238,238,0)
+      border-color: rgba(238,238,238,0) #fff rgba(238,238,238,0) rgba(238,238,238,0)
       position: absolute
-      left: -10px
+      left: -9px
       top: 15px
     .bubble-inner
       min-height: 32px
-      border: 1px solid #CACACA
-      background-color: #fff
 
 #dropbox
   margin: 0 10px 10px

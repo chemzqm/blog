@@ -33,7 +33,7 @@ block content
       form#upload.hidden(action="/uploadimg", method="post", enctype="multipart/form-data")
         input#fileselect.hidden(type="file", name="filename", multiple="multiple", accept="image/*")
       form#comment(class="comment-form clearfix", action="/comment/#{post.id}", method="post")
-        .content-bubble
+        .content-bubble.block
           .bubble-inner
             .tabnav.clearfix
               ul.tabs.left
@@ -120,8 +120,12 @@ block content
     $('#submit').on('click', function(){
       info.show();
     });
+    var disable = false;
     $('#comment').ajaxForm({
       beforeSubmit: function(arr, $form, options){
+        if(disable){
+          return false;
+        }
         arr.push({
           name:'location',
           type:'hidden',
@@ -129,11 +133,16 @@ block content
         });
       },
       success: function(data){
+        disable = false;
         if(data.success === true){
           window.location.reload();
         }
         if (data.success === false && data.error ) {
-          return $('#messages').html(data.error.toString()).slideDown();
+          $('#messages').html(data.error.toString()).removeClass('hide');
         }
+      },
+      error: function(xhr){
+        disable =false
+        $('#messages').html('连接错误！').removeClass('hide');
       }
     });
