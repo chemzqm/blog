@@ -12,3 +12,15 @@ block content
             span #{moment(p.create).format("YY-MM-DD")}
           .markdown
             | !{filter(p.content, p.id)}
+    #footer.clearfix
+      if(page > 0)
+        a.left(href="/p/#{page - 1}") 上一页
+      strong
+        | #{Number(page) + 1}/#{count}
+      if(page < count - 1)
+        a.right(href="/p/#{Number(page) + 1}") 下一页
+
+  #main-footer
+    .container
+      p Powered by 
+        a(href="http://expressjs.com/") express
