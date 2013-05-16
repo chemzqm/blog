@@ -1,0 +1,18 @@
+
+extends ../views/layout
+
+block content
+
+  .container
+    .block.post
+      h3 文章存档
+      - var year
+      #archive
+        each p in posts
+          if(!year||year>moment(p.create).years())
+            - year = moment(p.create).years()
+            h2.year #{year}
+          .p
+            time #{moment(p.create).format("YY-MM-DD")}
+            a.title(href="/view/post/#{p.id}") #{p.title} 
+
