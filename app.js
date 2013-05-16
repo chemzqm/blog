@@ -11,7 +11,7 @@ var express = require('express')
 var app = express();
 var config = require('config');
 
-var modules = ['admin', 'post', 'index', 'comment',
+var routes = ['admin', 'post', 'index', 'comment',
   'xml', 'validate', 'upload', 'login'];
 
 app.configure(function(){
@@ -41,7 +41,7 @@ app.configure(function(){
     })
   }));
   app.use(express.csrf());
-  modules.forEach(function(m) {
+  routes.forEach(function(m) {
     app.use(require(m));
   });
   app.use(express.static(path.join(__dirname, 'public')));
