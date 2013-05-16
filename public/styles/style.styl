@@ -193,11 +193,11 @@ section
       height: 28px
       -webkit-transition: 0.3s
       &.rss
-        background: url('/images/social/rss.png') center no-repeat transparent
+        background: url('../images/social/rss.png') center no-repeat transparent
       &.github
-        background: url('/images/social/github.png') center no-repeat transparent
+        background: url('../images/social/github.png') center no-repeat transparent
       &.weibo
-        background: url('/images/social/weibo.png') center no-repeat transparent
+        background: url('../images/social/weibo.png') center no-repeat transparent
       &:hover
         opacity: 1
 
@@ -209,12 +209,22 @@ section
     line-height: 1.5em
 
 #main-footer
-  clear: both;
-  margin-top: 20px;
-  padding: 10px 0;
-  background: url("../images/footersub.png") repeat-x center top #dcdcdc;
+  clear: both
+  margin-top: 20px
+  padding: 10px 0
+  background: url("../images/footersub.png") repeat-x center top #dcdcdc
   p
-    color: #818181;
+    color: #818181
+
+#backtop
+  position: fixed
+  display: none
+  right: 55px
+  bottom: 80px
+  width: 36px
+  height: 36px
+  background: url('../images/backtop.gif') no-repeat
+  cursor: pointer
 
 .post
   margin-bottom: 20px

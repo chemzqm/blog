@@ -41,5 +41,23 @@ html
     block content
 
     block footer
+      #backtop
       script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+      script(type="text/javascript")
+        $(function(){
+          $("#backtop").hide(); 
+          $(window).scroll(function () { 
+            if ($(this).scrollTop() > 100) { 
+              $('#backtop').fadeIn(); 
+            } else { 
+              $('#backtop').fadeOut(); 
+            } 
+          }); 
+          $('#backtop').click(function () { 
+            $('body,html').animate({ 
+              scrollTop: 0 
+            }, 500); 
+          }); 
+        }); 
+    
 
