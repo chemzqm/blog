@@ -41,8 +41,21 @@ html
     block content
 
     block footer
+      #main-footer
+        .container
+          p Powered by 
+            a(href="http://expressjs.com/") Express
+            |, theme inspired by 
+            a(href="https://github.com/willerce/noderce") Noderce
+          P Source code is available at  
+            a(href="https://github.com/chemzqm/blog") github
       #backtop
       script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
+      script(type="text/javascript")
+        var footer = $('#main-footer');
+        if(footer.offset().top < $(window).height()){
+          footer.addClass('fixed');
+        }
       script(type="text/javascript")
         $(function(){
           $("#backtop").hide(); 
