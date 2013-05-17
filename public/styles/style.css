@@ -1326,11 +1326,12 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
 
 /* line 754 : /home/jack/work/blog/public/styles/style.styl */
 .social-login {
+  display: none;
   color: #333;
   margin: 5px 8px;
 }
 
-/* line 757 : /home/jack/work/blog/public/styles/style.styl */
+/* line 758 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a {
   display: inline-block;
   color: #777;
@@ -1346,25 +1347,25 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   overflow: hidden;
 }
 
-/* line 766 : /home/jack/work/blog/public/styles/style.styl */
+/* line 767 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.weibo {
   background-position: 0 0;
 }
 
-/* line 768 : /home/jack/work/blog/public/styles/style.styl */
+/* line 769 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a.qq {
   background-position: 0 -192px;
 }
 
-/* line 770 : /home/jack/work/blog/public/styles/style.styl */
+/* line 771 : /home/jack/work/blog/public/styles/style.styl */
 .social-login a:hover {
   color: #333;
   text-decoration: none;
 }
 
-/* line 774 : /home/jack/work/blog/public/styles/style.styl */
-
 /* line 775 : /home/jack/work/blog/public/styles/style.styl */
+
+/* line 776 : /home/jack/work/blog/public/styles/style.styl */
 #messages.error {
   background-color: #c0392b;
   padding: 0 10px;
@@ -1379,7 +1380,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   filter: none;
 }
 
-/* line 781 : /home/jack/work/blog/public/styles/style.styl */
+/* line 782 : /home/jack/work/blog/public/styles/style.styl */
 #messages.hide {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -1391,12 +1392,12 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   transform: translateY(-100%);
 }
 
-/* line 785 : /home/jack/work/blog/public/styles/style.styl */
+/* line 786 : /home/jack/work/blog/public/styles/style.styl */
 #progress {
   padding: 0 8px;
 }
 
-/* line 787 : /home/jack/work/blog/public/styles/style.styl */
+/* line 788 : /home/jack/work/blog/public/styles/style.styl */
 #progress > p {
   width: 240px;
   padding: 2px 5px;
@@ -1406,7 +1407,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background: #eee url("../images/progress.png") 100% 0 repeat-y;
 }
 
-/* line 793 : /home/jack/work/blog/public/styles/style.styl */
+/* line 794 : /home/jack/work/blog/public/styles/style.styl */
 #progress > p.failure {
   background: #c00 none 0 0 no-repeat;
 }

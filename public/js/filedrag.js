@@ -45,10 +45,10 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
       f = files[i];
       //check file size
       if(f.size > 2*1024*1024){
-        output(
-          "文件不得大于2Mb"
-        );
-        return;
+        return output( "文件不得大于2Mb: " + f.name);
+      }
+      if(!/^image/.test(f.type)){
+        return output("文件不是合法图片文件: " + f.name);
       }
       //parseFile(f);
       uploadFile(f);

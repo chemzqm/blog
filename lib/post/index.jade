@@ -40,8 +40,8 @@ block content
                 li.active(onclick="showComment()") 评论
                 li(onclick="showPreview()") 预览
               span.right
-                | 评论通过
-                a(href="http://github.github.com/github-flavored-markdown/") GitHub Flavored Markdown
+                | 评论通过  
+                a(href="http://github.github.com/github-flavored-markdown/") GitHub Flavored Markdown  
                 | 进行转换
             #dropbox.write-content
               textarea(name="body", tabindex="1")
@@ -59,15 +59,15 @@ block content
                     a(class="qq", href="/login/qq", rel="nofollow") qq
                 input(type="hidden", name="_csrf", value="#{csrf}")
                 .control-group
-                  label(for="c_name") 大名
-                  input(id="c_name", type="text", placeholder="姓名", name="author", tabindex="2", required="required")
+                  label(for="c_name") 姓名
+                  input(id="c_name", type="text",  name="author", tabindex="2", required="required")
                   span.hint (必填)
                 .control-group
                   label(for="c_email") 邮箱
-                  input(id="c_email", type="email", placeholder="邮箱", name="email", tabindex="4")
+                  input(id="c_email", type="email", name="email", tabindex="4")
                 .control-group
                   label(for="c_site") 主页
-                  input(id="c_site", type="url", placeholder="主页", name="site", tabindex="5")
+                  input(id="c_site", type="url", name="site", tabindex="5")
             .preview.hidden
               .markdown
         .form-actions
