@@ -12,7 +12,7 @@ var app = express();
 var config = require('config');
 
 var routes = ['admin', 'post', 'index', 'comment',
-  'xml', 'validate', 'login'];
+  'xml', 'validate'];
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
