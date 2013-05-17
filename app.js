@@ -40,7 +40,6 @@ app.configure(function(){
       collection : 'sessions'
     })
   }));
-  app.use(express.csrf());
   routes.forEach(function(m) {
     app.use(require(m));
   });

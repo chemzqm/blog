@@ -8,7 +8,6 @@ block content
       div.editor-wrapper
         input(type="hidden",name="id",value="#{post.id}")
         input(type="hidden",value="#{post.hide}",name="hide")
-        input(type="hidden", name="_csrf", value="#{csrf}")
         input.title(type="text",name="title",placeholder="title",value="#{post.title}")
         textarea#editor(name="content", placeholder="Content here...")
           | !{post.content}
