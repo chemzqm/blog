@@ -22,7 +22,7 @@ $lightSilver = #ECF0F1
 $gray = #7F8C8D
 $lightGray = #95A5A6
 
-$maxWidth = 840px
+$maxWidth = 820px
 ::-moz-selection
   background: #b3d4fc
   text-shadow: none
@@ -129,6 +129,7 @@ pre, code, tt
 .container
   max-width: $maxWidth - 20
   margin:0 auto
+  padding-left: 20px
 
 section
   border-radius: 5px
@@ -263,6 +264,7 @@ section
 
 ul.listview
   padding: 0px
+  min-height: 40px
   li:nth-child(odd)
     background-color: #f9f9f9
   li
@@ -528,6 +530,9 @@ ul.comments
 //editor
 .editor-wrapper
   margin: 10px 0
+
+#editor
+  height: 610px
 
 #preview
   position: absolute
