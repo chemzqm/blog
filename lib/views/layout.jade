@@ -52,10 +52,18 @@ html
       #backtop
       script(type="text/javascript", src="/js/lib/jquery-2.0.0.min.js")
       script(type="text/javascript")
-        var footer = $('#main-footer');
-        if(footer.offset().top < $(window).height()){
-          footer.addClass('fixed');
-        }
+        $(function(){
+          function resetFooter(){
+            var footer = $('#main-footer');
+            if(footer.offset().top < $(window).height()){
+              footer.addClass('fixed');
+            }else{
+              footer.removeClass('fixed');
+            }
+          }
+          resetFooter();
+          setInterval(resetFooter, 1000);
+        });
       script(type="text/javascript")
         $(function(){
           $("#backtop").hide(); 
@@ -72,5 +80,4 @@ html
             }, 500); 
           }); 
         }); 
-    
 
