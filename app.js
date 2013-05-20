@@ -71,6 +71,8 @@ function getErrors (err) {
   return errs;
 }
 
+var init = require ('import');
+
 var server = http.createServer(app).listen(app.get('port'), function(){
 
   var pidfile = 'blog.pid';
