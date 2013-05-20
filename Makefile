@@ -1,5 +1,5 @@
 PATH := ./node_modules/.bin:$(PATH)
-NODE_PATH := lib:$(PATH)
+NODE_PATH := lib:$(NODE_PATH)
 
 CHECK=\033[32m✔\033[39m
 BUILD ?= public/build

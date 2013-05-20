@@ -12,7 +12,7 @@ var app = express();
 var config = require('config');
 
 var routes = ['admin', 'post', 'index', 'comment',
-  'xml', 'validate', 'upload', 'login'];
+  'xml', 'validate'];
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -40,7 +40,6 @@ app.configure(function(){
       collection : 'sessions'
     })
   }));
-  app.use(express.csrf());
   routes.forEach(function(m) {
     app.use(require(m));
   });

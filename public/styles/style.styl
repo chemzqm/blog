@@ -22,7 +22,7 @@ $lightSilver = #ECF0F1
 $gray = #7F8C8D
 $lightGray = #95A5A6
 
-$maxWidth = 840px
+$maxWidth = 820px
 ::-moz-selection
   background: #b3d4fc
   text-shadow: none
@@ -129,6 +129,7 @@ pre, code, tt
 .container
   max-width: $maxWidth - 20
   margin:0 auto
+  padding-left: 20px
 
 section
   border-radius: 5px
@@ -263,6 +264,7 @@ section
 
 ul.listview
   padding: 0px
+  min-height: 40px
   li:nth-child(odd)
     background-color: #f9f9f9
   li
@@ -445,8 +447,8 @@ ul.comments
       border-radius: 3px
     .content
       margin-left: 60px
-      .time
-        color: #999
+    .time
+      color: #999
       .reply
         visibility: hidden
         a
@@ -459,9 +461,10 @@ ul.comments
       > span
         font-size: 12px
         margin-right: 10px
-      .name
-        font-weight: 700
-        color: black
+    .name
+      margin-right: 10px
+      font-weight: 700
+      color: black
 
 #comment
   label
@@ -529,6 +532,9 @@ ul.comments
 .editor-wrapper
   margin: 10px 0
 
+#editor
+  height: 610px
+
 #preview
   position: absolute
   background-color: #fff
@@ -564,6 +570,9 @@ ul.comments
   border: 1px solid #eaeaea
   background-color: #f8f8f8
   border-radius: 3px
+
+.markdown pre code
+  white-space: pre
 
 .markdown blockquote
   border-left: 4px solid #DDD
@@ -747,6 +756,7 @@ div.dk_container
         border-bottom-color: #fff;
 
 .social-login
+  display: none
   color: #333
   margin: 5px 8px
   a

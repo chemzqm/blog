@@ -1,0 +1,13 @@
+extends ../views/layout
+
+block content
+  .container.block
+    ul.comments
+      each comment in comments
+        li
+          span.name #{comment.author}
+          span.time #{moment(comment.date).format('YY-MM-DD')}
+          a.right.btn.btn-danger(href="/comment/remove/#{comment.pid}?cid=#{comment._id}") remove
+          .markdown
+            | !{marked(comment.body)}
+
