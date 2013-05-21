@@ -74,7 +74,9 @@ function getErrors (err) {
 var init = require ('import');
 
 var server = http.createServer(app).listen(app.get('port'), function(){
-
+  if (config.get('env') !== 'development') {
+    return;
+  }
   var pidfile = 'blog.pid';
   fs.writeFile(pidfile, process.pid, function(err) {
     if(err) {
