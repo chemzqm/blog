@@ -71,8 +71,6 @@ function getErrors (err) {
   return errs;
 }
 
-var init = require ('import');
-
 var server = http.createServer(app).listen(app.get('port'), function(){
   if (config.get('env') !== 'development') {
     return;
