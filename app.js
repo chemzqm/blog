@@ -72,7 +72,7 @@ function getErrors (err) {
 }
 
 var server = http.createServer(app).listen(app.get('port'), function(){
-  if (config.get('env') !== 'development') {
+  if (app.get('env') !== 'development') {
     return;
   }
   var pidfile = 'blog.pid';
