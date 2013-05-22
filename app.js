@@ -6,6 +6,7 @@ var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , http = require('http')
   , fs = require ('fs')
+  , ejs = require ('ejs')
   , path = require('path');
 
 var app = express();
@@ -16,6 +17,8 @@ var routes = ['admin', 'post', 'index', 'comment',
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/lib/views');
+  app.engine('ejs', ejs.renderFile);
   app.use(express.compress({
     filter: function (req, res) {
       return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
@@ -44,9 +47,6 @@ app.configure(function(){
     app.use(require(m));
   });
   app.use(express.static(path.join(__dirname, 'public')));
-});
-
-app.configure('development', function(){
   app.use(function (err, req, res, next) {
     if (req.xhr) {
       var errs = getErrors(err);
@@ -56,7 +56,39 @@ app.configure('development', function(){
       });
     }
     next(err);
+  });
+});
+
+app.configure('production', function () {
+  //404
+  app.use(function (req, res, next) {
+    res.status(404);
+    if (req.accepts('html')) {
+      res.render('404.ejs', { url: req.url });
+      return;
+    }
+    if (req.accepts('json')) {
+      res.send({success:false ,message: 'Not found' });
+      return;
+    }
+    res.type('txt').send('Not found');
+  });
+  //500
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    if(req.accepts('html')){
+      res.render('500.ejs', { error: err});
+      return;
+    }
+    if(req.accepts('json')){
+      res.send({success:false ,message: err.message});
+      return;
+    }
+    res.type('txt').send(err.message);
   })
+});
+
+app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
