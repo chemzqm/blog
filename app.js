@@ -71,6 +71,8 @@ function getErrors (err) {
   return errs;
 }
 
+var init = require ('import');
+
 var server = http.createServer(app).listen(app.get('port'), function(){
 
   var pidfile = 'blog.pid';
@@ -92,9 +94,7 @@ var server = http.createServer(app).listen(app.get('port'), function(){
   });
 
   server.on('close', function() {
-    process.nextTick(function() {
-      process.exit();
-    });
+    process.exit();
   });
 
   process.on('SIGTERM', function() {

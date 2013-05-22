@@ -7,7 +7,7 @@ block content
       each p in posts
         article.post.block
           h2.title
-            a.title(href="/view/post/#{p.id}") #{p.title} 
+            a.title(href="/v/#{p.number}") #{p.title} 
           .meta
             span #{moment(p.create).format("YY-MM-DD")}
           .markdown

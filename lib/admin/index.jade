@@ -22,11 +22,11 @@ block content
           else
             listclass = ''
           li(class=listclass)
-            a(href="/post/edit/#{p.id}") #{p.title}
+            a(href="/post/e/#{p.number}") #{p.title}
             if(p.hide)
               span.tag 草稿
             .btn-group
-              a.btn.btn-danger(href="/post/remove/#{p.id}") 删除
+              a.btn.btn-danger(href="/post/d/#{p.number}") 删除
 
 block append footer
   script(type="text/javascript", src="/js/lib/dropkick-1.0.0.js")

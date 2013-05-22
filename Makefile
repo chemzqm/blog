@@ -47,7 +47,6 @@ blog.pid:
 	@node-dev app.js &
 	@echo -e "${CHECK} server started..."
 	@sleep 0.500
-	@google-chrome http://localhost:$$PORT
 
 tiny-lr.pid:
 	@tiny-lr > /dev/null &
