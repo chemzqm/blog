@@ -489,8 +489,8 @@ ul.listview li .date {
 }
 
 /* line 294 : /home/jack/work/blog/public/styles/style.styl */
-#admin {
-  padding-left: 30px;
+#post_list {
+  padding-left: 20px;
 }
 
 /* line 297 : /home/jack/work/blog/public/styles/style.styl */
@@ -500,20 +500,20 @@ ul.listview li .date {
   border-top: 1px solid #ddd;
 }
 
-/* line 303 : /home/jack/work/blog/public/styles/style.styl */
+/* line 302 : /home/jack/work/blog/public/styles/style.styl */
 h1 {
   font-size: 32px;
   margin: 10px 0;
 }
 
-/* line 306 : /home/jack/work/blog/public/styles/style.styl */
+/* line 305 : /home/jack/work/blog/public/styles/style.styl */
 h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 2px;
 }
 
-/* line 311 : /home/jack/work/blog/public/styles/style.styl */
+/* line 310 : /home/jack/work/blog/public/styles/style.styl */
 h3 {
   font-size: 24px;
   font-weight: 700;
@@ -521,26 +521,26 @@ h3 {
   margin-top: 2px;
 }
 
-/* line 317 : /home/jack/work/blog/public/styles/style.styl */
+/* line 316 : /home/jack/work/blog/public/styles/style.styl */
 h4 {
   font-size: 18px;
   font-weight: 500;
   margin-top: 4px;
 }
 
-/* line 322 : /home/jack/work/blog/public/styles/style.styl */
+/* line 321 : /home/jack/work/blog/public/styles/style.styl */
 h1,
 h2,
 h3 {
   line-height: 40px;
 }
 
-/* line 325 : /home/jack/work/blog/public/styles/style.styl */
+/* line 324 : /home/jack/work/blog/public/styles/style.styl */
 .control-group {
   margin: 1em 0;
 }
 
-/* line 329 : /home/jack/work/blog/public/styles/style.styl */
+/* line 328 : /home/jack/work/blog/public/styles/style.styl */
 .btn {
   display: inline-block;
   border: none;
@@ -558,57 +558,57 @@ h3 {
   padding: 0 1em;
 }
 
-/* line 340 : /home/jack/work/blog/public/styles/style.styl */
+/* line 339 : /home/jack/work/blog/public/styles/style.styl */
 .btn-block {
   background-color: #353535;
 }
 
-/* line 342 : /home/jack/work/blog/public/styles/style.styl */
+/* line 341 : /home/jack/work/blog/public/styles/style.styl */
 .btn-block:hover {
   background-color: #7b838a;
 }
 
-/* line 345 : /home/jack/work/blog/public/styles/style.styl */
+/* line 344 : /home/jack/work/blog/public/styles/style.styl */
 .btn-primary {
   background-color: #16a085;
 }
 
-/* line 347 : /home/jack/work/blog/public/styles/style.styl */
+/* line 346 : /home/jack/work/blog/public/styles/style.styl */
 .btn-primary:hover {
   background-color: #1abc9c;
 }
 
-/* line 350 : /home/jack/work/blog/public/styles/style.styl */
+/* line 349 : /home/jack/work/blog/public/styles/style.styl */
 .btn-danger {
   background-color: #c0392b;
 }
 
-/* line 352 : /home/jack/work/blog/public/styles/style.styl */
+/* line 351 : /home/jack/work/blog/public/styles/style.styl */
 .btn-danger:hover {
   background-color: #e74c3c;
 }
 
-/* line 355 : /home/jack/work/blog/public/styles/style.styl */
+/* line 354 : /home/jack/work/blog/public/styles/style.styl */
 .btn-warning {
   background-color: #f39c12;
 }
 
-/* line 357 : /home/jack/work/blog/public/styles/style.styl */
+/* line 356 : /home/jack/work/blog/public/styles/style.styl */
 .btn-warning:hover {
   background-color: #f1c40f;
 }
 
-/* line 360 : /home/jack/work/blog/public/styles/style.styl */
+/* line 359 : /home/jack/work/blog/public/styles/style.styl */
 .btn-info {
   background-color: #259dff;
 }
 
-/* line 362 : /home/jack/work/blog/public/styles/style.styl */
+/* line 361 : /home/jack/work/blog/public/styles/style.styl */
 .btn-info:hover {
   background-color: #3498db;
 }
 
-/* line 365 : /home/jack/work/blog/public/styles/style.styl */
+/* line 364 : /home/jack/work/blog/public/styles/style.styl */
 .btn.primary {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
@@ -623,7 +623,7 @@ h3 {
   border: 1px solid #5ca941;
 }
 
-/* line 372 : /home/jack/work/blog/public/styles/style.styl */
+/* line 371 : /home/jack/work/blog/public/styles/style.styl */
 .btn.primary:hover {
   border-color: #4a993e;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #79d858), color-stop(1, #569e3d));
@@ -635,31 +635,32 @@ h3 {
   background-color: #569e3d;
 }
 
-/* line 376 : /home/jack/work/blog/public/styles/style.styl */
+/* line 375 : /home/jack/work/blog/public/styles/style.styl */
 .btn.primary:active {
   background-color: #569e3d;
   background-image: none;
   border-color: #418737;
 }
 
-/* line 381 : /home/jack/work/blog/public/styles/style.styl */
+/* line 380 : /home/jack/work/blog/public/styles/style.styl */
 a.btn {
   text-decoration: none;
   font-size: 1em;
 }
 
-/* line 384 : /home/jack/work/blog/public/styles/style.styl */
+/* line 383 : /home/jack/work/blog/public/styles/style.styl */
 a.btn:hover {
   color: #fff;
 }
 
-/* line 386 : /home/jack/work/blog/public/styles/style.styl */
+/* line 385 : /home/jack/work/blog/public/styles/style.styl */
 a.btn .icon {
   margin-right: 10px;
 }
 
-/* line 389 : /home/jack/work/blog/public/styles/style.styl */
+/* line 388 : /home/jack/work/blog/public/styles/style.styl */
 .btn-group {
+  padding-left: 20px;
   margin: 10px 0;
 }
 
