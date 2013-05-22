@@ -46,7 +46,8 @@ app.configure(function(){
   routes.forEach(function(m) {
     app.use(require(m));
   });
-  app.use(express.static(path.join(__dirname, 'public')));
+  var maxAge = app.get('env') === 'production' ? 31557600000 : 0;
+  app.use(express.static(path.join(__dirname, 'public'), { maxAge: maxAge }));
   app.use(function (err, req, res, next) {
     if (req.xhr) {
       var errs = getErrors(err);
