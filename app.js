@@ -32,7 +32,7 @@ app.configure(function(){
   }else if(env === 'production'){
     app.use(express.logger());
   }
-  app.use(express.bodyParser({ uploadDir :'./public/upload/'}));
+  app.use(express.bodyParser({ uploadDir : __dirname + '/public/upload/'}));
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   // express/mongo session storage
