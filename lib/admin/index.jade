@@ -1,7 +1,7 @@
 extends ../views/layout
 
 block content
-  .container.block
+  #admin.container.block
     div.btn-group.clearfix
       a.btn.btn-primary.left(href="/post") 
         span.icon.fui-plus-16
@@ -13,7 +13,6 @@ block content
         select#filter(value="all", tabindex="1", name="filter")
           option(value="all") 全部
           option(value="hidden") 草稿
-
     div#post_list
       ul.listview
         each p in posts
