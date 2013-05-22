@@ -71,10 +71,10 @@ function getErrors (err) {
   return errs;
 }
 
-var init = require ('import');
-
 var server = http.createServer(app).listen(app.get('port'), function(){
-
+  if (app.get('env') !== 'development') {
+    return;
+  }
   var pidfile = 'blog.pid';
   fs.writeFile(pidfile, process.pid, function(err) {
     if(err) {
