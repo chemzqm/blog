@@ -108,7 +108,7 @@ var server = http.createServer(app).listen(app.get('port'), function(){
   if (app.get('env') !== 'development') {
     return;
   }
-  var pidfile = 'blog.pid';
+  var pidfile = __dirname + '/blog.pid';
   fs.writeFile(pidfile, process.pid, function(err) {
     if(err) {
       console.log('... Cannot write pid file: %s', pidfile);
@@ -119,15 +119,13 @@ var server = http.createServer(app).listen(app.get('port'), function(){
   });
 
   process.on('exit', function() {
-    fs.stat(pidfile, function(err, stats) {
-      if(stats && stats.isFile()){
-        fs.unlinkSync(pidfile);
-      }
-    });
+    fs.unlinkSync(pidfile);
   });
 
   server.on('close', function() {
-    process.exit();
+    process.nextTick(function() {
+      process.exit();
+    });
   });
 
   process.on('SIGTERM', function() {

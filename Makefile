@@ -53,7 +53,7 @@ tiny-lr.pid:
 	@echo -e "${CHECK} liveload server started..."
 
 stop-server:
-	@$(shell [ -f blog.pid ] && kill `cat blog.pid` && rm blog.pid)
+	@$(shell [ -f blog.pid ] && kill `cat blog.pid`)
 	@echo -e "${CHECK} server stopped ..."
 
 stop-tinylr:
