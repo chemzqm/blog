@@ -1,6 +1,6 @@
 #Blog
 
-本项目的目标是构建**易于使用，易于维护，基本功能健全**的博客工具。后端为Nodejs编写，采用MongoDB做为数据库，前端展示
+本项目的目标是构建 **易于使用，易于维护，基本功能健全** 的博客工具。后端为Nodejs编写，采用MongoDB做为数据库，前端展示
 页面借鉴了[Noderce](https://github.com/willerce/noderce)，管理页面借鉴了[Flat UI](http://designmodo.com/flat/)。
 
 ##基本特点
@@ -45,7 +45,7 @@
 
 * 可使用[Appfog](https://www.appfog.com/)的服务将应用部署到公网，不过要注意添加环境变量`NODE_PATH`为`lib`，而且在上面绑定自己的域名需要收费，最低20$一个月。
 
-* 或者购买VPS服务，我用的是[42qu]()
+* 或者购买VPS服务，我用的是[42qu](http://vps.42qu.com/by/15558513)
 
 ##licence
 
