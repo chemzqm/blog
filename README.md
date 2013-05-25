@@ -16,23 +16,29 @@
 
 * 因为使用`Makefile`作为构建工具，所以暂时只支持 \*nix 系统。
 * 安装[Nodejs](http://nodejs.org/)，[MongoDB](http://www.mongodb.org/)。
+
   ``` bash
   git clone https://github.com/chemzqm/blog
   cd blog
   ```
+
 * 如果不是 Ubuntu 系统，需要编辑`Makefile`将`notify-send`替换为对应的桌面提醒工具，例如[growl](http://growl.info/)
 * 编辑配置文件`lib/config/index.js `和`lib/views/layout.jade`，修改为你想要的。
 * 创建文件 `lib/config/password` 在第一行输入你的后台密码(服务启动后会被自动加密，支持在线修改)。
 * 运行：
+
   ``` bash
   npm install #安装依赖模块
   make compile #合并压缩资源文件
   make start #启动服务
   ```
+
 * 安装[watch](https://github.com/visionmedia/watch)可完成自动压缩打包，例如运行：
+
   ```bash
   watch -q make compile &
   ```
+
 * 安装Chrome插件[livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)，可让浏览器自动重加载编辑过的文件（`make start`会同时启动`tiny-lr`服务，启用插件可让页面连接到此服务）
 * 运行`make stop`停止服务
 
