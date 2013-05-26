@@ -49,7 +49,7 @@
 
 ##部署
 
-* 可使用[Appfog](https://www.appfog.com/)的服务将应用部署到公网，不过要注意添加环境变量`NODE_PATH`为`lib`，而且在上面绑定自己的域名需要收费，最低20$一个月。
+* 可使用[Appfog](https://www.appfog.com/)的服务将应用部署到公网，不过要注意添加环境变量`NODE_PATH`为`lib`，而且在上面绑定自己的域名需要收费，最低20$一个月。[中文攻略](http://cnodejs.org/topic/515c2e3b6d382773062ce19f)
 
 * 或者购买VPS服务，我用的是[42qu](http://vps.42qu.com/by/15558513)
 
