@@ -11,7 +11,7 @@ block content
           .meta
             span #{moment(p.create).format("YY-MM-DD")}
           .markdown
-            | !{filter(p.content, p.id)}
+            | !{filter(p.content, p.number)}
     #footer.clearfix
       if(page > 0)
         a.left(href="/p/#{page - 1}") 上一页
