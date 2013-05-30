@@ -14,7 +14,7 @@ BUILD_JS = public/build/build.min.js
 start: blog.pid tiny-lr.pid
 
 $(STYLE_CSS): public/styles/style.styl
-	@notify-send "$? has changes. Compile"
+	@growlnotify -m "$? has changes. Compile"
 	@stylus -l -u ./node_modules/nib $?
 
 
@@ -22,7 +22,7 @@ $(BUILD_CSS): $(CSS_FILES)
 	@mkdir -p ${BUILD}
 	@cat $^ > public/build/build.css
 	@cssmin public/build/build.css > $@
-	@notify-send "$? has changed. Reload"
+	@growlnotify -m "$? has changed. Reload"
 	sleep 0.500
 	curl -X POST http://localhost:35729/changed -d '{ "files": "$?" }'
 
@@ -31,13 +31,13 @@ $(BUILD_JS): $(JS_FILES)
 	@uglifyjs ${BUILD}/ie.js > ${BUILD}/ie.min.js
 	@cat ${JS_LIB}/editor.js ${JS_LIB}/highlight.pack.js ${JS_LIB}/marked.js public/js/editor.custom.js > ${BUILD}/editor.js
 	@uglifyjs ${BUILD}/editor.js > ${BUILD}/editor.min.js
-	@notify-send "$? has changed. Reload"
+	@growlnotify -m "$? has changed. Reload"
 	@touch $@
 	sleep 0.500
 	curl -X POST http://localhost:35729/changed -d '{ "files": "$?" }'
 
 $(BUILD): $(JADE_FILES)
-	@notify-send "$? has changed. Reload" 
+	@growlnotify -m "$? has changed. Reload" 
 	@touch $@
 	sleep 0.500
 	curl -X POST http://localhost:35729/changed -d '{ "files": "index.html" }'
@@ -45,20 +45,20 @@ $(BUILD): $(JADE_FILES)
 blog.pid:
 	@mkdir -p public/upload
 	@node-dev app.js &
-	@echo -e "${CHECK} server started..."
+	@echo "${CHECK} server started..."
 	@sleep 0.500
 
 tiny-lr.pid:
 	@tiny-lr > /dev/null &
-	@echo -e "${CHECK} liveload server started..."
+	@echo "${CHECK} liveload server started..."
 
 stop-server:
 	@$(shell [ -f blog.pid ] && kill `cat blog.pid`)
-	@echo -e "${CHECK} server stopped ..."
+	@echo "${CHECK} server stopped ..."
 
 stop-tinylr:
 	@$(shell [ -f tiny-lr.pid ] && kill `cat tiny-lr.pid`)
-	@echo -e "${CHECK} tiny-lr server stopped ..."
+	@echo "${CHECK} tiny-lr server stopped ..."
 
 stop: stop-server stop-tinylr
 
