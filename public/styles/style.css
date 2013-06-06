@@ -1,62 +1,62 @@
 
-/* line 1 : /home/jack/work/blog/node_modules/stylus/lib/functions/index.styl */
+/* line 1 : /usr/local/share/npm/lib/node_modules/stylus/lib/functions/index.styl */
 
-/* line 13 : /home/jack/work/blog/node_modules/nib/lib/nib/index.styl */
+/* line 13 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/index.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/border.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/border.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/clearfix.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/clearfix.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/color-image.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/color-image.styl */
 
-/* line 6 : /home/jack/work/blog/node_modules/nib/lib/nib/flex.styl */
+/* line 6 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/flex.styl */
 
-/* line 154 : /home/jack/work/blog/node_modules/nib/lib/nib/gradients.styl */
+/* line 154 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/gradients.styl */
 
-/* line 154 : /home/jack/work/blog/node_modules/nib/lib/nib/config.styl */
+/* line 154 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/config.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/iconic.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/iconic.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/image.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/image.styl */
 
-/* line 15 : /home/jack/work/blog/node_modules/nib/lib/nib/overflow.styl */
+/* line 15 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/overflow.styl */
 
-/* line 3 : /home/jack/work/blog/node_modules/nib/lib/nib/positions.styl */
+/* line 3 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/positions.styl */
 
-/* line 3 : /home/jack/work/blog/node_modules/nib/lib/nib/reset.styl */
+/* line 3 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/reset.styl */
 
-/* line 5 : /home/jack/work/blog/node_modules/nib/lib/nib/text/index.styl */
+/* line 5 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/text/index.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/text/aliases.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/text/aliases.styl */
 
-/* line 2 : /home/jack/work/blog/node_modules/nib/lib/nib/text/ellipsis.styl */
+/* line 2 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/text/ellipsis.styl */
 
-/* line 11 : /home/jack/work/blog/node_modules/nib/lib/nib/text/hide-text.styl */
+/* line 11 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/text/hide-text.styl */
 
-/* line 9 : /home/jack/work/blog/node_modules/nib/lib/nib/text/replace-text.styl */
+/* line 9 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/text/replace-text.styl */
 
-/* line 557 : /home/jack/work/blog/node_modules/nib/lib/nib/vendor.styl */
+/* line 557 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/vendor.styl */
 
-/* line 557 : /home/jack/work/blog/node_modules/nib/lib/nib/config.styl */
+/* line 557 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/config.styl */
 
-/* line 26 : /home/jack/work/blog/public/styles/style.styl */
+/* line 26 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
 }
 
-/* line 30 : /home/jack/work/blog/public/styles/style.styl */
+/* line 30 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ::selection {
   background: #b3d4fc;
   text-shadow: none;
 }
 
-/* line 33 : /home/jack/work/blog/public/styles/style.styl */
+/* line 33 : /Users/chemzqm/work/blog/public/styles/style.styl */
 /*
  * Image replacement
  */
 
-/* line 37 : /home/jack/work/blog/public/styles/style.styl */
+/* line 37 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ir {
   background-color: transparent;
   border: 0;
@@ -65,7 +65,7 @@
   *text-indent: -9999px;
 }
 
-/* line 44 : /home/jack/work/blog/public/styles/style.styl */
+/* line 44 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ir:before {
   content: "";
   display: block;
@@ -73,7 +73,7 @@
   height: 150%;
 }
 
-/* line 51 : /home/jack/work/blog/public/styles/style.styl */
+/* line 51 : /Users/chemzqm/work/blog/public/styles/style.styl */
 hr {
   display: block;
   height: 1px;
@@ -83,20 +83,20 @@ hr {
   padding: 0;
 }
 
-/* line 59 : /home/jack/work/blog/public/styles/style.styl */
+/* line 59 : /Users/chemzqm/work/blog/public/styles/style.styl */
 img {
   vertical-align: middle;
   border: 0;
 }
 
-/* line 63 : /home/jack/work/blog/public/styles/style.styl */
+/* line 63 : /Users/chemzqm/work/blog/public/styles/style.styl */
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* line 70 : /home/jack/work/blog/public/styles/style.styl */
+/* line 70 : /Users/chemzqm/work/blog/public/styles/style.styl */
 body {
   font: Arial,;
 /*'Microsoft YaHei',*/
@@ -105,20 +105,20 @@ body {
   color: #353535;
 }
 
-/* line 75 : /home/jack/work/blog/public/styles/style.styl */
+/* line 75 : /Users/chemzqm/work/blog/public/styles/style.styl */
 a {
   color: #2c3e50;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* line 80 : /home/jack/work/blog/public/styles/style.styl */
+/* line 80 : /Users/chemzqm/work/blog/public/styles/style.styl */
 a:hover,
 a:focus {
   text-decoration: underline;
 }
 
-/* line 83 : /home/jack/work/blog/public/styles/style.styl */
+/* line 83 : /Users/chemzqm/work/blog/public/styles/style.styl */
 pre,
 code,
 tt {
@@ -126,39 +126,39 @@ tt {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 
-/* line 88 : /home/jack/work/blog/public/styles/style.styl */
+/* line 88 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .clearfix {
   zoom: 1;
 }
 
-/* line 23 : /home/jack/work/blog/node_modules/nib/lib/nib/clearfix.styl */
+/* line 23 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/clearfix.styl */
 .clearfix:before,
 .clearfix:after {
   content: "";
   display: table;
 }
 
-/* line 27 : /home/jack/work/blog/node_modules/nib/lib/nib/clearfix.styl */
+/* line 27 : /Users/chemzqm/work/blog/node_modules/nib/lib/nib/clearfix.styl */
 .clearfix:after {
   clear: both;
 }
 
-/* line 91 : /home/jack/work/blog/public/styles/style.styl */
+/* line 91 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .hidden {
   display: none;
 }
 
-/* line 94 : /home/jack/work/blog/public/styles/style.styl */
+/* line 94 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .right {
   float: right;
 }
 
-/* line 97 : /home/jack/work/blog/public/styles/style.styl */
+/* line 97 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .left {
   float: left;
 }
 
-/* line 100 : /home/jack/work/blog/public/styles/style.styl */
+/* line 100 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .success {
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -168,7 +168,7 @@ tt {
   margin-bottom: 10px;
 }
 
-/* line 107 : /home/jack/work/blog/public/styles/style.styl */
+/* line 107 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ghost {
   position: relative;
   opacity: 1;
@@ -177,7 +177,7 @@ tt {
   height: 0;
 }
 
-/* line 111 : /home/jack/work/blog/public/styles/style.styl */
+/* line 111 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ghost > div {
   position: absolute;
   -webkit-transition: 0.3s ease-in-out;
@@ -191,7 +191,7 @@ tt {
   z-index: 999;
 }
 
-/* line 118 : /home/jack/work/blog/public/styles/style.styl */
+/* line 118 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ghost > div.hide {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -199,7 +199,7 @@ tt {
   top: -20px;
 }
 
-/* line 122 : /home/jack/work/blog/public/styles/style.styl */
+/* line 122 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .block {
   position: relative;
   overflow: hidden;
@@ -209,30 +209,30 @@ tt {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* line 129 : /home/jack/work/blog/public/styles/style.styl */
+/* line 129 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .container {
   max-width: 820px;
   margin: 0 auto;
 }
 
-/* line 133 : /home/jack/work/blog/public/styles/style.styl */
+/* line 133 : /Users/chemzqm/work/blog/public/styles/style.styl */
 section {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background-color: #ecf0f1;
 }
 
-/* line 137 : /home/jack/work/blog/public/styles/style.styl */
+/* line 137 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #title {
   text-align: center;
 }
 
-/* line 139 : /home/jack/work/blog/public/styles/style.styl */
+/* line 139 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #title p {
   color: #7b838a;
 }
 
-/* line 142 : /home/jack/work/blog/public/styles/style.styl */
+/* line 142 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header {
   border-bottom: 1px solid #ddd;
   -webkit-box-shadow: 0 0 4px #eee;
@@ -246,26 +246,26 @@ section {
   background-color: #2c3e50;
 }
 
-/* line 143 : /home/jack/work/blog/public/styles/style.styl */
+/* line 143 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header + div {
   margin-top: 60px;
   height: 0px;
   font-size: 0px;
 }
 
-/* line 156 : /home/jack/work/blog/public/styles/style.styl */
+/* line 156 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav {
   max-width: 820px;
   margin: 0 auto;
 }
 
-/* line 159 : /home/jack/work/blog/public/styles/style.styl */
+/* line 159 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav ul {
   margin: 0;
   padding: 0;
 }
 
-/* line 162 : /home/jack/work/blog/public/styles/style.styl */
+/* line 162 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav ul li {
   list-style: none;
   float: left;
@@ -273,7 +273,7 @@ section {
   padding: 0;
 }
 
-/* line 167 : /home/jack/work/blog/public/styles/style.styl */
+/* line 167 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav ul li a {
   display: block;
   padding: 10px 20px;
@@ -281,24 +281,24 @@ section {
   text-decoration: none;
 }
 
-/* line 172 : /home/jack/work/blog/public/styles/style.styl */
+/* line 172 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* line 174 : /home/jack/work/blog/public/styles/style.styl */
+/* line 174 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .nav ul li a.active {
   font-weight: bold;
 }
 
-/* line 177 : /home/jack/work/blog/public/styles/style.styl */
+/* line 177 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 178 : /home/jack/work/blog/public/styles/style.styl */
+/* line 178 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social {
   margin: 5px 0;
 }
 
-/* line 180 : /home/jack/work/blog/public/styles/style.styl */
+/* line 180 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social a {
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -318,41 +318,41 @@ section {
   -webkit-transition: 0.3s;
 }
 
-/* line 194 : /home/jack/work/blog/public/styles/style.styl */
+/* line 194 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social a.rss {
   background: url("../images/social/rss.png") center no-repeat transparent;
 }
 
-/* line 196 : /home/jack/work/blog/public/styles/style.styl */
+/* line 196 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social a.github {
   background: url("../images/social/github.png") center no-repeat transparent;
 }
 
-/* line 198 : /home/jack/work/blog/public/styles/style.styl */
+/* line 198 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social a.weibo {
   background: url("../images/social/weibo.png") center no-repeat transparent;
 }
 
-/* line 200 : /home/jack/work/blog/public/styles/style.styl */
+/* line 200 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #header .social a:hover {
   opacity: 1;
   -ms-filter: none;
   filter: none;
 }
 
-/* line 203 : /home/jack/work/blog/public/styles/style.styl */
+/* line 203 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #footer {
   text-align: center;
 }
 
-/* line 205 : /home/jack/work/blog/public/styles/style.styl */
+/* line 205 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #footer a {
   display: inline-block;
   font-size: 1.2em;
   line-height: 1.5em;
 }
 
-/* line 210 : /home/jack/work/blog/public/styles/style.styl */
+/* line 210 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #main-footer {
   clear: both;
   margin-top: 20px;
@@ -360,13 +360,13 @@ section {
   background: url("../images/footersub.png") repeat-x center top #dcdcdc;
 }
 
-/* line 215 : /home/jack/work/blog/public/styles/style.styl */
+/* line 215 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #main-footer p {
   color: #818181;
   margin: 5px 0;
 }
 
-/* line 218 : /home/jack/work/blog/public/styles/style.styl */
+/* line 218 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #main-footer.fixed {
   width: 100%;
   position: fixed;
@@ -374,7 +374,7 @@ section {
   bottom: 0;
 }
 
-/* line 224 : /home/jack/work/blog/public/styles/style.styl */
+/* line 224 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #backtop {
   position: fixed;
   display: none;
@@ -386,9 +386,9 @@ section {
   cursor: pointer;
 }
 
-/* line 234 : /home/jack/work/blog/public/styles/style.styl */
+/* line 234 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 235 : /home/jack/work/blog/public/styles/style.styl */
+/* line 235 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #archive .year {
   color: #666;
   font-size: 13px;
@@ -397,27 +397,27 @@ section {
   border-bottom: 1px dashed #ccc;
 }
 
-/* line 241 : /home/jack/work/blog/public/styles/style.styl */
+/* line 241 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #archive .p {
   display: list-item;
   margin-left: 20px;
   line-height: 1.9;
 }
 
-/* line 245 : /home/jack/work/blog/public/styles/style.styl */
+/* line 245 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #archive .p time {
   margin-right: 8px;
   color: #666;
   font-size: 13px;
 }
 
-/* line 250 : /home/jack/work/blog/public/styles/style.styl */
+/* line 250 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .post {
   margin-bottom: 20px;
   padding: 30px;
 }
 
-/* line 253 : /home/jack/work/blog/public/styles/style.styl */
+/* line 253 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .post .title {
   margin: 10px 0px;
   color: #2c3e50;
@@ -426,32 +426,32 @@ section {
   font-family: Pmingliu, Mingliu;
 }
 
-/* line 259 : /home/jack/work/blog/public/styles/style.styl */
+/* line 259 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .post .meta {
   margin-bottom: 15px;
   color: #777;
   font-size: 10px;
 }
 
-/* line 264 : /home/jack/work/blog/public/styles/style.styl */
+/* line 264 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview {
   padding: 0px;
   min-height: 40px;
 }
 
-/* line 267 : /home/jack/work/blog/public/styles/style.styl */
+/* line 267 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-/* line 269 : /home/jack/work/blog/public/styles/style.styl */
+/* line 269 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li {
   line-height: 2.8;
   list-style: none;
   position: relative;
 }
 
-/* line 273 : /home/jack/work/blog/public/styles/style.styl */
+/* line 273 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li .tag {
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -460,7 +460,7 @@ ul.listview li .tag {
   color: #fff;
 }
 
-/* line 278 : /home/jack/work/blog/public/styles/style.styl */
+/* line 278 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li > a {
   color: #353535;
   text-decoration: none;
@@ -469,12 +469,12 @@ ul.listview li > a {
   padding-right: 10px;
 }
 
-/* line 284 : /home/jack/work/blog/public/styles/style.styl */
+/* line 284 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li > a:hover {
   color: #259dff;
 }
 
-/* line 286 : /home/jack/work/blog/public/styles/style.styl */
+/* line 286 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li .btn-group,
 ul.listview li .date {
   position: absolute;
@@ -483,37 +483,37 @@ ul.listview li .date {
   top: 0;
 }
 
-/* line 291 : /home/jack/work/blog/public/styles/style.styl */
+/* line 291 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.listview li .date {
   color: #bdc3c7;
 }
 
-/* line 294 : /home/jack/work/blog/public/styles/style.styl */
+/* line 294 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #post_list {
   padding-left: 20px;
 }
 
-/* line 297 : /home/jack/work/blog/public/styles/style.styl */
+/* line 297 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 298 : /home/jack/work/blog/public/styles/style.styl */
+/* line 298 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #admin-list li {
   border-top: 1px solid #ddd;
 }
 
-/* line 302 : /home/jack/work/blog/public/styles/style.styl */
+/* line 302 : /Users/chemzqm/work/blog/public/styles/style.styl */
 h1 {
   font-size: 32px;
   margin: 10px 0;
 }
 
-/* line 305 : /home/jack/work/blog/public/styles/style.styl */
+/* line 305 : /Users/chemzqm/work/blog/public/styles/style.styl */
 h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 2px;
 }
 
-/* line 310 : /home/jack/work/blog/public/styles/style.styl */
+/* line 310 : /Users/chemzqm/work/blog/public/styles/style.styl */
 h3 {
   font-size: 24px;
   font-weight: 700;
@@ -521,26 +521,26 @@ h3 {
   margin-top: 2px;
 }
 
-/* line 316 : /home/jack/work/blog/public/styles/style.styl */
+/* line 316 : /Users/chemzqm/work/blog/public/styles/style.styl */
 h4 {
   font-size: 18px;
   font-weight: 500;
   margin-top: 4px;
 }
 
-/* line 321 : /home/jack/work/blog/public/styles/style.styl */
+/* line 321 : /Users/chemzqm/work/blog/public/styles/style.styl */
 h1,
 h2,
 h3 {
   line-height: 40px;
 }
 
-/* line 324 : /home/jack/work/blog/public/styles/style.styl */
+/* line 324 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .control-group {
   margin: 1em 0;
 }
 
-/* line 328 : /home/jack/work/blog/public/styles/style.styl */
+/* line 328 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn {
   display: inline-block;
   border: none;
@@ -558,57 +558,57 @@ h3 {
   padding: 0 1em;
 }
 
-/* line 339 : /home/jack/work/blog/public/styles/style.styl */
+/* line 339 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-block {
   background-color: #353535;
 }
 
-/* line 341 : /home/jack/work/blog/public/styles/style.styl */
+/* line 341 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-block:hover {
   background-color: #7b838a;
 }
 
-/* line 344 : /home/jack/work/blog/public/styles/style.styl */
+/* line 344 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-primary {
   background-color: #16a085;
 }
 
-/* line 346 : /home/jack/work/blog/public/styles/style.styl */
+/* line 346 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-primary:hover {
   background-color: #1abc9c;
 }
 
-/* line 349 : /home/jack/work/blog/public/styles/style.styl */
+/* line 349 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-danger {
   background-color: #c0392b;
 }
 
-/* line 351 : /home/jack/work/blog/public/styles/style.styl */
+/* line 351 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-danger:hover {
   background-color: #e74c3c;
 }
 
-/* line 354 : /home/jack/work/blog/public/styles/style.styl */
+/* line 354 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-warning {
   background-color: #f39c12;
 }
 
-/* line 356 : /home/jack/work/blog/public/styles/style.styl */
+/* line 356 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-warning:hover {
   background-color: #f1c40f;
 }
 
-/* line 359 : /home/jack/work/blog/public/styles/style.styl */
+/* line 359 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-info {
   background-color: #259dff;
 }
 
-/* line 361 : /home/jack/work/blog/public/styles/style.styl */
+/* line 361 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-info:hover {
   background-color: #3498db;
 }
 
-/* line 364 : /home/jack/work/blog/public/styles/style.styl */
+/* line 364 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn.primary {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
@@ -623,7 +623,7 @@ h3 {
   border: 1px solid #5ca941;
 }
 
-/* line 371 : /home/jack/work/blog/public/styles/style.styl */
+/* line 371 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn.primary:hover {
   border-color: #4a993e;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #79d858), color-stop(1, #569e3d));
@@ -635,41 +635,41 @@ h3 {
   background-color: #569e3d;
 }
 
-/* line 375 : /home/jack/work/blog/public/styles/style.styl */
+/* line 375 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn.primary:active {
   background-color: #569e3d;
   background-image: none;
   border-color: #418737;
 }
 
-/* line 380 : /home/jack/work/blog/public/styles/style.styl */
+/* line 380 : /Users/chemzqm/work/blog/public/styles/style.styl */
 a.btn {
   text-decoration: none;
   font-size: 1em;
 }
 
-/* line 383 : /home/jack/work/blog/public/styles/style.styl */
+/* line 383 : /Users/chemzqm/work/blog/public/styles/style.styl */
 a.btn:hover {
   color: #fff;
 }
 
-/* line 385 : /home/jack/work/blog/public/styles/style.styl */
+/* line 385 : /Users/chemzqm/work/blog/public/styles/style.styl */
 a.btn .icon {
   margin-right: 10px;
 }
 
-/* line 388 : /home/jack/work/blog/public/styles/style.styl */
+/* line 388 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-group {
   padding-left: 20px;
   margin: 10px 0;
 }
 
-/* line 391 : /home/jack/work/blog/public/styles/style.styl */
+/* line 391 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .btn-group .btn + .btn {
   margin-left: 10px;
 }
 
-/* line 395 : /home/jack/work/blog/public/styles/style.styl */
+/* line 395 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ds-ui-icon {
   width: 18px;
   height: 13px;
@@ -687,20 +687,20 @@ a.btn .icon {
   transition: opacity 0.15s linear;
 }
 
-/* line 405 : /home/jack/work/blog/public/styles/style.styl */
+/* line 405 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .ds-ui-reply {
   background-position: 0 -104px;
   position: relative;
   top: -1px;
 }
 
-/* line 411 : /home/jack/work/blog/public/styles/style.styl */
+/* line 411 : /Users/chemzqm/work/blog/public/styles/style.styl */
 input[type="text"]:focus,
 input[type="password"]:focus {
   border-color: #16a085;
 }
 
-/* line 414 : /home/jack/work/blog/public/styles/style.styl */
+/* line 414 : /Users/chemzqm/work/blog/public/styles/style.styl */
 input[type="text"],
 input[type="password"],
 input[type="textarea"] {
@@ -713,12 +713,12 @@ input[type="textarea"] {
   border-radius: 6px;
 }
 
-/* line 421 : /home/jack/work/blog/public/styles/style.styl */
+/* line 421 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments {
   padding: 0px;
 }
 
-/* line 423 : /home/jack/work/blog/public/styles/style.styl */
+/* line 423 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments h1,
 ul.comments h2,
 ul.comments h3 {
@@ -726,7 +726,7 @@ ul.comments h3 {
   line-height: 2em;
 }
 
-/* line 426 : /home/jack/work/blog/public/styles/style.styl */
+/* line 426 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li {
   position: relative;
   list-style: none;
@@ -734,24 +734,24 @@ ul.comments li {
   border-bottom: 1px solid #e2e2e2;
 }
 
-/* line 427 : /home/jack/work/blog/public/styles/style.styl */
+/* line 427 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li:hover {
   background: #f5f5f5;
 }
 
-/* line 429 : /home/jack/work/blog/public/styles/style.styl */
+/* line 429 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 430 : /home/jack/work/blog/public/styles/style.styl */
+/* line 430 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li:hover .content .reply {
   visibility: visible;
 }
 
-/* line 436 : /home/jack/work/blog/public/styles/style.styl */
+/* line 436 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li:last-child {
   border-bottom-width: 0px;
 }
 
-/* line 438 : /home/jack/work/blog/public/styles/style.styl */
+/* line 438 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .floor {
   position: absolute;
   right: 20px;
@@ -764,98 +764,98 @@ ul.comments li .floor {
   padding: 3px 5px;
 }
 
-/* line 448 : /home/jack/work/blog/public/styles/style.styl */
+/* line 448 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .left img {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 
-/* line 450 : /home/jack/work/blog/public/styles/style.styl */
+/* line 450 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .content {
   margin-left: 60px;
 }
 
-/* line 452 : /home/jack/work/blog/public/styles/style.styl */
+/* line 452 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time {
   color: #999;
 }
 
-/* line 454 : /home/jack/work/blog/public/styles/style.styl */
+/* line 454 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time .reply {
   visibility: hidden;
 }
 
-/* line 456 : /home/jack/work/blog/public/styles/style.styl */
+/* line 456 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time .reply a {
   color: #999;
 }
 
-/* line 458 : /home/jack/work/blog/public/styles/style.styl */
+/* line 458 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time .reply a:hover {
   text-decoration: none;
   color: #555;
 }
 
-/* line 459 : /home/jack/work/blog/public/styles/style.styl */
+/* line 459 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time .reply a:hover .ds-ui-icon {
   opacity: 1;
   -ms-filter: none;
   filter: none;
 }
 
-/* line 463 : /home/jack/work/blog/public/styles/style.styl */
+/* line 463 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .time > span {
   font-size: 12px;
   margin-right: 10px;
 }
 
-/* line 466 : /home/jack/work/blog/public/styles/style.styl */
+/* line 466 : /Users/chemzqm/work/blog/public/styles/style.styl */
 ul.comments li .name {
   margin-right: 10px;
   font-weight: 700;
   color: #000;
 }
 
-/* line 471 : /home/jack/work/blog/public/styles/style.styl */
+/* line 471 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 472 : /home/jack/work/blog/public/styles/style.styl */
+/* line 472 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #comment label {
   width: 40px;
 }
 
-/* line 474 : /home/jack/work/blog/public/styles/style.styl */
+/* line 474 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #comment img.vertify {
   margin-left: 8px;
   margin-right: 7px;
 }
 
-/* line 477 : /home/jack/work/blog/public/styles/style.styl */
+/* line 477 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #comment .preview {
   padding: 0 12px;
 }
 
-/* line 480 : /home/jack/work/blog/public/styles/style.styl */
+/* line 480 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .form-actions {
   margin-top: 12px;
   margin-left: 80px;
 }
 
-/* line 484 : /home/jack/work/blog/public/styles/style.styl */
+/* line 484 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 485 : /home/jack/work/blog/public/styles/style.styl */
+/* line 485 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .control-group label {
   font-size: 14px;
   display: inline-block;
   margin: 0 10px;
 }
 
-/* line 489 : /home/jack/work/blog/public/styles/style.styl */
+/* line 489 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .control-group .hint {
   color: #aaa;
   margin-left: 6px;
 }
 
-/* line 492 : /home/jack/work/blog/public/styles/style.styl */
+/* line 492 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .control-group input[type="text"],
 .control-group input[type="password"],
 .control-group input[type="email"],
@@ -873,7 +873,7 @@ ul.comments li .name {
   border-radius: 3px;
 }
 
-/* line 500 : /home/jack/work/blog/public/styles/style.styl */
+/* line 500 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .control-group input[type="text"]:focus,
 .control-group input[type="password"]:focus,
 .control-group input[type="email"]:focus,
@@ -884,23 +884,23 @@ ul.comments li .name {
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
 }
 
-/* line 504 : /home/jack/work/blog/public/styles/style.styl */
+/* line 504 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form {
   max-width: 360px;
   margin: 40px auto;
 }
 
-/* line 507 : /home/jack/work/blog/public/styles/style.styl */
+/* line 507 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form input:focus + .login-field-icon {
   color: #16a085;
 }
 
-/* line 509 : /home/jack/work/blog/public/styles/style.styl */
+/* line 509 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form .control-group {
   position: relative;
 }
 
-/* line 511 : /home/jack/work/blog/public/styles/style.styl */
+/* line 511 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form input[type="text"],
 #login_form input[type="password"] {
   font-size: 17px;
@@ -910,7 +910,7 @@ ul.comments li .name {
   width: 100%;
 }
 
-/* line 517 : /home/jack/work/blog/public/styles/style.styl */
+/* line 517 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form .login-field-icon {
   color: #bdc3c7;
   position: absolute;
@@ -927,12 +927,12 @@ ul.comments li .name {
   backface-visibility: hidden;
 }
 
-/* line 524 : /home/jack/work/blog/public/styles/style.styl */
+/* line 524 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #login_form .btn {
   width: 100%;
 }
 
-/* line 527 : /home/jack/work/blog/public/styles/style.styl */
+/* line 527 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #form {
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -941,17 +941,17 @@ ul.comments li .name {
   background-color: #ecf0f1;
 }
 
-/* line 534 : /home/jack/work/blog/public/styles/style.styl */
+/* line 534 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .editor-wrapper {
   margin: 10px 0;
 }
 
-/* line 537 : /home/jack/work/blog/public/styles/style.styl */
+/* line 537 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #editor {
   height: 610px;
 }
 
-/* line 540 : /home/jack/work/blog/public/styles/style.styl */
+/* line 540 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #preview {
   position: absolute;
   background-color: #fff;
@@ -963,7 +963,7 @@ ul.comments li .name {
   width: 100%;
 }
 
-/* line 549 : /home/jack/work/blog/public/styles/style.styl */
+/* line 549 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #preview .content {
   -webkit-box-shadow: 0 0 10px #ddd;
   box-shadow: 0 0 10px #ddd;
@@ -974,7 +974,7 @@ ul.comments li .name {
   overflow: auto;
 }
 
-/* line 556 : /home/jack/work/blog/public/styles/style.styl */
+/* line 556 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #preview .close {
   position: absolute;
   top: 15px;
@@ -987,7 +987,7 @@ ul.comments li .name {
   transition: 0.25s;
 }
 
-/* line 562 : /home/jack/work/blog/public/styles/style.styl */
+/* line 562 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #preview .close:hover {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -996,12 +996,12 @@ ul.comments li .name {
   transform: rotate(90deg);
 }
 
-/* line 565 : /home/jack/work/blog/public/styles/style.styl */
+/* line 565 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .markdown {
   line-height: 1.6;
 }
 
-/* line 568 : /home/jack/work/blog/public/styles/style.styl */
+/* line 567 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .markdown code {
   white-space: nowrap;
   margin: 0 2px;
@@ -1012,19 +1012,48 @@ ul.comments li .name {
   border-radius: 3px;
 }
 
-/* line 576 : /home/jack/work/blog/public/styles/style.styl */
+/* line 574 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .markdown pre code {
   white-space: pre;
 }
 
-/* line 579 : /home/jack/work/blog/public/styles/style.styl */
+/* line 576 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .markdown blockquote {
   border-left: 4px solid #ddd;
   padding: 0 15px;
   color: #777;
 }
 
-/* line 585 : /home/jack/work/blog/public/styles/style.styl */
+/* line 580 : /Users/chemzqm/work/blog/public/styles/style.styl */
+.markdown table {
+  border: 1px solid #ddd;
+  border-collapse: separate;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+}
+
+/* line 585 : /Users/chemzqm/work/blog/public/styles/style.styl */
+.markdown table td,
+.markdown table th {
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  padding: 8px;
+  line-height: 20px;
+}
+
+/* line 590 : /Users/chemzqm/work/blog/public/styles/style.styl */
+.markdown table thead tr:first-child th {
+  border-top: 0;
+}
+
+/* line 592 : /Users/chemzqm/work/blog/public/styles/style.styl */
+.markdown table tr th:first-child,
+.markdown table tr td:first-child {
+  border-left: 0;
+}
+
+/* line 596 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container {
   display: inline-block;
   zoom: 1;
@@ -1034,20 +1063,20 @@ div.dk_container {
   margin-right: 10px;
 }
 
-/* line 592 : /home/jack/work/blog/public/styles/style.styl */
+/* line 603 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 593 : /home/jack/work/blog/public/styles/style.styl */
+/* line 604 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle {
   background-color: #1abc9c;
 }
 
-/* line 595 : /home/jack/work/blog/public/styles/style.styl */
+/* line 606 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container.dk_open > a.dk_toggle .select-icon {
   background-color: #16a085;
   border-left-color: transparent;
 }
 
-/* line 598 : /home/jack/work/blog/public/styles/style.styl */
+/* line 609 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container.dk_open .dk_options {
   opacity: 1;
   -ms-filter: none;
@@ -1056,7 +1085,7 @@ div.dk_container.dk_open .dk_options {
   z-index: 999;
 }
 
-/* line 602 : /home/jack/work/blog/public/styles/style.styl */
+/* line 613 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle {
   display: block;
   position: relative;
@@ -1080,18 +1109,18 @@ div.dk_container > a.dk_toggle {
   backface-visibility: hidden;
 }
 
-/* line 615 : /home/jack/work/blog/public/styles/style.styl */
+/* line 626 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle:hover {
   background-color: #1dd2af;
   color: #fff;
 }
 
-/* line 618 : /home/jack/work/blog/public/styles/style.styl */
+/* line 629 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .dk_label {
   margin-right: 44px;
 }
 
-/* line 620 : /home/jack/work/blog/public/styles/style.styl */
+/* line 631 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container > a.dk_toggle .select-icon {
   background: #1abc9c url("../images/toggle.png") no-repeat right center;
   border-left: 2px solid rgba(52,73,94,0.15);
@@ -1113,7 +1142,7 @@ div.dk_container > a.dk_toggle .select-icon {
   backface-visibility: hidden;
 }
 
-/* line 631 : /home/jack/work/blog/public/styles/style.styl */
+/* line 642 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options {
   margin-top: 0px;
   top: 27px;
@@ -1136,7 +1165,7 @@ div.dk_container .dk_options {
   backface-visibility: hidden;
 }
 
-/* line 642 : /home/jack/work/blog/public/styles/style.styl */
+/* line 653 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options:before {
   left: auto;
   right: 12px;
@@ -1151,7 +1180,7 @@ div.dk_container .dk_options:before {
   -webkit-transform: rotate(360deg);
 }
 
-/* line 654 : /home/jack/work/blog/public/styles/style.styl */
+/* line 665 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner {
   overflow: auto;
   outline: none;
@@ -1163,13 +1192,13 @@ div.dk_container .dk_options .dk_options_inner {
   padding: 3px 3px 0;
 }
 
-/* line 662 : /home/jack/work/blog/public/styles/style.styl */
+/* line 673 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li {
   margin-bottom: 3px;
   line-height: 2em;
 }
 
-/* line 665 : /home/jack/work/blog/public/styles/style.styl */
+/* line 676 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a {
   padding: 0 2em;
   display: block;
@@ -1180,24 +1209,24 @@ div.dk_container .dk_options .dk_options_inner li a {
   text-decoration: none;
 }
 
-/* line 672 : /home/jack/work/blog/public/styles/style.styl */
+/* line 683 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li a:hover {
   background-color: #1abc9c;
 }
 
-/* line 674 : /home/jack/work/blog/public/styles/style.styl */
+/* line 685 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 675 : /home/jack/work/blog/public/styles/style.styl */
+/* line 686 : /Users/chemzqm/work/blog/public/styles/style.styl */
 div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background-color: #1abc9c;
 }
 
-/* line 678 : /home/jack/work/blog/public/styles/style.styl */
+/* line 689 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .comment-container {
   margin: 20px 0;
 }
 
-/* line 680 : /home/jack/work/blog/public/styles/style.styl */
+/* line 691 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .comment-container img.avatar {
   position: relative;
   float: left;
@@ -1205,7 +1234,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-radius: 3px;
 }
 
-/* line 684 : /home/jack/work/blog/public/styles/style.styl */
+/* line 695 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .comment-container .content-bubble {
   overflow: visible;
   position: relative;
@@ -1214,7 +1243,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-radius: 3px;
 }
 
-/* line 689 : /home/jack/work/blog/public/styles/style.styl */
+/* line 700 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .comment-container .content-bubble:before {
   content: "";
   display: block;
@@ -1233,12 +1262,12 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   transform: rotate(45deg);
 }
 
-/* line 701 : /home/jack/work/blog/public/styles/style.styl */
+/* line 712 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .comment-container .content-bubble .bubble-inner {
   min-height: 32px;
 }
 
-/* line 704 : /home/jack/work/blog/public/styles/style.styl */
+/* line 715 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox {
   margin: 0 10px 10px;
   -webkit-border-radius: 3px;
@@ -1247,30 +1276,30 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border: 1px solid #ccc;
 }
 
-/* line 709 : /home/jack/work/blog/public/styles/style.styl */
+/* line 720 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox.focus {
   border-color: #51a7e8;
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
 }
 
-/* line 712 : /home/jack/work/blog/public/styles/style.styl */
+/* line 723 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox.focus textarea {
   border-bottom-color: #51a7e8;
 }
 
-/* line 714 : /home/jack/work/blog/public/styles/style.styl */
+/* line 725 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox.dragover {
   -webkit-box-shadow: #c9ff00 0 0 3px;
   box-shadow: #c9ff00 0 0 3px;
 }
 
-/* line 716 : /home/jack/work/blog/public/styles/style.styl */
+/* line 727 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox.dragover textarea {
   border-bottom-color: #c9ff00;
 }
 
-/* line 718 : /home/jack/work/blog/public/styles/style.styl */
+/* line 729 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox textarea {
   min-height: 58px;
   border-width: 0;
@@ -1285,21 +1314,21 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   resize: vertical;
 }
 
-/* line 728 : /home/jack/work/blog/public/styles/style.styl */
+/* line 739 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #dropbox .drag-drop {
   line-height: 1.6;
   color: #aaa;
   padding: 0 8px;
 }
 
-/* line 732 : /home/jack/work/blog/public/styles/style.styl */
+/* line 743 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .tabnav {
   margin: 10px 0;
   border-bottom: 1px solid #ddd;
   height: 35px;
 }
 
-/* line 736 : /home/jack/work/blog/public/styles/style.styl */
+/* line 747 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .tabnav span.right {
   display: inline-block;
   margin-top: 12px;
@@ -1308,14 +1337,14 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   color: #666;
 }
 
-/* line 742 : /home/jack/work/blog/public/styles/style.styl */
+/* line 753 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .tabnav ul {
   margin: 0;
   padding-left: 12px;
   display: inline-block;
 }
 
-/* line 746 : /home/jack/work/blog/public/styles/style.styl */
+/* line 757 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .tabnav ul>li {
   display: inline-block;
   line-height: 35px;
@@ -1326,7 +1355,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   margin: 0;
 }
 
-/* line 754 : /home/jack/work/blog/public/styles/style.styl */
+/* line 765 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .tabnav ul>li.active {
   border-color: #ddd;
   -webkit-border-radius: 3px 3px 0 0;
@@ -1335,14 +1364,14 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   border-bottom-color: #fff;
 }
 
-/* line 760 : /home/jack/work/blog/public/styles/style.styl */
+/* line 771 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .social-login {
   display: none;
   color: #333;
   margin: 5px 8px;
 }
 
-/* line 764 : /home/jack/work/blog/public/styles/style.styl */
+/* line 775 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .social-login a {
   display: inline-block;
   color: #777;
@@ -1358,25 +1387,25 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   overflow: hidden;
 }
 
-/* line 773 : /home/jack/work/blog/public/styles/style.styl */
+/* line 784 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .social-login a.weibo {
   background-position: 0 0;
 }
 
-/* line 775 : /home/jack/work/blog/public/styles/style.styl */
+/* line 786 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .social-login a.qq {
   background-position: 0 -192px;
 }
 
-/* line 777 : /home/jack/work/blog/public/styles/style.styl */
+/* line 788 : /Users/chemzqm/work/blog/public/styles/style.styl */
 .social-login a:hover {
   color: #333;
   text-decoration: none;
 }
 
-/* line 781 : /home/jack/work/blog/public/styles/style.styl */
+/* line 792 : /Users/chemzqm/work/blog/public/styles/style.styl */
 
-/* line 782 : /home/jack/work/blog/public/styles/style.styl */
+/* line 793 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #messages.error {
   background-color: #c0392b;
   padding: 0 10px;
@@ -1391,7 +1420,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   filter: none;
 }
 
-/* line 788 : /home/jack/work/blog/public/styles/style.styl */
+/* line 799 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #messages.hide {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -1403,12 +1432,12 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   transform: translateY(-100%);
 }
 
-/* line 792 : /home/jack/work/blog/public/styles/style.styl */
+/* line 803 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #progress {
   padding: 0 8px;
 }
 
-/* line 794 : /home/jack/work/blog/public/styles/style.styl */
+/* line 805 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #progress > p {
   width: 240px;
   padding: 2px 5px;
@@ -1418,7 +1447,7 @@ div.dk_container .dk_options .dk_options_inner li.dk_option_current a {
   background: #eee url("../images/progress.png") 100% 0 repeat-y;
 }
 
-/* line 800 : /home/jack/work/blog/public/styles/style.styl */
+/* line 811 : /Users/chemzqm/work/blog/public/styles/style.styl */
 #progress > p.failure {
   background: #c00 none 0 0 no-repeat;
 }
