@@ -22,7 +22,8 @@
   cd blog
   ```
 
-* 如果不是 Ubuntu 系统，需要编辑`Makefile`将`notify-send`替换为对应的桌面提醒工具，例如[growl](http://growl.info/)
+* ~~如果不是 Ubuntu 系统，需要编辑`Makefile`将`notify-send`替换为对应的桌面提醒工具，例如[growl](http://growl.info/)~~
+* 默认使用[growl](http://growl.info/)进行通知，如果你使用linux，可考虑替换为notify-send进行通知
 * 编辑配置文件`lib/config/index.js `和`lib/views/layout.jade`，修改为你想要的。
 * 创建文件 `lib/config/password` 在第一行输入你的后台密码(服务启动后会被自动加密，支持在线修改)。
 * 运行：
