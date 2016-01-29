@@ -4,7 +4,7 @@ SRCDIR := src
 HTMLDIR := public
 REMOTE := chemzqm@chemzqm.me
 
-SRCFILES := $(shell find $(SRCDIR) -type f)
+SRCFILES := $(wildcard $(SRCDIR)/*)
 HTMLFILES := $(patsubst $(SRCDIR)/%,$(HTMLDIR)/%.html,$(SRCFILES))
 CWD := $(shell pwd)
 
