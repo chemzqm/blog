@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-      <loc>http://chemzqm.me/vim-regex</loc>
+      <loc>http://chemzqm.me/mac-script</loc>
         <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-      <loc>http://chemzqm.me/mac-script</loc>
+      <loc>http://chemzqm.me/vim-plugins</loc>
         <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
     </url>
@@ -21,28 +21,13 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
-      <loc>http://chemzqm.me/vim-plugins</loc>
-        <lastmod>2016-01-28</lastmod>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-      <loc>http://chemzqm.me/vim-speed-up</loc>
-        <lastmod>2016-01-28</lastmod>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-      <loc>http://chemzqm.me/vim-complete</loc>
-        <lastmod>2016-01-28</lastmod>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
       <loc>http://chemzqm.me/best-plug-manager</loc>
         <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-      <loc>http://chemzqm.me/mobile-touch</loc>
-        <lastmod>2016-01-27</lastmod>
+      <loc>http://chemzqm.me/vim-regex</loc>
+        <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
     </url>
     <url>
