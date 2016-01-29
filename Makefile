@@ -17,7 +17,7 @@ public/index.html: index.html $(SRCFILES)
 	@$(HOME) $^
 
 remote: all
-	@rsync -rvz -e 'ssh -p 302' $(CWD) $(REMOTE):/home/chemzqm
+	@rsync -rvz --exclude '.git' -e 'ssh -p 302' $(CWD) $(REMOTE):/home/chemzqm
 
 clean:
 	@rm -rf $(HTMLFILES) public/index.html
