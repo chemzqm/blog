@@ -1,0 +1,137 @@
+title: 理解并使用 vim 中的正则表达式
+url: vim-regex
+created: 2016-01-28
+updated: 2016-01-28
+id: 6
+tags:
+  - vim
+---
+vim 存在 4 种模式，并且在不同场景有不同的使用方式，本文做一些简单小结。
+
+### 4 种模式概览
+
+以下摘自 vim 文档：
+
+``` vim
+after:   \v    \m     \M      \V  matches ~
+      'magic' 'nomagic'
+   $    $     $      \$  matches end-of-line
+   .    .     \.     \.  matches any character
+   *    *     \*     \*  any number of the previous atom
+   ()   \(\)  \(\)   \(\) grouping into an atom
+   |    \|    \|     \|  separating alternatives
+   \a   \a    \a     \a  alphabetic character
+   \\   \\    \\     \\  literal backslash
+   \.   \.    .      .  literal dot
+   \{   {     {      {  literal '{'
+   a    a     a      a  literal 'a'
+```
+
+并不需要记住这些，因为你可以保持只使用其中一种模式，需要帮助的时候 `:h magic` 查看即可。
+
+### 默认模式以及改变模式
+
+除非你设置 `magic` 选项（不推荐），vim 在所有情况都默认使用 `magic` 模式，也就是 `\m` 进行匹配，假如你搜索 any number 两个字符串，你需要这么敲：
+
+    /\(any\|number\)  
+
+因为 `(` 和 `|` 在默认 `magic` 模式是没有特殊含义的，如果你使用 `\v` 模式就可以简化成这样：
+
+    /\v(any|number)  
+
+`\v` 模式最接近大部分语言中的正则，所以这也是 [learnvimscriptthehardway](http://learnvimscriptthehardway.stevelosh.com/) 书中推荐的使用方式。
+
+### 理解 vim 中字符串转义
+
+通常如果你是直接使用命令，例如 `/`，`?` , `:substitute` 进行搜索的话，里面的正则并不需要考虑转义问题，但是你要使用 vimscript 编程就肯定要遇到转义的问题。
+
+vim 有两种字符串表示方式，一种是使用单引号 `'`, 另一种使用双引号 `"`。
+
+`'` 内的字符不会进行任何转义，但是如果需要包含另一个 `'`,  则需要使用两个 `'` 连在一起表示。 `"`  内的 `\` 具有转义功能，如果需要表示字面的 `\` 则需要两个相连 `\`。
+
+几个例子：
+``` vim
+:echo 'abc' =~# '\v\a{3}'
+" 单引号不需要转义 \, 输出 1 表示匹配成功
+
+:echo 'abc' =~# "\\v\\a{3}"
+" 双引号需要转义 \, 输出 1 表示匹配成功
+
+:echo substitute("'abc'", '\v^''(.*)''$', '\1', '') 
+" 输出 abc，单引号需要两个相连表示字面单引号
+
+:execute 'normal! ?\v^#.*' . "\<cr>" 
+" 使用拼接字符串同时利用单引号无需转义以及双引号转义
+```
+
+### 理解 `syntax` 命令里的 `pattern`
+
+`:h syn-pattern` 里有详细介绍，简单来说就是跟是用 `:substitue` 命令一样，另外不包含 `cpoption` 的 `l` 总是不包含的（通常只要你有 vimrc 文件，cp 选项都是关闭的，所以一般用不着关心这个， 使用 `:h cp` 了解更多）
+
+这里要特别注意一个陷阱，考虑以下命令:
+
+    :syntax region Comment  start="/\*"  end="\*/"
+
+为什么双引号里面的 `\` 不需要转义 ？？？
+
+答案就是这里的双引号并不代表字符串，它只是边界符号的一种表示，这类似你使用的 `:substitue` 命令，以下命令跟上面的是等效的：
+
+    :syntax region String   start=+/\*+    end=+\*/+
+
+`syntax` 里面的正则同样是默认 `magic` 的，注意你不能关闭这里 `magic`，但是可以使用 `\v` 让它更加 magic，于是上面的命令可以这么写
+
+    :syntax region Comment  start="\v/\*"  end="\v\*/"
+
+这里的 `\v` 有些多余，但是可以让你的代码保持更好的一致性。
+
+### 一些有用的匹配原
+
+出了通常其它语言都有的 `^` `$`, vim 还提供很多非常有用的匹配原
+
+``` vim
+\< " 单词开始，0宽度匹配
+\> " 单词结束，0宽度匹配
+\zs " 设定匹配开始，0宽度匹配
+\ze " 设定匹配结束，0宽度匹配
+\%^ " 文件开始，0宽度匹配
+\%$ " 文件结束，0宽度匹配
+```
+
+这几个是我个人日常最常用的，使用 `:h ordinary-atom` 可以查看全部匹配原
+
+### 正则相关的 vimscript 方法
+
+* `'a' =~# '\a'` 匹配返回 1，不匹配返回 0，不忽略大小写
+* `'a' =~? '\a'` 同上，但忽略大小写 
+* `'a' !~# '\a'` 匹配返回 0，不匹配返回 1，不忽略大小写
+* `'a' !~? '\a'` 同上，但忽略大小写 
+* `substitute( {expr}, {pat}, {sub}, {flags})` 使用 flags，替换 expr 里面的 pat (即 pattern 表示的正则) 为 sub
+* `match( {expr}, {pat}[, {start}[, {count}]])` 返回 pat 在 expr 里面所匹配的位置，可设置开始位置和重复次数
+* `matchend( {expr}, {pat}[, {start}[, {count}]])` 跟 match 函数一样，但是返回最后一个字符的匹配位置
+* `matchlist({expr}, {pat}[, {start}[, {count}]])` 返回匹配的列表，第一项是完整匹配，后面是其它子匹配项
+* `matchstr({expr}, {pat}[, {start}[, {count}]])` 返回 expr 里面 pat 所匹配的字符串，无匹配返回空字符串	
+* `split( {expr} [, {pat} [, {keepempty}]])` 使用 pat 分割字符串为列表
+
+使用 `:h functions` 然后 `/{pat}` 可快速查看这些方法，使用类似 `:h match()` 可直接查看具体函数帮助。
+
+
+### grep 命令里面的正则
+
+vimgrep 使用 vim 的正则，当然也是开启 `magic` 模式的。 但是 vimgrep 有一个严重问题就是 vimscript 本身运行效率低，所以导致搜索很慢，通常我们都会设置 grep 相关选项，然后使用 grep 命令调用外部工具进行搜索，例如设置 ag：
+
+``` vim
+if executable('ag')
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+endif
+``` 
+vim 只会简单的把搜索字符串评级到 ag 的命令里然后传给 shell 去执行，所以现在的正则就是 ag 的正则了，它使用的是 [PCRE正则](https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions), 以下命令：
+```
+:grep 'Pragmatic(?=Vim)'
+```
+匹配 Vim 前面的 Pragmatic
+
+vim 的正则确实比较复杂，希望本文能帮你更好的理解它们。
+
+_Happy vimming_
+

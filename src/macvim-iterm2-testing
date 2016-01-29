@@ -1,0 +1,49 @@
+title: 使用 MaVim iTerm2 异步测试
+url: macvim-iterm2-testing
+created: 2016-01-16
+updated: 2016-01-28
+id: 8
+tags:
+  - macvim
+---
+本文简单介绍在 MacVim 异步进行 node 代码测试，并将测试结果返回到 MacVim quickfix 列表的一种方法。
+
+这里有段特别不清晰的视频：
+
+http://video.weibo.com/player/1034:02c9053642a0d4b1bf462a0c45b99f42/v.swf
+
+## 背景介绍
+
+[vim-dispatch](https://github.com/tpope/vim-dispatch) 支持异步执行 shell 命令，但是并不支持 beta 版的 iTerm2, 因为iTerm2 2.9 以后的 applescript 语法完全不同了，然后我就我做了一个简单版本的异步执行插件：[vim-iterm2-start](https://github.com/chemzqm/vim-iterm2-start),  它暂时只支持我现在用的 MacVim, iTerm2  和 fish shell。
+
+## 配合 vim-test
+
+配合使用 [vim-test](https://github.com/janko-m/vim-test) 我们可以一键异步执行当前鼠标下的测试代码，只需要以下设置：
+
+``` vim
+ nmap <silent> <leader>t :TestNearest<CR>
+ function! StartTest(cmd)
+   execute 'ItermStartTab! ' . a:cmd
+ endfunction
+ let g:test#custom_strategies = {'start': function('StartTest')}
+ let g:test#strategy = 'start'
+```
+
+使用 `<leader>t` 一键测试
+
+测试版的 iTerm2  修复了文件路径获取的 bug，你可以直接点击错误信息里的文件路径，通过 profile 里设置 MacVim 为默认编辑器，它可以让你的 MacVim 直接跳转到点击的(⌘+鼠标左键)文件，甚至行号也支持。
+
+## 支援 quickfix
+
+接下来我们可以使用一个过滤程序把 mocha 的错误信息发回到 macvim，这样我们就可以直接在 macvim 里面使用 quickfix 列表快速跳转到错误处了，代码实现在这里：https://gist.github.com/chemzqm/fd1313206c182884efbc
+
+把 error-parse.js 添加可执行权限并连接 path 目录下，我们就可以让它把错误信息通过 MacVim 的 clientserver 特性发回到 MacVim，在 MacVim 下只需要把配置改成：
+
+execute 'ItermStartTab! ' . a:cmd . '| error-parse.js'
+
+即可，然后我们就可以愉快的让 iTerm2帮我们执行测试，然后需要看错误的时候 MacVim 下 `:copen`  打开 quickfix 列表就可以了
+
+error-parse 的代码实现并不完善，请根据个人喜好进行修改。
+它并不局限与 nodejs ，任何输出错误文件路径的测试工具都可以通过调整它来支持。
+
+_Happy vimming_

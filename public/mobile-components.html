@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>常用移动端前端组件</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">常用移动端前端组件</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Sat Jan 24 2015 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2015-1-24
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>之前的移动端组件迁移到了 npm ，支持使用 webpack 或者 brwoserify 来构建。</p>
+
+<p>介绍下常用组件，如果你喜欢轻量灵活的移动端解决方案不妨看看，如果是依赖框架开发的话，还是最好使用框架提供的功能。</p>
+
+<ul>
+<li><a href="https://github.com/component/tap-event/">tap-event</a> 正确的 tap event</li>
+<li><a href="https://github.com/component/tap">component-tap</a> 支持 unbind 的 tap，但是没有函数不能代理事件</li>
+<li><a href="https://github.com/component/raf">component-raf</a> 兼容的 request animation frame</li>
+<li><a href="https://github.com/component/ease">ease-component</a> 提供缓动函数 <a href="http://easings.net/">http://easings.net/</a> 实现</li>
+<li><a href="https://github.com/component/tween">component-tween</a> 使用 ease 实现高性能js动画的基础库</li>
+<li><a href="https://github.com/component/swipe">swipe</a> 提供滑动切换效果</li>
+</ul>
+
+<p>下面是我自己的：</p>
+
+<ul>
+<li><a href="https://github.com/chemzqm/scrollfix">component-scrollfix</a> 解决 ios 上页面整体拖动的问题</li>
+<li><a href="https://github.com/chemzqm/livechart">component-livechart</a> 自适应的动态 canvas 图表库</li>
+<li><a href="https://github.com/chemzqm/iscroll">iscroll-component</a> 模拟滚动效果，跟<a href="http://iscrolljs.com/">iscroll</a> 类似，但是更快</li>
+<li><a href="https://github.com/chemzqm/pull-to-refresh">pull-to-refresh</a> 兼容 ios 和 android 的下拉刷新库</li>
+<li><a href="https://github.com/chemzqm/more">more-mobile</a> 实现列表加载更多的功能</li>
+<li><a href="https://github.com/chemzqm/notice">component-notice</a> 简洁的 notice 实现</li>
+<li><a href="https://github.com/chemzqm/overlay">component-overlay</a> 简洁的 overlay 实现</li>
+<li><a href="https://github.com/chemzqm/sweet-sortable">sweet-sortable</a> 增强动画效果的拖拽 sortable 组件</li>
+<li><a href="https://github.com/chemzqm/swipe-it">swipe-it</a> 提供划出效果的组件</li>
+</ul>
+
+<p>以上组件都由一些基础的 component 组件实现，最后项目的大小要相比使用框架小很多，因为代码简单，维护起来也相对节省时间。</p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '常用移动端前端组件';
+    var disqus_identifier = '4';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

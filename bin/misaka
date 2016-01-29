@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function
+import re
+import sys
+import os
+import misaka as m
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+if len(sys.argv) > 1:
+    title = sys.argv[1]
+else:
+    title = ''
+
+class HighlighterRenderer(m.HtmlRenderer):
+
+    def normal_text(self, text):
+        return m.smartypants(text)
+
+    def blockcode(self, text, lang):
+        lang = 'sh'
+        lexer = get_lexer_by_name(lang, stripall=True)
+        formatter = HtmlFormatter()
+
+        return highlight(text, lexer, formatter)
+
+renderer = HighlighterRenderer(('skip-html',))
+# http://misaka.61924.nl/#extensions
+md = m.Markdown(renderer, extensions=('tables', 'strikethrough', 'math', 'fenced-code', 'footnotes', 'autolink'))
+
+content = ''
+for line in sys.stdin:
+    content = content + line
+
+html_content = md(content)
+
+print(html_content)

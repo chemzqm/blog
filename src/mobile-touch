@@ -1,0 +1,102 @@
+title: 移动端的touch事件处理
+url: mobile-touch
+created: 2015-12-24
+updated: 2016-01-27
+id: 3
+tags:
+  - mobile
+  - front-end
+---
+简要的探讨一下移动端 touch 事件处理几个坑，以及相应的简单处理方法。
+
+## click 穿透
+
+假设有个弹出层，上面有个关闭的按钮支持 touchend 触发后关闭，若正好下方有个元素支持 click 事件，在弹出层关闭后将会在下方元素触发 click 事件。这种效果肯定不是我们需要的，而且我们无法确定合适会在上方出现一个支持 touch 的弹出层，所以我认为最好的处理方式是禁用所有元素的 click 事件，相比 click 需要长达 1s 的触发时间，使用 touchend 可以获得更好的体验。
+
+## tap 事件的判定
+
+一个正确的 tap 事件应当满足一下条件：
+
+1. 用户手指从屏幕移开时触发
+2. 不能在用户移动手指时触发（防止和滚动、拖拽事件的冲突）
+3. 多个手指同时触摸屏幕时不能触发
+4. 不应该触发 click 事件
+
+具体实现代码可以参考 [tap-event](https://github.com/component/tap-event/blob/master/index.js)。我个人也有一个 [tap-event](https://github.com/chemzqm/tap-event/blob/master/index.js)，这个分支支持绑定后函数作为事件代理函数，同时也增加了移动位置的判定。
+
+## 使用原生的滚动事件
+
+Android 4.0 以下是不支持原生的 webview 滚动的，所以只能使用 [iscroll](https://github.com/cubiq/iscroll) 之类的工具来模拟元素滚动。它的缺点就是有些过于的复杂，所以我还是会在条件允许的情况下使用原生的滚动。
+
+启用原生滚动只需要给外层元素加上样式 `-webkit-overflow-scrolling: touch;` 即可，如果你的监听函数比较占用资源我们可以通过一个简单的 buffer 函数来限制它的触发间隔，例如：
+
+``` js
+function buffer(fn, ms) {
+  var timeout;
+  return function() {
+    if (timeout) return;
+    var args = arguments;
+    timeout = setTimeout(function() {
+      timeout = null;
+      fn.apply(null, args);
+    }, ms);
+  }
+}
+
+
+document.querySelector('.scrollable').onscroll = buffer(onScroll, 100);
+```
+另外的建议就是不要在可滚动元素上使用阴影样式（text-shadow 和 box-shadow），因为它们非常影响性能，而且看上去也不怎么美观。
+
+还有需要注意的是如果你需要启用`apple-mobile-web-app-capable`, 注意将`apple-mobile-web-app-status-bar-style`设置为`black-translucent`，否则会出现还差 22 像素滚动不到头的坑爹 bug。
+
+如果需要很好的兼容性，或者 pull refresh 等功能，也可以考虑使用我做的简化版 [iscroll](https://github.com/chemzqm/iscroll)。
+
+## 禁用页面整体拖动
+
+IOS下默认情况下用户的拖动操作在scroll滚到头以后会导致整体页面的滚动，一种方式是禁用掉 document 的 touchmove 原生触发
+``` js
+document.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+});
+```
+此时原生的滚动是无法工作的，解决办法就是禁用滚动元素的 touchmove 事件冒泡
+``` js
+scrollable.addEventListener('touchmove', function (e) {
+   e.stopPropagation();
+});
+```
+
+另一种方式是判定滚动元素滚到头之后禁用掉默认的处理
+``` js
+var el = document.querySelector('.scrollable');
+var sy = 0;
+events.bind(el, 'touchstart', function (e) {
+  sy = e.pageY;
+})
+
+events.bind(el, 'touchmove', function (e) {
+  var down = (e.pageY - sy > 0);
+  //top
+  if (down && el.scrollTop <= 0) {
+    e.preventDefault();
+  }
+  //bottom
+  if (!down && el.scrollTop >= el.scrollHeight - el.clientHeight) {
+    e.preventDefault();
+  }
+})
+```
+我个人倾向于第二种方案，因为如果单纯的禁用 document 的 touchmove 监听，会导致一些处理的失效，比如说上面提到的 `tap-event` 模块。
+
+这里有个模块 [scrollfix](https://github.com/chemzqm/scrollfix) 使用了第一种方案。
+
+## 拖动方向与距离
+
+通过 event 的 clientX 和 clientY 即可计算。
+
+具体实现可以参考 [swipe](https://github.com/component/swipe),以及我的移动端组件 [swipe-it](https://github.com/chemzqm/swipe-it) [sweet-sortable](https://github.com/chemzqm/sweet-sortable)。
+
+## 最后
+
+禁用 click 的前提下，移动端事件其实没什么复杂的东西，只要理解一些基础的技巧，就可以做出很好的体验了。

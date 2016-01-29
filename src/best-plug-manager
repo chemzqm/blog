@@ -1,0 +1,86 @@
+title: 世界上最好的 vim plugin 管理插件
+url: best-plug-manager
+created: 2016-01-03
+updated: 2016-01-28
+id: 7
+tags:
+  - vim
+---
+## 原因
+常用的 vim plugin 管理插件包括： `pathogen`, `vundle`, `neobundle` 基本都能满足日常用户的需求，但是它们对我来说有一些很大的问题：
+
+* 行为不确定。不确定它们在我的文件系统上做了什么手脚，如果哪天我不小心删了什么可能就有大麻烦了
+
+* 不支持插件的自定义修改。如果我修改了一些插件没有 git 提交，或者本地创建了自己的新分支，这些管理插件很可能无法正常工作
+
+* 各种繁琐选项命令，对我来说插件管理更新下插件并生成 helptag 就够了，其它的功能我基本用不上，就算有用也可以很容易使用其它方式实现。
+
+## 实现插件加载
+
+.vimrc 中这样实现
+
+``` vim
+command! -nargs=1 Plugin call s:bundle(<args>)
+
+function! s:bundle(name)
+  exe 'set rtp+=~/.vim/bundle/' . a:name
+endfunction
+
+if !exists('g:bundles_loaded')
+  Plugin 'syntastic'
+  Plugin 'ultisnips'
+  ....
+endif
+let g:bundles_loaded = 1
+
+filetype plugin indent on
+syntax enable
+```
+
+就实现了插件的加载功能，安装也很简单，只需要到 `~/.vim/bundle` 目录，然后执行 `git clone [remote address]` 就行了，如果插件还需要进一步操作，进入目录执行就行了。
+
+以上代码还不支持 `after` 目录的夹在，而且在 .vimrc 重加载时，还会重新加载全部插件，所以有了 [plug.vim](https://github.com/chemzqm/plug.vim) 这个只管 rtp 的 vim 插件管理插件。
+
+## 实现插件更新
+
+我写了一段 `fish` 脚本完成
+
+``` fish
+function updateBundles
+	set old_dir $PWD
+	cd ~/.vim/bundle
+	for dir in (ls)
+		if test -d $dir
+			cd $dir
+			echo updating $dir
+			git up
+			if test -d doc
+				echo doc generate
+				vim -c "helptags doc|q"
+			end
+			cd ..
+		end
+	end
+	cd $old_dir
+end
+```
+
+非常之简单，这里的关键是 [git up](https://github.com/aanand/git-up) 命令 ，它可以自动执行 `forward` 和 `rabase` 操作，而且本地有修改还帮你 `stash` `stash apply`， 再不用担心更新无法正常进行。
+
+也你会想同时更新所有插件不是会更快吗？
+
+确实如此, 所以我尝试了 [vim-plug](https://github.com/junegunn/vim-plug),  结果每次执行 `PlugUpdate` 我的 MacVim 都会崩溃，而且这个插件强行使用了 `filetype plugin indent on` 这类语句开启所有插件，因为我需要禁用内部插件进行调试，所以还是放弃了。
+
+或许你会觉得某些 vim 管理插件（例如 vim-plug ）提供的 lazyLoad 功能可以让你 vim 启动更快，但是实际上他们可以带来的优化连 `1ms` 都不到，因为基本上复杂点的插件都会把主要代码放到 aotuload 目录中，它们并不会占用启动时间，而那些具备 lazyLoad 的复杂插件，它们的加载时间都大大超过了 10ms，所以结果就是更慢，代码更复杂。
+
+## 自动更新
+
+通过简单的 crontab 操作，我们就可以自动更新插件了
+
+```
+SHELL=/usr/local/bin/bash
+5 0 * * * $HOME/bin/updateBundles >> $HOME/.vim/log 2>&1
+```
+每天 5 点更新一次
+
+_Happy Vimming_

@@ -1,0 +1,50 @@
+title: 常用移动端前端组件
+url: mobile-components
+created: 2015-01-24
+updated: 2016-01-28
+id: 4
+tags:
+  - mobile
+  - front-end
+---
+之前的移动端组件迁移到了 npm ，支持使用 webpack 或者 brwoserify 来构建。
+
+介绍下常用组件，如果你喜欢轻量灵活的移动端解决方案不妨看看，如果是依赖框架开发的话，还是最好使用框架提供的功能。
+
+ - [tap-event][1] 正确的 tap event
+ - [component-tap][2] 支持 unbind 的 tap，但是没有函数不能代理事件
+ - [component-raf][3] 兼容的 request animation frame
+ - [ease-component][4] 提供缓动函数 http://easings.net/ 实现
+ - [component-tween][5] 使用 ease 实现高性能js动画的基础库
+ - [swipe][6] 提供滑动切换效果
+
+下面是我自己的：
+
+ - [component-scrollfix][7] 解决 ios 上页面整体拖动的问题
+ - [component-livechart][8] 自适应的动态 canvas 图表库
+ - [iscroll-component][9] 模拟滚动效果，跟[iscroll][10] 类似，但是更快
+ - [pull-to-refresh][11] 兼容 ios 和 android 的下拉刷新库
+ - [more-mobile][14] 实现列表加载更多的功能
+ - [component-notice][12] 简洁的 notice 实现
+ - [component-overlay][13] 简洁的 overlay 实现
+ - [sweet-sortable][15] 增强动画效果的拖拽 sortable 组件
+ - [swipe-it][16] 提供划出效果的组件
+
+以上组件都由一些基础的 component 组件实现，最后项目的大小要相比使用框架小很多，因为代码简单，维护起来也相对节省时间。
+
+  [1]: https://github.com/component/tap-event/
+  [2]: https://github.com/component/tap
+  [3]: https://github.com/component/raf
+  [4]: https://github.com/component/ease
+  [5]: https://github.com/component/tween
+  [6]: https://github.com/component/swipe
+  [7]: https://github.com/chemzqm/scrollfix
+  [8]: https://github.com/chemzqm/livechart
+  [9]: https://github.com/chemzqm/iscroll
+  [10]: http://iscrolljs.com/
+  [11]: https://github.com/chemzqm/pull-to-refresh
+  [12]: https://github.com/chemzqm/notice
+  [13]: https://github.com/chemzqm/overlay
+  [14]: https://github.com/chemzqm/more
+  [15]: https://github.com/chemzqm/sweet-sortable
+  [16]: https://github.com/chemzqm/swipe-it

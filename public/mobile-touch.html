@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>移动端的touch事件处理</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">移动端的touch事件处理</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Thu Dec 24 2015 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2015-12-24
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>简要的探讨一下移动端 touch 事件处理几个坑，以及相应的简单处理方法。</p>
+
+<h2>click 穿透</h2>
+
+<p>假设有个弹出层，上面有个关闭的按钮支持 touchend 触发后关闭，若正好下方有个元素支持 click 事件，在弹出层关闭后将会在下方元素触发 click 事件。这种效果肯定不是我们需要的，而且我们无法确定合适会在上方出现一个支持 touch 的弹出层，所以我认为最好的处理方式是禁用所有元素的 click 事件，相比 click 需要长达 1s 的触发时间，使用 touchend 可以获得更好的体验。</p>
+
+<h2>tap 事件的判定</h2>
+
+<p>一个正确的 tap 事件应当满足一下条件：</p>
+
+<ol>
+<li>用户手指从屏幕移开时触发</li>
+<li>不能在用户移动手指时触发（防止和滚动、拖拽事件的冲突）</li>
+<li>多个手指同时触摸屏幕时不能触发</li>
+<li>不应该触发 click 事件</li>
+</ol>
+
+<p>具体实现代码可以参考 <a href="https://github.com/component/tap-event/blob/master/index.js">tap-event</a>。我个人也有一个 <a href="https://github.com/chemzqm/tap-event/blob/master/index.js">tap-event</a>，这个分支支持绑定后函数作为事件代理函数，同时也增加了移动位置的判定。</p>
+
+<h2>使用原生的滚动事件</h2>
+
+<p>Android 4.0 以下是不支持原生的 webview 滚动的，所以只能使用 <a href="https://github.com/cubiq/iscroll">iscroll</a> 之类的工具来模拟元素滚动。它的缺点就是有些过于的复杂，所以我还是会在条件允许的情况下使用原生的滚动。</p>
+
+<p>启用原生滚动只需要给外层元素加上样式 <code>-webkit-overflow-scrolling: touch;</code> 即可，如果你的监听函数比较占用资源我们可以通过一个简单的 buffer 函数来限制它的触发间隔，例如：</p>
+<div class="highlight"><pre><span class="k">function</span> buffer<span class="o">(</span>fn, ms<span class="o">)</span> <span class="o">{</span>
+  var timeout<span class="p">;</span>
+  <span class="k">return</span> <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span>timeout<span class="o">)</span> <span class="k">return</span><span class="p">;</span>
+    var <span class="nv">args</span> <span class="o">=</span> arguments<span class="p">;</span>
+    <span class="nv">timeout</span> <span class="o">=</span> setTimeout<span class="o">(</span><span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nv">timeout</span> <span class="o">=</span> null<span class="p">;</span>
+      fn.apply<span class="o">(</span>null, args<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>, ms<span class="o">)</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+
+document.querySelector<span class="o">(</span><span class="s1">&#39;.scrollable&#39;</span><span class="o">)</span>.onscroll <span class="o">=</span> buffer<span class="o">(</span>onScroll, 100<span class="o">)</span><span class="p">;</span>
+</pre></div>
+
+<p>另外的建议就是不要在可滚动元素上使用阴影样式（text-shadow 和 box-shadow），因为它们非常影响性能，而且看上去也不怎么美观。</p>
+
+<p>还有需要注意的是如果你需要启用<code>apple-mobile-web-app-capable</code>, 注意将<code>apple-mobile-web-app-status-bar-style</code>设置为<code>black-translucent</code>，否则会出现还差 22 像素滚动不到头的坑爹 bug。</p>
+
+<p>如果需要很好的兼容性，或者 pull refresh 等功能，也可以考虑使用我做的简化版 <a href="https://github.com/chemzqm/iscroll">iscroll</a>。</p>
+
+<h2>禁用页面整体拖动</h2>
+
+<p>IOS下默认情况下用户的拖动操作在scroll滚到头以后会导致整体页面的滚动，一种方式是禁用掉 document 的 touchmove 原生触发
+<code>js
+document.addEventListener(&#39;touchmove&#39;, function(e) {
+  e.preventDefault();
+});
+</code>
+此时原生的滚动是无法工作的，解决办法就是禁用滚动元素的 touchmove 事件冒泡
+<code>js
+scrollable.addEventListener(&#39;touchmove&#39;, function (e) {
+   e.stopPropagation();
+});
+</code></p>
+
+<p>另一种方式是判定滚动元素滚到头之后禁用掉默认的处理
+``` js
+var el = document.querySelector(&lsquo;.scrollable&rsquo;);
+var sy = 0;
+events.bind(el, &lsquo;touchstart&rsquo;, function (e) {
+  sy = e.pageY;
+})</p>
+
+<p>events.bind(el, &lsquo;touchmove&rsquo;, function (e) {
+  var down = (e.pageY - sy > 0);
+  //top
+  if (down && el.scrollTop <= 0) {
+    e.preventDefault();
+  }
+  //bottom
+  if (!down && el.scrollTop >= el.scrollHeight - el.clientHeight) {
+    e.preventDefault();
+  }
+})
+``<code>
+我个人倾向于第二种方案，因为如果单纯的禁用 document 的 touchmove 监听，会导致一些处理的失效，比如说上面提到的</code>tap-event` 模块。</p>
+
+<p>这里有个模块 <a href="https://github.com/chemzqm/scrollfix">scrollfix</a> 使用了第一种方案。</p>
+
+<h2>拖动方向与距离</h2>
+
+<p>通过 event 的 clientX 和 clientY 即可计算。</p>
+
+<p>具体实现可以参考 <a href="https://github.com/component/swipe">swipe</a>,以及我的移动端组件 <a href="https://github.com/chemzqm/swipe-it">swipe-it</a> <a href="https://github.com/chemzqm/sweet-sortable">sweet-sortable</a>。</p>
+
+<h2>最后</h2>
+
+<p>禁用 click 的前提下，移动端事件其实没什么复杂的东西，只要理解一些基础的技巧，就可以做出很好的体验了。</p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '移动端的touch事件处理';
+    var disqus_identifier = '3';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

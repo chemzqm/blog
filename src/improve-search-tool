@@ -1,0 +1,145 @@
+title: 搜索体验改进尝试
+url: improve-search-tool
+created: 2015-12-12
+updated: 2016-01-27
+id: 2
+tags:
+  - vim
+  - tool
+---
+默认的代码搜索工具体验并不理想，但是通过一定的配置，我们可以更快的找到要搜索的代码，并进行快速的跳转、编辑等操作，这篇文章包含以下几个方面：
+
+* 增强 git grep 使其显示行和列
+* 使用 [ag](https://github.com/ggreer/the_silver_searcher) 替换默认的 vim grep 加速搜索
+* 通过快捷键切换 ag 和 git 搜索
+* 自定义 command 让 quickfix 更易用
+* 自定义映射支持 motion 搜索和选中内容搜索
+* 通过 unite 控制 quickfix 列表实现列表内搜索和快速跳转
+
+### 增强版 git grep
+
+* `--no-index --exclude-standard` 支持搜索未加入版本控制但是忽略 gitignore 的文件
+* 通过 sed  awk 的处理让 git grep 支持显示列，后面会需要
+
+```bash
+#! /bin/bash
+git --no-pager grep --no-color --no-index --exclude-standard -n $1 
+  \| while read git_grep; do
+
+  file_and_line=$(echo "$git_grep" | cut -d : -f 1,2)
+  match=$(echo "$git_grep" | sed 's/[^:]*:[^:]*:\(.*\)/\1/')
+  column=$(echo "$match" | awk "{print index(\$0, \"$1\")}")
+
+  echo "$file_and_line:$column:$match"
+done
+```
+保存为 `grepprg`
+
+### 让 vim 使用 grepprg 做 grep
+
+```vim
+    set grepprg=grepprg\ $*
+    set grepformat=%f:%l:%c:%m
+```
+### 让 vim 使用 ag 做 grep
+
+```vim
+    set grepprg=ag\ --vimgrep\ $*
+    set grepformat=%f:%l:%c:%m
+```
+### 通过映射命令灵活切换 ag 和 grep
+
+```vim
+nnoremap <leader>ag :call <SID>SwitchGrepCmd()<cr>
+let g:g:grep_using_git = 0
+function! s:SwitchGrepCmd()
+  if g:grep_using_git
+    set grepprg=ag\ --vimgrep\ $*
+    let g:grep_using_git = 0
+    echohl Identifier | echon 'grep by ag' | echohl None
+  else
+    set grepprg=grepprg\ $*
+    let g:grep_using_git = 1
+    echohl Identifier | echon 'grep by git' | echohl None
+  endif
+endfunction
+```
+### 添加快捷命令搜索完成时自动弹出 quickfix 列表
+
+用自定义 `Ag` 命令执行 vim grep
+
+```vim
+command! -nargs=+ -bar -complete=file Ag silent! grep! <args>|cwindow|redraw!
+```
+
+### 自定义操作命令快速搜索
+
+可以减少搜索所需输入
+
+```vim
+vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<cr>
+nnoremap <leader>g :<C-u>set operatorfunc=<SID>GrepFromSelected<cr>g@
+
+function! s:GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+    let g:grep_word = @@
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+    let g:grep_word = '\b' . @@ . '\b'
+  else
+    return
+  endif
+  silent execute "Ag '" . g:grep_word ."'"
+  let @@ = saved_unnamed_register
+endfunction
+```
+* `<leader>giw` 可搜索光标下单词
+* `v***<leader>g` 可搜索选中字符串
+
+### 使用 Unite 控制 quickfix 列表
+
+首先需要安装 [unite-location](https://github.com/chemzqm/unite-location) 插件
+
+修改自定义 `Ag` 命令为：
+
+```vim
+command! -nargs=+ -bar -complete=file Ag silent! grep! <args>|execute "Unite -buffer-name=quickfix quickfix"
+```
+让 Unite 的 quickfix 列表选中后不要退出
+
+```vim
+call unite#custom#profile('quickfix', 'context', {
+  \  'no_quit': 1
+  \ })
+```
+
+## 添加映射快速控制 Unite 列表
+
+```vim
+function! s:ToggleUnite()
+  for i in range(1, winnr('$'))
+    let name = bufname(winbufnr(i))
+    if match(name, '^\[unite\]') == 0
+      UniteClose
+      return
+    endif
+  endfor
+  UniteResume
+endfunction
+
+" <space>u 显示/关闭列表
+nmap <silent> <space>u :call <SID>ToggleUnite()<cr>
+
+" 对前/后[count]项执行默认操作
+nmap <space>j :<C-u>call <SID>Jump(v:count1, 'Next')<cr>
+nmap <space>k :<C-u>call <SID>Jump(v:count1, 'Previous')<cr>
+
+function! s:Jump(count, dir)
+  execute a:count . 'Unite' . a:dir
+endfunction
+```
+简单些可以直接配置 unite 的 grep 使用 ag 命令你，我放弃那种用法是因为不想再为它做单独的搜索设置，另外 [vim-qargs](https://github.com/nelstrom/vim-qargs) 这样的插件来对搜索结果做快速替换等操作。
+
+_Happy vimming_

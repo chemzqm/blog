@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+var exec = require('child_process').exec
+var fs = require('fs')
+var Parallel = require('../lib/parallel')
+var readline = require('../lib/readline')
+var path = require('path')
+var template = fs.readFileSync(process.argv[2], 'utf8')
+var sitemap_tempalte = fs.readFileSync('sitemap.xml', 'utf8')
+var files = process.argv.slice(3)
+var et = require('../lib/et')
+
+var p = new Parallel()
+files.forEach(function (file) {
+  p.add(function (done) {
+    var rl = readline(file)
+    var o = {url: path.basename(file)}
+    rl.on('line', function (line, lineCount) {
+      if (/^title:/.test(line)) o.title = line.replace(/^title:\s*/, '')
+      if (/^created:/.test(line)) o.created = line.replace(/^created:\s*/, '')
+      if (/^updated:/.test(line)) o.updated = line.replace(/^updated:\s*/, '')
+      if (/^---/.test(line)) return done(null, o)
+    })
+    rl.on('end', function () {
+      done()
+    })
+  })
+})
+p.done(function (err, arr) {
+  if (err) throw err
+  arr = arr.filter(function (o) {
+    return o != null
+  })
+  arr = arr.sort(function (a, b) {
+    return new Date(b.created) - new Date(a.created)
+  })
+  var data = {posts: arr}
+  var html = et(template, data)
+  fs.writeFileSync('public/index.html', html, 'utf8')
+  html = et(sitemap_tempalte, data).replace(/\n\s*\n/gm, '\n')
+  fs.writeFileSync('public/sitemap.xml', html, 'utf8')
+})

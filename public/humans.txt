@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Qiming Zhao <chemzqm@gmail.com> http://weibo.com/chemzqm
+
+# THANKS
+
+    Open source
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, Component

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>理解使用 vim 补全功能</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">理解使用 vim 补全功能</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Thu Jan 28 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2016-1-28
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <h2>插件的问题</h2>
+
+<p>功能强大的补全插件（例如 <a href="https://github.com/Shougo/neocomplete.vim">neocomplete</a> 以及 <a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a> ）, 可以做到非常智能的补全，同时代替你的一些配置工作。但是这些插件都有无可避免的缺陷：</p>
+
+<ul>
+<li>响应慢，因为它们同时要去进行不同补全模式的查找</li>
+<li>补全慢，干扰项有时会过多，选择更费时间</li>
+<li>容易产生依赖性，影响大脑记忆</li>
+</ul>
+
+<h2>常用补全模式</h2>
+
+<p>其实 vim 本身就提供很多样的补全模式。与官方全面的文档不同 <code>:h ins-completion</code>，文本尝试按各种补全重要性排序进行介绍。</p>
+
+<p>首先是补全选项 <code>completeopt</code>，推荐设置为 <code>menu,preview</code>， menu 可以让补全选项唯一时自动扩展，preivew 选项可以显示补全的预览界面。</p>
+
+<p>关键词补全模式。 这是 vim 最重要的补全模式，它主要使用 <code>&lt;c-n&gt;</code> <code>&lt;c-p&gt;</code> <code>&lt;c-y&gt;</code> 来实现补全，你可以通过选项 <code>complete</code> 来进一步设置关键词来源，推荐设置 <code>set complete+=k</code> 这样关键词补全可以帮你顺道补全 dictionary 里面的内容， 例如你可以设置如下命令：</p>
+<div class="highlight"><pre>command! -nargs<span class="o">=</span><span class="m">0</span> -bar Node     execute <span class="s1">&#39;setl dictionary+=~/.vim/dict/node.dict&#39;</span>
+</pre></div>
+
+<p>使用 Node 命令就可以把 node 词典添加到当前文件内，同时不会污染别的文件。（词典只是一行包含一单词的普通文件，可从 github 搜索获取）</p>
+
+<p>如果你喜欢回车完成补全，而不是蛋疼的 <code>&lt;c-y&gt;</code> 只需要设置：</p>
+<div class="highlight"><pre>inoremap &lt;expr&gt; &lt;CR&gt; pumvisible<span class="o">()</span> ? <span class="s2">&quot;\&lt;C-y&gt;&quot;</span> : <span class="s2">&quot;\&lt;C-g&gt;u\&lt;CR&gt;&quot;</span>
+</pre></div>
+
+<p>如果你需要补全完成时预览窗口自动消失，可以设置：</p>
+<div class="highlight"><pre>augroup <span class="nb">complete</span>
+  autocmd!
+  autocmd CompleteDone * pclose
+augroup end
+</pre></div>
+
+<p>如果你喜欢 <code>&lt;tab&gt;</code>和 <code>&lt;s-tab&gt;</code> 来展开补全以及切换选项，这里有段简单的脚本 <a href="https://gist.github.com/chemzqm/287b0e98560e2e0a1491">complete.vim</a></p>
+
+<p>另外两个比较常用的模式是行补全 <code>&lt;c-x&gt;&lt;c-l&gt;</code> 和文件补全 <code>&lt;c-x&gt;&lt;c-f&gt;</code> ,没什么需要解释的。</p>
+
+<p><code>&lt;c-x&gt;&lt;c-o&gt;</code> omni complete 通常用于代码智能补全，例如 javascript 的代码补全插件 <a href="https://github.com/ternjs/tern_for_vim">tern-for-vim</a> 就是通过设置 javascript 文件的 omnifunc 选项实现的。Vim 自带 omni complete 并不是默认开启的，你需要设置</p>
+<div class="highlight"><pre><span class="nb">set</span> <span class="nv">omnifunc</span><span class="o">=</span>syntaxcomplete#Complete
+</pre></div>
+
+<p>自带的补全选项只是一些基础的语法补全，如不能满足需要，可使用特定语言的插件。</p>
+
+<p><code>&lt;c-x&gt;&lt;c-u&gt;</code> 用户自定义补全，使用选项 <code>completefunc</code> 进行设置的补全模式，有些插件例如 <a href="https://github.com/junegunn/vim-emoji">vim-emoji</a> 使用该选项进行补全，当然你可以设置自己的 <code>completefunc</code></p>
+
+<p>其它补全模式并非不重要，只是因为我日常用不到，这里就略过了。</p>
+
+<p>最后谈一下最为灵活的补全方式：通过使用 complete 函数 <code>:h complete()</code></p>
+
+<p>我使用 <a href="https://github.com/SirVer/ultisnips">ultisnips</a> 来管理我的 snippets，因为每种文件的 snipptes 缩写都会比较多，所以我就需要实现一个快捷键来帮我补全这些缩写：</p>
+<div class="highlight"><pre>inoremap &lt;c-l&gt; &lt;C-R&gt;<span class="o">=</span>SnipComplete<span class="o">()</span>&lt;CR&gt;
+</pre></div>
+
+<p>同时我还希望只有一种补全时自动完成扩展，没有补全选项时提供错误消息提示，所以最后代码长这样：</p>
+<div class="highlight"><pre>inoremap &lt;c-l&gt; &lt;C-R&gt;<span class="o">=</span>SnipComplete<span class="o">()</span>&lt;CR&gt;
+func! SnipComplete<span class="o">()</span>
+  <span class="nb">let</span> <span class="nv">line</span> <span class="o">=</span> getline<span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">)</span>
+  <span class="nb">let</span> <span class="nv">start</span> <span class="o">=</span> col<span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> - 1
+  <span class="k">while</span> start &gt; <span class="m">0</span> <span class="o">&amp;&amp;</span> line<span class="o">[</span>start - 1<span class="o">]</span> <span class="o">=</span>~# <span class="s1">&#39;\k&#39;</span>
+    <span class="nb">let</span> start -<span class="o">=</span> 1
+  endwhile
+  <span class="nb">let</span> <span class="nv">suggestions</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="k">for</span> item in UltiSnips#SnippetsInCurrentScope<span class="o">()</span>
+    <span class="nb">let</span> <span class="nv">trigger</span> <span class="o">=</span> item<span class="o">[</span>0<span class="o">]</span>
+    <span class="nb">let</span> <span class="nv">menu</span> <span class="o">=</span> fnamemodify<span class="o">(</span>item<span class="o">[</span>2<span class="o">]</span>, <span class="s1">&#39;:t:r&#39;</span><span class="o">)</span>
+    <span class="nb">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;word&#39;</span>: trigger, <span class="s1">&#39;menu&#39;</span>: menu, <span class="s1">&#39;info&#39;</span>: item<span class="o">[</span>1<span class="o">]}</span>
+    call add<span class="o">(</span>suggestions, entry<span class="o">)</span>
+  endfor
+  <span class="k">if</span> empty<span class="o">(</span>suggestions<span class="o">)</span>
+    echohl Error <span class="p">|</span> echon <span class="s1">&#39;no match&#39;</span> <span class="p">|</span> echohl None
+  elseif len<span class="o">(</span>suggestions<span class="o">)</span> <span class="o">==</span> 1
+    <span class="nb">let</span> <span class="nv">pos</span> <span class="o">=</span> getcurpos<span class="o">()</span>
+    <span class="k">if</span> <span class="nv">start</span> <span class="o">==</span> 0
+      <span class="nb">let</span> <span class="nv">str</span> <span class="o">=</span> trigger
+    <span class="k">else</span>
+      <span class="nb">let</span> <span class="nv">str</span> <span class="o">=</span> line<span class="o">[</span>0:start - 1<span class="o">]</span> . trigger
+    endif
+    call setline<span class="o">(</span><span class="s1">&#39;.&#39;</span>, str<span class="o">)</span>
+    <span class="nb">let</span> pos<span class="o">[</span>2<span class="o">]</span> <span class="o">=</span> len<span class="o">(</span>str<span class="o">)</span> + 1
+    call setpos<span class="o">(</span><span class="s1">&#39;.&#39;</span>, pos<span class="o">)</span>
+    call UltiSnips#ExpandSnippet<span class="o">()</span>
+  <span class="k">else</span>
+    call complete<span class="o">(</span>start + 1, suggestions<span class="o">)</span>
+  endif
+  <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+endfunc
+</pre></div>
+
+<p>其实只是简单的找了一下补全开始位置，然后转化下当前的可用补全项，添加到 complete 函数。</p>
+
+<h2>一些认识</h2>
+
+<p>vim 一直没有良好的进程通讯模式，所以复杂插件的性能低下是无法避免的。
+vim 需要很多配置，而不是开包即用，这点确实对新人很不友好。</p>
+
+<p><em>Happy vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '理解使用 vim 补全功能';
+    var disqus_identifier = '10';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

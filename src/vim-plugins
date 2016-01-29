@@ -1,0 +1,50 @@
+title: 个人使用的一些 vim 轻量级插件
+url: vim-plugins
+created: 2016-01-16
+updated: 2016-01-28
+id: 12
+tags:
+  - vim
+---
+* [vim-bbye](https://github.com/moll/vim-bbye) 移除 buffer 同时尽可能保留原有的窗口，对多窗口编辑切换非常有帮助。
+
+* [matchit.vim](http://www.vim.org/scripts/script.php?script_id=39) 扩展了 vim 的 `%`，对我来说主要是匹配 html 的 tag，以及 vim 的里面成对的关键词，例如 `if` `endif`， 据说新版 vim 自带该插件
+
+* [qdo.vim](https://gist.github.com/chemzqm/b7d1091d5b4b85ebd622) 主要用于对 quickfix 搜索结果进行批量替换，例如：`:Qdo %s/\<abc\>/ABC/gc | update `
+
+* [system.vim](https://gist.github.com/chemzqm/b798a1c51f533bbc9667) 整合了一些系统相关操作，包括 `rm` `rename` `mkdir` `copy to clipboard`
+
+* [simple_pairs.vim](http://www.vim.org/scripts/script.php?script_id=2339) 轻量的字符配对插件，很容易修改。 不是特别智能，但也不会像某些自作聪明的插件恶心你。
+
+* [complete.vim](https://gist.github.com/chemzqm/287b0e98560e2e0a1491) 简洁的关键词补全插件，只是让 tab 可以实现 `<c-n>` `<c-p>` 不自作聪明，不影响性能。
+
+* [open.vim](https://gist.github.com/chemzqm/a235e5151d530cdef760) Mac 下快速打开当前行的 url 和 email，简单调用了下 `open` 命令
+
+* [mycomment.vim](https://github.com/chemzqm/mycomment.vim)一个快捷键搞定注释问题
+
+* [vim-easygit](https://github.com/chemzqm/vim-easygit/) 轻量级 git wrapper 插件，用以解决 [fugitive]()难以扩展的问题
+
+* [jscheck](https://github.com/chemzqm/jscheck) 只做 js 语法检查的 vim 插件，用以解决 eslint 之类插件速度太慢的问题
+
+* [unite-extra](https://github.com/chemzqm/unite-extra) 一些实用的 unite 源，包括 emoji command project 和 note
+
+* [unite-git-log](https://github.com/chemzqm/unite-git-log) 整合 gitlog 到 unite 界面的插件
+
+* [unite-js-func](https://github.com/chemzqm/unite-js-func) 快速定位 js 函数的 unite 插件
+
+* [unite-location](https://github.com/chemzqm/unite-location)
+整合 vim quickfix 和 location 列表到 unite 的插件
+
+* [vim-iterm2-start](https://github.com/chemzqm/vim-iterm2-start) 让 iterm2 执行任务，主要解决 vim 不能异步，执行耗时任务会卡住的问题。
+
+* [vim-macos](https://github.com/chemzqm/vim-macos) 包含些与 macos 交互的函数，包括 ItermOpen, 发送系统 keycodes 等
+
+* [vim-run](https://github.com/chemzqm/vim-run) 快速执行当前文件并看到结果的小工具，主要用于学习新语言。
+
+* [vim-v2ex](https://github.com/chemzqm/vim-v2ex) 异步方式刷新 v2ex 的小插件
+
+* [macdown.vim](https://github.com/chemzqm/macdown.vim) 使用 applescript 的快速预览 markdown 插件
+
+* [todoapp.vim](https://github.com/chemzqm/todoapp.vim) 使用 unite 的 todo 管理插件
+
+* [unite-session](https://github.com/chemzqm/unite-session) 支持 restart 的 session 管理插件

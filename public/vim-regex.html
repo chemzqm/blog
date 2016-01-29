@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>理解并使用 vim 中的正则表达式</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">理解并使用 vim 中的正则表达式</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Thu Jan 28 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2016-1-28
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>vim 存在 4 种模式，并且在不同场景有不同的使用方式，本文做一些简单小结。</p>
+
+<h3>4 种模式概览</h3>
+
+<p>以下摘自 vim 文档：</p>
+<div class="highlight"><pre>after:   <span class="se">\v</span>    <span class="se">\m</span>     <span class="se">\M</span>      <span class="se">\V</span>  matches ~
+      <span class="s1">&#39;magic&#39;</span> <span class="s1">&#39;nomagic&#39;</span>
+   $    $     $      <span class="se">\$</span>  matches end-of-line
+   .    .     <span class="se">\.</span>     <span class="se">\.</span>  matches any character
+   *    *     <span class="se">\*</span>     <span class="se">\*</span>  any number of the previous atom
+   <span class="o">()</span>   <span class="se">\(\)</span>  <span class="se">\(\)</span>   <span class="se">\(\)</span> grouping into an atom
+   <span class="p">|</span>    <span class="se">\|</span>    <span class="se">\|</span>     <span class="se">\|</span>  separating alternatives
+   <span class="se">\a</span>   <span class="se">\a</span>    <span class="se">\a</span>     <span class="se">\a</span>  alphabetic character
+   <span class="se">\\</span>   <span class="se">\\</span>    <span class="se">\\</span>     <span class="se">\\</span>  literal backslash
+   <span class="se">\.</span>   <span class="se">\.</span>    .      .  literal dot
+   <span class="se">\{</span>   <span class="o">{</span>     <span class="o">{</span>      <span class="o">{</span>  literal <span class="s1">&#39;{&#39;</span>
+   a    a     a      a  literal <span class="s1">&#39;a&#39;</span>
+</pre></div>
+
+<p>并不需要记住这些，因为你可以保持只使用其中一种模式，需要帮助的时候 <code>:h magic</code> 查看即可。</p>
+
+<h3>默认模式以及改变模式</h3>
+
+<p>除非你设置 <code>magic</code> 选项（不推荐），vim 在所有情况都默认使用 <code>magic</code> 模式，也就是 <code>\m</code> 进行匹配，假如你搜索 any number 两个字符串，你需要这么敲：</p>
+<div class="highlight"><pre>/<span class="se">\(</span>any<span class="se">\|</span>number<span class="se">\)</span>
+</pre></div>
+
+<p>因为 <code>(</code> 和 <code>|</code> 在默认 <code>magic</code> 模式是没有特殊含义的，如果你使用 <code>\v</code> 模式就可以简化成这样：</p>
+<div class="highlight"><pre>/<span class="se">\v</span><span class="o">(</span>any<span class="p">|</span>number<span class="o">)</span>
+</pre></div>
+
+<p><code>\v</code> 模式最接近大部分语言中的正则，所以这也是 <a href="http://learnvimscriptthehardway.stevelosh.com/">learnvimscriptthehardway</a> 书中推荐的使用方式。</p>
+
+<h3>理解 vim 中字符串转义</h3>
+
+<p>通常如果你是直接使用命令，例如 <code>/</code>，<code>?</code> , <code>:substitute</code> 进行搜索的话，里面的正则并不需要考虑转义问题，但是你要使用 vimscript 编程就肯定要遇到转义的问题。</p>
+
+<p>vim 有两种字符串表示方式，一种是使用单引号 <code>&#39;</code>, 另一种使用双引号 <code>&quot;</code>。</p>
+
+<p><code>&#39;</code> 内的字符不会进行任何转义，但是如果需要包含另一个 <code>&#39;</code>,  则需要使用两个 <code>&#39;</code> 连在一起表示。 <code>&quot;</code>  内的 <code>\</code> 具有转义功能，如果需要表示字面的 <code>\</code> 则需要两个相连 <code>\</code>。</p>
+
+<p>几个例子：
+``` vim
+:echo &lsquo;abc&rsquo; =~# &lsquo;\v\a{3}&lsquo;
+&ldquo; 单引号不需要转义 \, 输出 1 表示匹配成功</p>
+
+<p>:echo &lsquo;abc&rsquo; =~# &ldquo;va{3}&ldquo;
+&ldquo; 双引号需要转义 \, 输出 1 表示匹配成功</p>
+
+<p>:echo substitute(&ldquo;&lsquo;abc&rsquo;&rdquo;, &lsquo;\v^&ldquo;(.*)&ldquo;[markdown]lsquo;, &rsquo;\1', &ldquo;) 
+&ldquo; 输出 abc，单引号需要两个相连表示字面单引号</p>
+
+<p>:execute &lsquo;normal! ?\v^#.*&lsquo; . &ldquo;<cr>&ldquo; 
+&ldquo; 使用拼接字符串同时利用单引号无需转义以及双引号转义
+```</p>
+
+<h3>理解 <code>syntax</code> 命令里的 <code>pattern</code></h3>
+
+<p><code>:h syn-pattern</code> 里有详细介绍，简单来说就是跟是用 <code>:substitue</code> 命令一样，另外不包含 <code>cpoption</code> 的 <code>l</code> 总是不包含的（通常只要你有 vimrc 文件，cp 选项都是关闭的，所以一般用不着关心这个， 使用 <code>:h cp</code> 了解更多）</p>
+
+<p>这里要特别注意一个陷阱，考虑以下命令:</p>
+<div class="highlight"><pre>:syntax region Comment  <span class="nv">start</span><span class="o">=</span><span class="s2">&quot;/\*&quot;</span>  <span class="nv">end</span><span class="o">=</span><span class="s2">&quot;\*/&quot;</span>
+</pre></div>
+
+<p>为什么双引号里面的 <code>\</code> 不需要转义 ？？？</p>
+
+<p>答案就是这里的双引号并不代表字符串，它只是边界符号的一种表示，这类似你使用的 <code>:substitue</code> 命令，以下命令跟上面的是等效的：</p>
+<div class="highlight"><pre>:syntax region String   <span class="nv">start</span><span class="o">=</span>+/<span class="se">\*</span>+    <span class="nv">end</span><span class="o">=</span>+<span class="se">\*</span>/+
+</pre></div>
+
+<p><code>syntax</code> 里面的正则同样是默认 <code>magic</code> 的，注意你不能关闭这里 <code>magic</code>，但是可以使用 <code>\v</code> 让它更加 magic，于是上面的命令可以这么写</p>
+<div class="highlight"><pre>:syntax region Comment  <span class="nv">start</span><span class="o">=</span><span class="s2">&quot;\v/\*&quot;</span>  <span class="nv">end</span><span class="o">=</span><span class="s2">&quot;\v\*/&quot;</span>
+</pre></div>
+
+<p>这里的 <code>\v</code> 有些多余，但是可以让你的代码保持更好的一致性。</p>
+
+<h3>一些有用的匹配原</h3>
+
+<p>出了通常其它语言都有的 <code>^</code> <code>$</code>, vim 还提供很多非常有用的匹配原</p>
+<div class="highlight"><pre><span class="se">\&lt;</span> <span class="s2">&quot; 单词开始，0宽度匹配</span>
+<span class="s2">\&gt; &quot;</span> 单词结束，0宽度匹配
+<span class="se">\z</span>s <span class="s2">&quot; 设定匹配开始，0宽度匹配</span>
+<span class="s2">\ze &quot;</span> 设定匹配结束，0宽度匹配
+<span class="se">\%</span>^ <span class="s2">&quot; 文件开始，0宽度匹配</span>
+<span class="s2">\%</span>$<span class="s2"> &quot;</span> 文件结束，0宽度匹配
+</pre></div>
+
+<p>这几个是我个人日常最常用的，使用 <code>:h ordinary-atom</code> 可以查看全部匹配原</p>
+
+<h3>正则相关的 vimscript 方法</h3>
+
+<ul>
+<li><code>&#39;a&#39; =~# &#39;\a&#39;</code> 匹配返回 1，不匹配返回 0，不忽略大小写</li>
+<li><code>&#39;a&#39; =~? &#39;\a&#39;</code> 同上，但忽略大小写 </li>
+<li><code>&#39;a&#39; !~# &#39;\a&#39;</code> 匹配返回 0，不匹配返回 1，不忽略大小写</li>
+<li><code>&#39;a&#39; !~? &#39;\a&#39;</code> 同上，但忽略大小写 </li>
+<li><code>substitute( {expr}, {pat}, {sub}, {flags})</code> 使用 flags，替换 expr 里面的 pat (即 pattern 表示的正则) 为 sub</li>
+<li><code>match( {expr}, {pat}[, {start}[, {count}]])</code> 返回 pat 在 expr 里面所匹配的位置，可设置开始位置和重复次数</li>
+<li><code>matchend( {expr}, {pat}[, {start}[, {count}]])</code> 跟 match 函数一样，但是返回最后一个字符的匹配位置</li>
+<li><code>matchlist({expr}, {pat}[, {start}[, {count}]])</code> 返回匹配的列表，第一项是完整匹配，后面是其它子匹配项</li>
+<li><code>matchstr({expr}, {pat}[, {start}[, {count}]])</code> 返回 expr 里面 pat 所匹配的字符串，无匹配返回空字符串<br></li>
+<li><code>split( {expr} [, {pat} [, {keepempty}]])</code> 使用 pat 分割字符串为列表</li>
+</ul>
+
+<p>使用 <code>:h functions</code> 然后 <code>/{pat}</code> 可快速查看这些方法，使用类似 <code>:h match()</code> 可直接查看具体函数帮助。</p>
+
+<h3>grep 命令里面的正则</h3>
+
+<p>vimgrep 使用 vim 的正则，当然也是开启 <code>magic</code> 模式的。 但是 vimgrep 有一个严重问题就是 vimscript 本身运行效率低，所以导致搜索很慢，通常我们都会设置 grep 相关选项，然后使用 grep 命令调用外部工具进行搜索，例如设置 ag：</p>
+<div class="highlight"><pre><span class="k">if</span> executable<span class="o">(</span><span class="s1">&#39;ag&#39;</span><span class="o">)</span>
+  <span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>ag<span class="se">\ </span>--vimgrep<span class="se">\ </span><span class="nv">$*</span>
+  <span class="nb">set</span> <span class="nv">grepformat</span><span class="o">=</span>%f:%l:%c:%m
+endif
+</pre></div>
+
+<p>vim 只会简单的把搜索字符串评级到 ag 的命令里然后传给 shell 去执行，所以现在的正则就是 ag 的正则了，它使用的是 <a href="https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCRE正则</a>, 以下命令：
+<code>
+:grep &#39;Pragmatic(?=Vim)&#39;
+</code>
+匹配 Vim 前面的 Pragmatic</p>
+
+<p>vim 的正则确实比较复杂，希望本文能帮你更好的理解它们。</p>
+
+<p><em>Happy vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '理解并使用 vim 中的正则表达式';
+    var disqus_identifier = '6';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

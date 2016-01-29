@@ -1,0 +1,103 @@
+title: 使用脚本控制 Mac 的 app
+url: mac-script
+created: 2016-01-28
+updated: 2016-01-28
+id: 13
+tags:
+  - mac
+---
+Mac 提供了 applescript 接口来提供脚本化控制应用的接口。 applescript 是 apple 搞的一种脚本语言，apple 为了方便开发者，又搞了一套基于 javascript 的接口。 这里我忍不住要吐槽一下，这货并不是标准的 javascript，用起来比 applescript 还坑, 所以建议还是使用 applescript。
+
+虽然 applescript 很强大（或者说有着极其变态复杂的文档），但并不一定所有自动化控制都需要用它来完成。
+
+Mac 下有个非常好用的命令行工具： `open`，它不仅可以帮你使用默认方式打开文件，还可以打开各种 url 和 app，例如：
+
+``` applescript
+# 打开 safari
+open -a Safari.app
+# 默认浏览器打开 url
+open https://github.com
+# 使用默认邮件 app 发送邮件给某人
+open mailto:someone@gmail.com
+# 后台打开 Dash，并搜索 event
+open -g dash-plugin://query=event
+```
+
+使用 `open -h` 来查看更多选项。
+
+如果你需要暂停/继续某个进程(例如控制一个音乐播放器)，可以使用 kill 命令实现，例如：
+
+``` bash
+# 假设你的播放器 PID 为 838
+kill -SIGSTOP 838
+kill -SIGCONT 838
+```
+
+接下来我们用 applescript 做点简单功能。打开 script editor 这个 app，新建文档，然后输入
+
+``` applescript
+set savedSettings to get volume settings
+# output volume:32, input volume:70, alert volume:78, output muted:false
+set volume output volume 90
+say "This is pretty loud."
+set volume output volume (output volume of savedSettings)
+```
+
+点击执行按钮，相信你凭直觉就能明白这段脚本是干什么的了。
+
+applescript 有个非常有用的功能就是模拟按键，例如：
+
+``` applescript
+tell application "System Events"
+  key code {58,55,124}
+end tell
+```
+
+同时发送 `⌥` `⌘` `←` 这三个键，如果你装有 网易云音乐 这个 app，可以开启全局快捷键，并用这段脚本打开上一首歌曲。
+
+但是我们在自己程序里怎么调用这些脚本呢？
+最简单的方式就是使用 Mac 提供的 osascript 这个命令行工具，例如 `osascript xxx.scpt`，这里的 xxx.scrpt 不一定是 script editor 生成的二进制文件，它也可以是只包含代码的纯文本文件。你也可以使用
+
+``` bash
+osasript -e 'tell application "System Events"' -e 'key code {58,55,124}' -e 'end tell'
+```
+
+这种方式调用脚本，这种方式的好处是你可以使用其它任何语言生成这段代码，然后直接交给 shell 执行。
+
+如果你需要脚本控制某一个 app，可以使用 script editer 里面的 file -> open directory 选中 app，然后浏览这个应用提供的接口，这个接口是需要 app 开发者实现的，并不是每个 app 都有，例如 网易云音乐 就没有 applescript 接口。
+
+最后再来看一段控制 Chrome 的脚本：
+
+``` applescript
+#!/usr/bin/env osascript
+on run full_path
+
+set findtab to false
+tell application "Google Chrome"
+	set window_list to every window
+	repeat with the_window in window_list
+		set tab_list to every tab in the_window
+		set num to 0
+		repeat with the_tab in tab_list
+			set num to num + 1
+			set the_url to the URL of the_tab
+			if the_url starts with full_path then
+				set active tab index of the_window to num
+				set findtab to true
+				tell the_tab
+					reload
+				end tell
+			end if
+		end repeat
+	end repeat
+	if not findtab then
+		open location full_path
+	end if
+end tell
+end run
+```
+
+这段脚本的功能也很简单，它接受一个参数 full_path，判断它是否已经被 Chrome 打开，如果打开就刷新它，如果没有打开就让 Chrome 在新标签页打开它。
+
+Mac 还提供了 Automator.app 这个应用来帮助用户创建自动化流程，甚至应用，只是我习惯用命令行控制，所以对它并没做太多了解。
+

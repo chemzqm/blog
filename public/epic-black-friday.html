@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>Epic-Black-Friday-Deals 效果的前端技术实现</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">Epic-Black-Friday-Deals 效果的前端技术实现</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Tue Dec 15 2015 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2015-12-15
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <h1>介绍</h1>
+
+<p>这是一个通过 web 技术实现的效果演示 demo 。</p>
+
+<p>原设计链接： <a href="https://dribbble.com/shots/2372734-Epic-Black-Friday-Deals">Epic-Black-Friday-Deals</a></p>
+
+<p>原效果图：</p>
+
+
+<p>Demo 链接： <a href="https://chemzqm.github.io/dribbble-effects/friday.html">https://chemzqm.github.io/dribbble-effects/friday.html</a></p>
+
+<p>注：使用 safari 保存到桌面浏览效果更佳。</p>
+
+<p>整个效果分为两个部分实现，上半部分通过 canvas 不断绘制实现，下半部分使用了 css 的 transform 和 transition 来实现。 下面是详细介绍。</p>
+
+<h2>基于 canvas 实现的上半部分动画</h2>
+
+<h3>关于canvas</h3>
+
+<p>canvas 是使用 javascript 进行绘图的基本 API, 它本身只提供了基础的画图 API （例如直线、弧线、曲线、矩形、填充等），通过学习<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">MDN提供的教程</a>, 一个具备 javascript 基本知识的开发者可以很快掌握。</p>
+
+<p>canvas 并不提供动画，事件等更高层的 API，所以需要相应功能都需要自行计算，或者借助其它库来实现。</p>
+
+<p>尽管抽象性很低（或者说非常底层）但是相应的好处是可塑性比较好，因为开发者可以精确的控制每一个细节如何完成。</p>
+
+<h3>canvas 动画实现</h3>
+
+<p>canvas 本身是静态的，并不提供动画，所以我们借助 API <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>， 通过重复的调用这个 API ， 不断的清空画布，并借助其返回的 timestamp 时间戳计算绘制所需的参数值，就可以实现动画效果了， 代码示例：</p>
+<div class="highlight"><pre>var <span class="nv">raf</span> <span class="o">=</span> window.requestAnimationFrame
+var start
+<span class="k">function</span> animate<span class="o">(</span>timestamp<span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span>!start<span class="o">)</span> <span class="nv">start</span> <span class="o">=</span> timestamp
+    //通过持续时间不同重绘
+    drawImage<span class="o">(</span>timestamp - start<span class="o">)</span>
+    raf<span class="o">(</span>animate<span class="o">)</span>
+<span class="o">}</span>
+raf<span class="o">(</span>animate<span class="o">)</span>
+</pre></div>
+
+<p>当然你也能用 setInterval 这样的 API 实现，但是这么做性能太差，比如当前页面隐藏的时候 requestAnimationFrame 是不会触发调用的，这样就节省了客户端的资源。</p>
+
+<h3>实现缓动效果</h3>
+
+<p>缓动效果可以让你的动画更柔和自然，<a href="http://easings.net/zh-cn">easings.net</a>上可以看到已经命名的缓动函数，其实质就是把一个 0 到 1 之间的值进行转化。 <a href="https://github.com/component/ease/blob/master/index.js">component/ease</a> 是一个实现了缓动函数的 javascript 库，我们拿它的一个函数 <code>inQuad</code> 举例：</p>
+<div class="highlight"><pre><span class="k">function</span> inQuad<span class="o">(</span>n<span class="o">){</span>
+  <span class="k">return</span> n * n<span class="p">;</span>
+<span class="o">}</span>
+var <span class="nv">duration</span> <span class="o">=</span> <span class="m">600</span> //动画持续 <span class="m">600</span> ms
+var <span class="nv">raf</span> <span class="o">=</span> window.requestAnimationFrame
+var start
+<span class="k">function</span> animate<span class="o">(</span>timestamp<span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span>!start<span class="o">)</span> <span class="nv">start</span> <span class="o">=</span> timestamp
+    var <span class="nv">percent</span> <span class="o">=</span> <span class="o">(</span>timestamp - start<span class="o">)</span>/duration
+    // 转化为缓动后的值
+    <span class="nv">percent</span> <span class="o">=</span> inQuad<span class="o">(</span>percent<span class="o">)</span>
+    drawImage<span class="o">(</span>percent<span class="o">)</span>
+    raf<span class="o">(</span>animate<span class="o">)</span>
+<span class="o">}</span>
+raf<span class="o">(</span>animate<span class="o">)</span>
+</pre></div>
+
+<p>这样我们的 <code>drawImage</code>接收到的就是缓动后的百分比了。</p>
+
+<p>尽管 <code>drawImage</code> 接收到了百分比，但是具体的值很是需要自己计算，如果你想省事可以借助 <a href="https://github.com/component/tween">component/tween</a> 之类的库来帮你计算属性值，事实上后面要讲到的日期选择的滑动效果就是借助 tween 来实现的.</p>
+
+<h2>keyframe(关键帧) 的实现</h2>
+
+<p>keyframe（关键帧）是一种对动画控制非常有用的抽象，比如说一个画一个圈的起始和终止就各自对应一个 keyframe，css animation 就是通过控制 keyframe 来实现动画的 API。 canvas 也有类似的库来实现 keyframe，例如 <a href="https://github.com/jeremyckahn/rekapi">rekapi</a>。 因为这次的动画并不需要 playback 支持（或者说我比较懒），所以这次只是简单的通过状态来实现了不同效果的切换，代码大致如下：</p>
+<div class="highlight"><pre><span class="k">function</span> View<span class="o">()</span> <span class="o">{</span>
+    //负责圆圈的绘制
+    this.circle <span class="o">=</span> new Circle<span class="o">(</span>this<span class="o">)</span>
+    //负责中间图标绘制
+    this.icon <span class="o">=</span> new Icon<span class="o">(</span>this<span class="o">)</span>
+    //负责时间文本的绘制
+    this.time <span class="o">=</span> new Time<span class="o">(</span>this<span class="o">)</span>
+    this.stat <span class="o">=</span> <span class="s1">&#39;stopped&#39;</span>
+<span class="o">}</span>
+//展开状态
+View.prototype.pend <span class="o">=</span> <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+    this.stat <span class="o">=</span> <span class="s1">&#39;pending&#39;</span>
+<span class="o">}</span>
+//中间对勾效果
+View.prototype.check<span class="o">=</span> <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+    this.stat <span class="o">=</span> <span class="s1">&#39;checking&#39;</span>
+<span class="o">}</span>
+//重置为展开状态
+View.prototype.reset <span class="o">=</span> <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+    this.stat <span class="o">=</span> <span class="s1">&#39;reseting&#39;</span>
+<span class="o">}</span>
+//主绘制函数
+View.prototype.draw <span class="o">=</span> <span class="k">function</span><span class="o">(){</span>
+    this.circle.draw<span class="o">()</span>
+    this.time.draw<span class="o">()</span>
+    this.icon.draw<span class="o">()</span>
+<span class="o">}</span>
+
+//每个子模块通过判定 view 的 stat 绘制
+<span class="k">function</span> Circle<span class="o">(</span>view<span class="o">){</span>
+    this.view <span class="o">=</span> view
+<span class="o">}</span>
+Circle.prototype.draw <span class="o">=</span> <span class="k">function</span><span class="o">(){</span>
+    var <span class="nv">stat</span> <span class="o">=</span> this.view.stat
+    switch <span class="o">(</span>stat<span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="s1">&#39;pending&#39;</span>:
+            this.pend<span class="o">()</span>
+        <span class="k">case</span> <span class="s1">&#39;checking&#39;</span>:
+            this.check<span class="o">()</span>
+        <span class="k">case</span> <span class="s1">&#39;reseting&#39;</span>:
+            this.reset<span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+// <span class="nb">time</span> 模块和 icon 模块同上
+</pre></div>
+
+<p>这种写法比较方便省事，但是抽象性比较差，建议需要灵活控制的话还是找一个适合的库来辅助。</p>
+
+<h2>动画流程控制</h2>
+
+<p>因为没有实现 keyframe ，所以流程控制（例如取消动画和动画连续）也得自己来实现了。 可选的办法有 callback 回调，事件，Promise等，这次使用了 Promise 实现，因为使用起来比较简洁，而且可以很容易实现取消操作。</p>
+
+<p>通过让 Promise reject 来取消原来动画流程：</p>
+<div class="highlight"><pre>View.prototype.cancel <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  this.promise <span class="o">=</span> this.promise <span class="o">||</span> Promise.resolve<span class="o">(</span>null<span class="o">)</span>
+  this.canceled <span class="o">=</span> <span class="nb">true</span>
+  var <span class="nv">self</span> <span class="o">=</span> this
+  <span class="k">return</span> this.promise.then<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+    // 当前 promise 已经执行完毕
+    self.canceled <span class="o">=</span> <span class="nb">false</span>
+  <span class="o">}</span>, <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+    // reject 表明成功结束
+    self.canceled <span class="o">=</span> <span class="nb">false</span>
+  <span class="o">})</span>
+<span class="o">}</span>
+
+View.prototype.animate <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  var <span class="nv">duration</span> <span class="o">=</span> this.duration
+  var start
+  var <span class="nv">self</span> <span class="o">=</span> this
+  var <span class="nv">promise</span> <span class="o">=</span> this.promise <span class="o">=</span> new Promise<span class="o">(</span><span class="k">function</span> <span class="o">(</span>resolve, reject<span class="o">)</span> <span class="o">{</span>
+    // raf 调用的绘制主进程
+    <span class="k">function</span> step<span class="o">(</span>timestamp<span class="o">)</span> <span class="o">{</span>
+      // transform 重置
+      // 因为使用了 https://github.com/component/autoscale-canvas/blob/master/index.js 通过 scale 支持 Retina，
+      // 所以这里不能简单的把 scale 设为 1
+      self.ctx.setTransform<span class="o">(</span>window.devicePixelRatio <span class="o">||</span> <span class="m">1</span> ,0 ,0 ,window.devicePixelRatio <span class="o">||</span> <span class="m">1</span> ,0, 0<span class="o">)</span><span class="p">;</span>
+      // 清空画布
+      self.ctx.clearRect<span class="o">(</span>0, 0, self.width, self.height<span class="o">)</span>
+      // 停止动画并且 reject
+      <span class="k">if</span> <span class="o">(</span>self.canceled <span class="o">===</span> <span class="nb">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> reject<span class="o">()</span>
+      <span class="o">}</span>
+      <span class="k">if</span> <span class="o">(</span>!start<span class="o">)</span> <span class="nv">start</span> <span class="o">=</span> timestamp
+      var <span class="nv">d</span> <span class="o">=</span> timestamp - start
+      // 回着不同模块
+      self.draw<span class="o">()</span>
+      // 成功结束
+      <span class="k">if</span> <span class="o">(</span>d &gt; duration<span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> resolve<span class="o">()</span>
+      <span class="o">}</span>
+      raf<span class="o">(</span>step<span class="o">)</span>
+    <span class="o">}</span>
+    raf<span class="o">(</span>step<span class="o">)</span>
+  <span class="o">})</span>
+  <span class="k">return</span> promise
+<span class="o">}</span>
+</pre></div>
+
+<p>调用 <code>view.cancel()</code> 就可以取消原来的流程了。</p>
+
+<p><a href="https://github.com/chemzqm/dribbble-effects/blob/master/lib/friday/index.js">view模块</a> 的 <code>cancel</code> <code>pend</code> <code>reset</code> 和 <code>check</code> 方法都返回了 promise 对象，这样我们需要开始新的流程就可以这样写：</p>
+<div class="highlight"><pre>// 先取消当前动画
+view.cancel<span class="o">()</span>
+.then<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  // 只有当前是 checked 完成状态才走 reset 流程
+  <span class="k">if</span> <span class="o">(</span>view.checked<span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> view.reset<span class="o">()</span>.then<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+      // 暂停一下再开始展开
+      <span class="k">return</span> view.wait<span class="o">(</span>300<span class="o">)</span>
+    <span class="o">})</span>
+  <span class="o">}</span>
+<span class="o">})</span>.then<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> view.pend<span class="o">()</span>
+<span class="o">})</span>.then<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> view.check<span class="o">()</span>
+<span class="o">})</span>.catch<span class="o">(</span><span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  // 因为通过 fail 来终止动画，不捕获会报错
+  <span class="k">return</span> <span class="nb">true</span>
+<span class="o">})</span>
+</pre></div>
+
+<h3>具体效果实现</h3>
+
+<ul>
+<li>消逝圆圈的残余尾巴：首先是设定了一个区间，例如：<code>arr = [1, 2, 2, 1, 1]</code> 表示有 <code>arr.length</code> 个区间，每个区间有 <code>arr[i]</code> 个尾巴，每次变换区间都重新生成尾巴：</li>
+</ul>
+<div class="highlight"><pre><span class="nv">step_len</span> <span class="o">=</span> arr.length
+Circle.prototype.pend <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  var <span class="nv">ctx</span> <span class="o">=</span> this.ctx
+  var <span class="nv">percent</span> <span class="o">=</span> this.view.percent
+  var <span class="nv">step</span> <span class="o">=</span> Math.floor<span class="o">(</span>percent*step_len<span class="o">)</span>
+  // step 转变，生成新的 tail
+  <span class="k">if</span> <span class="o">(</span>step &gt; this.step<span class="o">)</span> <span class="o">{</span>
+    this.createTails<span class="o">()</span>
+  <span class="o">}</span>
+  this.step <span class="o">=</span> step
+  // 绘制每一个tail
+  this.tails.forEach<span class="o">(</span><span class="k">function</span> <span class="o">(</span>tail<span class="o">)</span> <span class="o">{</span>
+    // 计算 tail 的 percent
+    var <span class="nv">p</span> <span class="o">=</span> percent*step_len - step
+    // tail 根据自己 percent <span class="o">(</span><span class="m">0</span> 为初始 1为消失<span class="o">)</span>进行绘制
+    tail.draw<span class="o">(</span>p<span class="o">)</span>
+  <span class="o">})</span>
+<span class="o">}</span>
+
+Circle.prototype.createTails <span class="o">=</span> <span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+  var <span class="nv">n</span> <span class="o">=</span> this.step
+  var <span class="nv">num</span> <span class="o">=</span> steps<span class="o">[</span>n<span class="o">]</span>
+  var <span class="nv">tails</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="k">for</span> <span class="o">(</span>var <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt; num<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+    var <span class="nv">tail</span> <span class="o">=</span> new Tail<span class="o">(</span>this, i<span class="o">)</span>
+    tails.push<span class="o">(</span>tail<span class="o">)</span>
+  <span class="o">}</span>
+  this.tails <span class="o">=</span> tails
+<span class="o">}</span>
+</pre></div>
+
+<ul>
+<li>时间动画的计算，这里的展开和重置动画是不同的（暂开时分秒的动画要远快与时，重置时时分秒的速率是相同的），所以也就不能简单的 playback 了，重置时只需要 <code>percent*total</code> 就能计算对应的十分秒，展开时需要根据一天的十分秒进行一点计算：
+```
+function pad(n) {
+return (&lsquo;0&rsquo; + String(n)).slice(-2)
+}</li>
+</ul>
+
+<p>function toHMS(n) {
+  var h = Math.floor(n/3600)
+  var m = Math.floor((n - h<em>3600)/60)
+  var s = Math.floor(n%60)
+  return {
+    h: pad(h),
+    m: pad(m),
+    s: pad(s)
+  }
+}
+// 1天的秒数
+var total = 24</em>60*60
+// 获取 hms
+toHMS(n)
+```</p>
+
+<p>其实这里有个坑，就是因为秒数变化飞快，有可能 1/60 秒就完成了 0~60 的变化, 这样如果浏览器是 60hz 的话就只会显示相对固定的秒数，例如 <code>
+5x</code> (x为0 ~ 9), 解决办法就是调整下动画持续时间 😅</p>
+
+<ul>
+<li><p>设置动态文本。这次本来打算使用自定义字体 ProximaNova-Light 来显示时间的，但是发现这个字体的数字不是等宽的，结果就是显示动画的时候数字会一直抖动，改为系统自带字体 <code>sans-serif</code> <code>Helvetica</code> 就没有这种问题。</p></li>
+<li><p>对勾的实现。本次实现最为复杂的部分，因为涉及角度、位置、长度的精确计算，最后使用了黄金分割，也就是右边比左边 1.618: 1, 结果比较满意。代码如下：</p></li>
+</ul>
+<div class="highlight"><pre>Icon.prototype.drawCorrect <span class="o">=</span> <span class="k">function</span> <span class="o">(</span>p, tx<span class="o">)</span> <span class="o">{</span>
+  var <span class="nv">l</span> <span class="o">=</span> 14
+  var <span class="nv">tl</span> <span class="o">=</span> 2.618*l
+  var <span class="nv">len</span> <span class="o">=</span> tl*<span class="o">(</span>outBack<span class="o">(</span>p<span class="o">))</span>
+  var <span class="nv">ctx</span> <span class="o">=</span> this.ctx
+  var <span class="nv">x</span> <span class="o">=</span> this.x
+  var <span class="nv">y</span> <span class="o">=</span> this.y
+  // 起始 x y
+  var <span class="nv">sx</span> <span class="o">=</span> x - 10
+  var <span class="nv">sy</span> <span class="o">=</span> y - 3
+  var <span class="nv">subtense</span> <span class="o">=</span> Math.min<span class="o">(</span>len, l<span class="o">)</span>
+  // 中间点 x y
+  var <span class="nv">mx</span> <span class="o">=</span> sx + subtense*Math.cos<span class="o">(</span>45*PI/180<span class="o">)</span>
+  var <span class="nv">my</span> <span class="o">=</span> sy + subtense*Math.sin<span class="o">(</span>45*PI/180<span class="o">)</span>
+  <span class="nv">tx</span> <span class="o">=</span> tx !<span class="o">=</span> null ? tx : - 8*<span class="o">(</span><span class="m">1</span> - outBack<span class="o">(</span>p<span class="o">))</span>
+  // 偏移量
+  ctx.translate<span class="o">(</span>tx, 0<span class="o">)</span>
+  ctx.beginPath<span class="o">()</span>
+  ctx.moveTo<span class="o">(</span>sx, sy<span class="o">)</span>
+  ctx.lineTo<span class="o">(</span>mx, my<span class="o">)</span>
+  <span class="k">if</span> <span class="o">(</span>len &gt; l<span class="o">)</span> <span class="o">{</span>
+    <span class="nv">subtense</span> <span class="o">=</span> len - l
+    // 终止 x y
+    var <span class="nv">ex</span> <span class="o">=</span> mx + subtense*Math.cos<span class="o">(</span>50*PI/180<span class="o">)</span>
+    var <span class="nv">ey</span> <span class="o">=</span> my - subtense*Math.sin<span class="o">(</span>50*PI/180<span class="o">)</span>
+    ctx.lineTo<span class="o">(</span>ex, ey<span class="o">)</span>
+  <span class="o">}</span>
+  ctx.stroke<span class="o">()</span>
+  // 重置 transform
+  ctx.setTransform<span class="o">(</span>window.devicePixelRatio <span class="o">||</span> <span class="m">1</span> ,0 ,0 ,window.devicePixelRatio <span class="o">||</span> <span class="m">1</span> ,0, 0<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+// 出去一点返回
+<span class="k">function</span> outBack<span class="o">(</span>n<span class="o">){</span>
+  var <span class="nv">s</span> <span class="o">=</span> 1.70158<span class="p">;</span>
+  <span class="k">return</span> --n * n * <span class="o">((</span>s + 1<span class="o">)</span> * n + s<span class="o">)</span> + 1<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>这里几个点的坐标不用重复计算的，但是比较偷懒就没抽象出去🙂</p>
+
+<ul>
+<li>创建遮罩。为了实现中间图标的进入和退出效果，我在每次动画的时候都在中间图标的左边或者右边创建了一个与背景色相同的矩形区域，这样图标出去的时候就会被遮罩盖住，看上就就好象图标是在下一层退出的一样。(因为canvas 并没有 z-index)</li>
+</ul>
+
+<h2>基于 Dom 的下半部分日期选择模块</h2>
+
+<h3>日期状态变化时颜色渐变</h3>
+
+<p>只需要用 css 一个 transion 就能实现：</p>
+<div class="highlight"><pre>transition: color 0.5s linear<span class="p">;</span>
+</pre></div>
+
+<p>对应状态切换时改变元素的 className 就可以了，（小技巧: classList API）</p>
+
+<h3>日期列表触摸滚动实现</h3>
+
+<p>通过不断调整元素的 translateX 或者有 translate3d 时调整 translate3d 的 x 值实现：</p>
+<div class="highlight"><pre>var <span class="nv">s</span> <span class="o">=</span> el.style
+<span class="k">if</span> <span class="o">(</span>has3d<span class="o">)</span> <span class="o">{</span>
+  s<span class="o">[</span>transform<span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;translate3d(&#39;</span> + x + <span class="s1">&#39;px, 0, 0)&#39;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  s<span class="o">[</span>transform<span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;translateX(&#39;</span> + x + <span class="s1">&#39;px)&#39;</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>这里相对复杂的一步就是 touchend 时计算之后动画的持续时间、最终位置和缓动函数：</p>
+<div class="highlight"><pre>// 减速度
+var <span class="nv">deceleration</span> <span class="o">=</span> 0.0004
+// 当前滑动速度
+var <span class="nv">speed</span> <span class="o">=</span> this.speed
+var <span class="nv">x</span> <span class="o">=</span> this.x
+// 限定速度
+<span class="nv">speed</span> <span class="o">=</span> Math.min<span class="o">(</span>speed, 0.6<span class="o">)</span>
+var <span class="nv">minX</span> <span class="o">=</span> - <span class="o">(</span>this.total - this.count<span class="o">)</span>*width
+// 估算终点
+var <span class="nv">destination</span> <span class="o">=</span> x + <span class="o">(</span> speed * speed <span class="o">)</span> / <span class="o">(</span> <span class="m">2</span> * deceleration <span class="o">)</span> * <span class="o">(</span> this.distance &lt; <span class="m">0</span> ? -1 : <span class="m">1</span> <span class="o">)</span>
+// 估算时间
+var <span class="nv">duration</span> <span class="o">=</span> speed / deceleration
+var newX
+var <span class="nv">ease</span> <span class="o">=</span> <span class="s1">&#39;out-cube&#39;</span>
+// 终点超出右边界 重算终点和缓动函数
+<span class="k">if</span> <span class="o">(</span>destination &gt; 0<span class="o">)</span> <span class="o">{</span>
+  <span class="nv">newX</span> <span class="o">=</span> 0
+  <span class="nv">ease</span> <span class="o">=</span> <span class="s1">&#39;out-back&#39;</span>
+// 终点小于左边界 重算终点和缓动函数
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span>destination &lt; minX<span class="o">)</span> <span class="o">{</span>
+  <span class="nv">newX</span> <span class="o">=</span> minX
+  <span class="nv">ease</span> <span class="o">=</span> <span class="s1">&#39;out-back&#39;</span>
+<span class="o">}</span>
+// 超出边界的话重算持续时间
+<span class="k">if</span> <span class="o">(</span>typeof <span class="nv">newX</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nv">duration</span> <span class="o">=</span> duration*Math.abs<span class="o">((</span>newX - x + 50<span class="o">)</span>/<span class="o">(</span>destination - x<span class="o">))</span>
+  //duration <span class="o">=</span> Math.max<span class="o">(</span>200, duration<span class="o">)</span>
+  <span class="nv">destination</span> <span class="o">=</span> newX
+<span class="o">}</span>
+// 当前点在边界外，固定持续时间和缓动函数
+<span class="k">if</span> <span class="o">(</span>x &gt; <span class="m">0</span> <span class="o">||</span> x &lt; minX<span class="o">)</span> <span class="o">{</span>
+  <span class="nv">duration</span> <span class="o">=</span> 500
+  <span class="nv">ease</span> <span class="o">=</span> <span class="s1">&#39;out-circ&#39;</span>
+<span class="o">}</span>
+// 固定终点为子元素宽度的整数倍
+<span class="nv">destination</span> <span class="o">=</span> Math.round<span class="o">(</span>destination/width<span class="o">)</span>*width
+<span class="k">return</span> <span class="o">{</span>
+  x: destination,
+  duration: duration,
+  ease: ease
+<span class="o">}</span>
+</pre></div>
+
+<p>计算完成后把结果传递给 <code>tween</code> 对象就可以开始滑动了。</p>
+
+<h3>日期选择</h3>
+
+<p>用到了 <a href="https://github.com/component/events">events</a> 实现事件代理, 以及<a href="https://github.com/chemzqm/tap-event">tap-event</a>实现正确的 tap 事件 （都是非常常用的移动端组件）</p>
+<div class="highlight"><pre>// 简单的判定，防止 click 和 tap 事件同时触发
+var <span class="nv">hastouch</span> <span class="o">=</span> <span class="s1">&#39;ontouchstart&#39;</span> in window
+
+<span class="k">function</span> Footer<span class="o">()</span> <span class="o">{</span>
+  this.events <span class="o">=</span> events<span class="o">(</span>el, this<span class="o">)</span>
+  <span class="k">if</span> <span class="o">(</span>hastouch<span class="o">)</span> <span class="o">{</span>
+    this.events.bind<span class="o">(</span><span class="s1">&#39;touchstart li&#39;</span>, <span class="s1">&#39;ontap&#39;</span><span class="o">)</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    this.events.bind<span class="o">(</span><span class="s1">&#39;click li&#39;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+Footer.prototype.onclick <span class="o">=</span> <span class="k">function</span> <span class="o">(</span>e<span class="o">)</span> <span class="o">{</span>
+  var <span class="nv">li</span> <span class="o">=</span> e.delegateTarget
+  var <span class="nv">children</span> <span class="o">=</span> this.el.children
+  <span class="k">for</span> <span class="o">(</span>var <span class="nv">i</span> <span class="o">=</span> 0, <span class="nv">l</span> <span class="o">=</span> children.length<span class="p">;</span> i &lt; l<span class="p">;</span> i++<span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nv">li</span> <span class="o">===</span> children<span class="o">[</span>i<span class="o">])</span> <span class="o">{</span>
+      // 高亮选中元素
+      li.classList.add<span class="o">(</span><span class="s1">&#39;active&#39;</span><span class="o">)</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      // 移除其它元素高亮
+      li.classList.remove<span class="o">(</span><span class="s1">&#39;active&#39;</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+Footer.prototype.ontap <span class="o">=</span> tap<span class="o">(</span>Footer.prototype.onclick<span class="o">)</span>
+</pre></div>
+
+<h3>事件传递</h3>
+
+<p>使用的 <a href="https://github.com/component/emitter">component/emitter</a>, 它实现了非常简单的观察者模式（订阅发布模式）</p>
+<div class="highlight"><pre><span class="k">function</span> Footer<span class="o">(</span>el<span class="o">)</span> <span class="o">{</span>
+  ...
+<span class="o">}</span>
+
+Emitter<span class="o">(</span>el<span class="o">)</span>
+
+Footer.prototype.active <span class="o">=</span> <span class="k">function</span> <span class="o">(</span>index<span class="o">)</span> <span class="o">{</span>
+  this.emit<span class="o">(</span><span class="s1">&#39;change&#39;</span>,  index<span class="o">)</span>
+<span class="o">}</span>
+
+<span class="k">function</span> View<span class="o">()</span> <span class="o">{</span>
+  var <span class="nv">footer</span> <span class="o">=</span> this.footer <span class="o">=</span> new Footer<span class="o">()</span>
+  footer.on<span class="o">(</span><span class="s1">&#39;change&#39;</span>, <span class="k">function</span><span class="o">(</span>index<span class="o">)</span> <span class="o">{</span>
+    // active 变化的事件代理函数
+  <span class="o">})</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>这样我们就实现了 <code>Footer</code> 模块和 <code>View</code> 模块的解耦合</p>
+
+<h2>Q and A</h2>
+
+<p>Q: 为什么没有注释?</p>
+
+<p>A: 实现比较仓促，而且也不是实际使用项目，所以比较偷懒，其实我的大部分项目都很严肃，也有比较完整的测试和注释。</p>
+
+<p>Q: 为什么 ios 上保存为 app 后状态栏是白色？</p>
+
+<p>A: 因为这是 ios9 的 bug， 原本可以透明的， <a href="https://forums.developer.apple.com/thread/9819">了解更多</a></p>
+
+<p>Q: 为什么手机横过来就不能看了？</p>
+
+<p>A: 因为现在safari 还没有实现锁屏的 API !</p>
+
+<h2>最后</h2>
+
+<p>实现 web 动画还有 <a href="https://developer.mozilla.org/en/docs/Web/CSS/animation">css animation</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">webgl</a> <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/SVG_animation_with_SMIL">svg smil</a> 等方案，这次并没有用到，以后有机会再为大家介绍。</p>
+
+<p>或许是因为 web 存在很多的技术方案以及相应类库，导致很多做 web 的同学觉得搞特效很复杂，但事实并非如此, 只要你了解了它们基本特点并掌握基本方法，就足够做出不错的效果了，再附送一个更简单的例子：<a href="https://chemzqm.github.io/loadings/">canvas loadings</a></p>
+
+<p>希望本文能帮你做出更好的 web 动画效果。</p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = 'Epic-Black-Friday-Deals 效果的前端技术实现';
+    var disqus_identifier = '5';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

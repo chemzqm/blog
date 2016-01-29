@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>世界上最好的 vim plugin 管理插件</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">世界上最好的 vim plugin 管理插件</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Sun Jan 03 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2016-1-3
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <h2>原因</h2>
+
+<p>常用的 vim plugin 管理插件包括： <code>pathogen</code>, <code>vundle</code>, <code>neobundle</code> 基本都能满足日常用户的需求，但是它们对我来说有一些很大的问题：</p>
+
+<ul>
+<li><p>行为不确定。不确定它们在我的文件系统上做了什么手脚，如果哪天我不小心删了什么可能就有大麻烦了</p></li>
+<li><p>不支持插件的自定义修改。如果我修改了一些插件没有 git 提交，或者本地创建了自己的新分支，这些管理插件很可能无法正常工作</p></li>
+<li><p>各种繁琐选项命令，对我来说插件管理更新下插件并生成 helptag 就够了，其它的功能我基本用不上，就算有用也可以很容易使用其它方式实现。</p></li>
+</ul>
+
+<h2>实现插件加载</h2>
+
+<p>.vimrc 中这样实现</p>
+<div class="highlight"><pre>command! -nargs<span class="o">=</span><span class="m">1</span> Plugin call s:bundle<span class="o">(</span>&lt;args&gt;<span class="o">)</span>
+
+<span class="k">function</span>! s:bundle<span class="o">(</span>name<span class="o">)</span>
+  exe <span class="s1">&#39;set rtp+=~/.vim/bundle/&#39;</span> . a:name
+endfunction
+
+<span class="k">if</span> !exists<span class="o">(</span><span class="s1">&#39;g:bundles_loaded&#39;</span><span class="o">)</span>
+  Plugin <span class="s1">&#39;syntastic&#39;</span>
+  Plugin <span class="s1">&#39;ultisnips&#39;</span>
+  ....
+endif
+<span class="nb">let</span> g:bundles_loaded <span class="o">=</span> 1
+
+filetype plugin indent on
+syntax <span class="nb">enable</span>
+</pre></div>
+
+<p>就实现了插件的加载功能，安装也很简单，只需要到 <code>~/.vim/bundle</code> 目录，然后执行 <code>git clone [remote address]</code> 就行了，如果插件还需要进一步操作，进入目录执行就行了。</p>
+
+<p>以上代码还不支持 <code>after</code> 目录的夹在，而且在 .vimrc 重加载时，还会重新加载全部插件，所以有了 <a href="https://github.com/chemzqm/plug.vim">plug.vim</a> 这个只管 rtp 的 vim 插件管理插件。</p>
+
+<h2>实现插件更新</h2>
+
+<p>我写了一段 <code>fish</code> 脚本完成</p>
+<div class="highlight"><pre><span class="k">function</span> updateBundles
+    <span class="nb">set</span> old_dir $PWD
+    <span class="nb">cd</span> ~/.vim/bundle
+    <span class="k">for</span> dir in <span class="o">(</span>ls<span class="o">)</span>
+        <span class="k">if</span> <span class="nb">test</span> -d <span class="nv">$d</span>ir
+            <span class="nb">cd</span> <span class="nv">$d</span>ir
+            <span class="nb">echo</span> updating <span class="nv">$d</span>ir
+            git up
+            <span class="k">if</span> <span class="nb">test</span> -d doc
+                <span class="nb">echo</span> doc generate
+                vim -c <span class="s2">&quot;helptags doc|q&quot;</span>
+            end
+            <span class="nb">cd</span> ..
+        end
+    end
+    <span class="nb">cd</span> $old_dir
+end
+</pre></div>
+
+<p>非常之简单，这里的关键是 <a href="https://github.com/aanand/git-up">git up</a> 命令 ，它可以自动执行 <code>forward</code> 和 <code>rabase</code> 操作，而且本地有修改还帮你 <code>stash</code> <code>stash apply</code>， 再不用担心更新无法正常进行。</p>
+
+<p>也你会想同时更新所有插件不是会更快吗？</p>
+
+<p>确实如此, 所以我尝试了 <a href="https://github.com/junegunn/vim-plug">vim-plug</a>,  结果每次执行 <code>PlugUpdate</code> 我的 MacVim 都会崩溃，而且这个插件强行使用了 <code>filetype plugin indent on</code> 这类语句开启所有插件，因为我需要禁用内部插件进行调试，所以还是放弃了。</p>
+
+<p>或许你会觉得某些 vim 管理插件（例如 vim-plug ）提供的 lazyLoad 功能可以让你 vim 启动更快，但是实际上他们可以带来的优化连 <code>1ms</code> 都不到，因为基本上复杂点的插件都会把主要代码放到 aotuload 目录中，它们并不会占用启动时间，而那些具备 lazyLoad 的复杂插件，它们的加载时间都大大超过了 10ms，所以结果就是更慢，代码更复杂。</p>
+
+<h2>自动更新</h2>
+
+<p>通过简单的 crontab 操作，我们就可以自动更新插件了</p>
+<div class="highlight"><pre><span class="nv">SHELL</span><span class="o">=</span>/usr/local/bin/bash
+<span class="m">5</span> <span class="m">0</span> * * * $HOME/bin/updateBundles &gt;&gt; $HOME/.vim/log 2&gt;<span class="p">&amp;</span>1
+</pre></div>
+
+<p>每天 5 点更新一次</p>
+
+<p><em>Happy Vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '世界上最好的 vim plugin 管理插件';
+    var disqus_identifier = '7';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+var YAML = require('../lib/yaml')
+var et = require('../lib/et')
+var readline = require('readline')
+var fs = require('fs')
+var system = require('child_process').spawnSync
+var path = require('path')
+if (!process.argv[2]) throw new Error('template file required as argument')
+var template = fs.readFileSync(process.argv[2], 'utf8')
+
+process.stdin.setEncoding('utf8')
+var rl = readline.createInterface({
+  input: process.stdin
+})
+
+var front = ''
+var markdown = ''
+var delimater = false
+
+rl.on('line', function (line) {
+  if (!delimater) {
+    if (/^---\s*$/.test(line)) {
+      delimater = true
+    } else {
+      front = front + line + '\n'
+    }
+  } else {
+    markdown = markdown + line + '\n'
+  }
+})
+
+process.stdin.on('end', function(){
+  rl.close()
+  if (!markdown) {
+    markdown = front
+    front = ''
+  }
+  if (front) {
+    var meta = YAML.parse(front)
+    meta.title = meta.title || ''
+  } else {
+    meta = {title: '', created: ''}
+  }
+  template = et(template, meta)
+  var cmd = path.join(__dirname, 'misaka')
+  var obj = system(cmd, [], {input: markdown, encoding:'utf8', timeout: 5000})
+  if (obj.stderr) {
+    console.log(obj.stderr)
+  }
+  template = template.replace('[markdown]', obj.stdout)
+  process.stdout.write(template)
+})

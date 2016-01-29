@@ -1,0 +1,46 @@
+title: Vim 启动速度优化
+url: vim-speed-up
+created: 2016-01-15
+updated: 2016-01-28
+id: 11
+keywords: vim, speed up
+tags:
+  - vim
+---
+
+最近因为新加了一些插件，发现 Vim 的启动速度明显变慢了一点，使用 time 命令看一下启动耗时 0.25s 左右（打开空文件的时间），这对一个追求优质编程体验的人来说，简直是不可容忍。经过一些努力，这个数值终于降到了 0.12s， 整整一倍的性能提升！
+
+一开始我用了一个工具 [vim-plugins-profile](https://github.com/hyiltiz/vim-plugins-profile), 坦白讲，我完全是被它的漂亮的图表所吸引，这个工具其实并不很可靠，而且更麻烦的是你要安装一堆依赖，其中有个叫 R 的东西，要占用你 160M 的磁盘空间，简直就是强盗行为。虽说如此，我还是靠它发现了一点问题。
+
+![](/images/result.png)
+
+这是最终优化后的结果，起初有两个插件占用了超过 15ms 的启动时间：分别是 [syntastic](https://github.com/scrooloose/syntastic) 以及 [dash.vim](https://github.com/rizzatti/dash.vim), 经过查看它们的代码，发现问题在于它们在启动时调用了 `system('uname -a')` 命令，用于判定当前系统，通过简单的移除这些多余判定（对我而言），最终获得了 30ms 左右的启动速度提升。
+
+通过使用 vim 自带的 profile 命令 `vim --startuptime time.txt`，我又发现了一些新的问题。
+
+一个是 [neoyank.vim](https://github.com/Shougo/neoyank.vim), 可能是因为它在执行调用的是 autoload 里面的函数，vim-plugins-profile 并没有显示它的时间。通过分析 `time.txt`
+
+```
+127.985  000.395  000.395: sourcing /Users/chemzqm/.vim/bundle/neoyank.vim/autoload/neoyank.vim
+142.818  000.611  000.611: sourcing /Users/chemzqm/vim-dev/easygit/autoload/easygit.vim
+```
+
+可以看到实际上它占用了 15ms 的启动时间，自从熟悉了 `"0p` 粘贴上次的 yank 命令保存内容，我已经基本不需要它了， 所以我决定跟它说再见。 
+
+另一个是 [vim-stay](https://github.com/kopischke/vim-stay), 这个插件本身并不占多少启动时间，但是它会读取 `~/.vim/view` 目录，有时候这会导致 60ms 左右延迟（并没有太深究）。特
+
+```
+291.428  000.350  000.350: sourcing /Users/chemzqm/.vim/view/~=+.vimrc=
+```
+
+这个插件作用也有限，所以我还是暂时不用了。
+
+还有一个特别慢的插件是 [Ultisnip](https://github.com/SirVer/ultisnips)。 慢的主要原因在于 `autoload/UltiSnips.vim` 效率太低（如果 vim 初始化并不打开文件，它不会造成任何影响）35ms 执行时间，实在有些略长。
+
+```
+166.823  035.594  035.594: sourcing /Users/chemzqm/.vim/bundle/ultisnips/autoload/UltiSnips.vim
+```
+
+鉴于我目前还很依赖这个插件，所以只好忍着了。
+
+

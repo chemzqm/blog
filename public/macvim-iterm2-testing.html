@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>使用 MaVim iTerm2 异步测试</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">使用 MaVim iTerm2 异步测试</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Sat Jan 16 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2016-1-16
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>本文简单介绍在 MacVim 异步进行 node 代码测试，并将测试结果返回到 MacVim quickfix 列表的一种方法。</p>
+
+<p>这里有段特别不清晰的视频：</p>
+
+<p><a href="http://video.weibo.com/player/1034:02c9053642a0d4b1bf462a0c45b99f42/v.swf">http://video.weibo.com/player/1034:02c9053642a0d4b1bf462a0c45b99f42/v.swf</a></p>
+
+<h2>背景介绍</h2>
+
+<p><a href="https://github.com/tpope/vim-dispatch">vim-dispatch</a> 支持异步执行 shell 命令，但是并不支持 beta 版的 iTerm2, 因为iTerm2 2.9 以后的 applescript 语法完全不同了，然后我就我做了一个简单版本的异步执行插件：<a href="https://github.com/chemzqm/vim-iterm2-start">vim-iterm2-start</a>,  它暂时只支持我现在用的 MacVim, iTerm2  和 fish shell。</p>
+
+<h2>配合 vim-test</h2>
+
+<p>配合使用 <a href="https://github.com/janko-m/vim-test">vim-test</a> 我们可以一键异步执行当前鼠标下的测试代码，只需要以下设置：</p>
+<div class="highlight"><pre>nmap &lt;silent&gt; &lt;leader&gt;t :TestNearest&lt;CR&gt;
+ <span class="k">function</span>! StartTest<span class="o">(</span>cmd<span class="o">)</span>
+   execute <span class="s1">&#39;ItermStartTab! &#39;</span> . a:cmd
+ endfunction
+ <span class="nb">let</span> g:test#custom_strategies <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;start&#39;</span>: <span class="k">function</span><span class="o">(</span><span class="s1">&#39;StartTest&#39;</span><span class="o">)}</span>
+ <span class="nb">let</span> g:test#strategy <span class="o">=</span> <span class="s1">&#39;start&#39;</span>
+</pre></div>
+
+<p>使用 <code>&lt;leader&gt;t</code> 一键测试</p>
+
+<p>测试版的 iTerm2  修复了文件路径获取的 bug，你可以直接点击错误信息里的文件路径，通过 profile 里设置 MacVim 为默认编辑器，它可以让你的 MacVim 直接跳转到点击的(⌘+鼠标左键)文件，甚至行号也支持。</p>
+
+<h2>支援 quickfix</h2>
+
+<p>接下来我们可以使用一个过滤程序把 mocha 的错误信息发回到 macvim，这样我们就可以直接在 macvim 里面使用 quickfix 列表快速跳转到错误处了，代码实现在这里：<a href="https://gist.github.com/chemzqm/fd1313206c182884efbc">https://gist.github.com/chemzqm/fd1313206c182884efbc</a></p>
+
+<p>把 error-parse.js 添加可执行权限并连接 path 目录下，我们就可以让它把错误信息通过 MacVim 的 clientserver 特性发回到 MacVim，在 MacVim 下只需要把配置改成：</p>
+
+<p>execute &lsquo;ItermStartTab! &rsquo; . a:cmd . &lsquo;| error-parse.js&rsquo;</p>
+
+<p>即可，然后我们就可以愉快的让 iTerm2帮我们执行测试，然后需要看错误的时候 MacVim 下 <code>:copen</code>  打开 quickfix 列表就可以了</p>
+
+<p>error-parse 的代码实现并不完善，请根据个人喜好进行修改。
+它并不局限与 nodejs ，任何输出错误文件路径的测试工具都可以通过调整它来支持。</p>
+
+<p><em>Happy vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '使用 MaVim iTerm2 异步测试';
+    var disqus_identifier = '8';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

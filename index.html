@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>Life for coding</title>
+  <link rel="stylesheet" href="./build.css">
+  <style>
+    .yue a {
+      text-decoration: none;
+    }
+    .contact > ul.unstyled {
+      width: 300px;
+      margin: 0 auto;
+    }
+    .contact ul > li {
+      line-height: 52px;
+      display: block;
+      float: left;
+      font-size: 32px;
+      margin: 0 22px;
+    }
+    time {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+    <div class="yue entry-content">
+      <h2 class="title">articles</h2>
+      <ul class="unstyled">
+        {{each posts}}
+        <li>
+          <time>{{= created}}</time> <a href="/{{= url}}">{{= title}}</a>
+        </li>
+        {{/}}
+      </ul>
+      <h2 class="title">contact</h2>
+      <div class="contact">
+        <ul class="unstyled clearfix">
+          <li>
+            <a class="icon-weibo" title="weibo" href="http://weibo.com/chemzqm"></a>
+          </li>
+          <li>
+            <a class="icon-github-circled" title="github" href="https://github.com/chemzqm"></a>
+          </li>
+          <li>
+            <a class="icon-mail" title="gmail" href="mailto:chemzqm@gmail.com"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

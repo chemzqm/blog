@@ -1,0 +1,115 @@
+title: 理解使用 vim 补全功能
+url: vim-complete
+created: 2016-01-28
+updated: 2016-01-28
+keywords: vim,complete,master vim complete
+id: 10
+tags:
+  - vim
+---
+
+## 插件的问题
+
+功能强大的补全插件（例如 [neocomplete](https://github.com/Shougo/neocomplete.vim) 以及 [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) ）, 可以做到非常智能的补全，同时代替你的一些配置工作。但是这些插件都有无可避免的缺陷：
+
+* 响应慢，因为它们同时要去进行不同补全模式的查找
+* 补全慢，干扰项有时会过多，选择更费时间
+* 容易产生依赖性，影响大脑记忆
+
+## 常用补全模式
+
+其实 vim 本身就提供很多样的补全模式。与官方全面的文档不同 `:h ins-completion`，文本尝试按各种补全重要性排序进行介绍。
+
+首先是补全选项 `completeopt`，推荐设置为 `menu,preview`， menu 可以让补全选项唯一时自动扩展，preivew 选项可以显示补全的预览界面。
+
+关键词补全模式。 这是 vim 最重要的补全模式，它主要使用 `<c-n>` `<c-p>` `<c-y>` 来实现补全，你可以通过选项 `complete` 来进一步设置关键词来源，推荐设置 `set complete+=k` 这样关键词补全可以帮你顺道补全 dictionary 里面的内容， 例如你可以设置如下命令：
+
+``` vim
+command! -nargs=0 -bar Node     execute 'setl dictionary+=~/.vim/dict/node.dict'
+```
+
+使用 Node 命令就可以把 node 词典添加到当前文件内，同时不会污染别的文件。（词典只是一行包含一单词的普通文件，可从 github 搜索获取）
+
+如果你喜欢回车完成补全，而不是蛋疼的 `<c-y>` 只需要设置：
+
+``` vim
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+```
+
+如果你需要补全完成时预览窗口自动消失，可以设置：
+
+``` vim
+augroup complete
+  autocmd!
+  autocmd CompleteDone * pclose
+augroup end
+```
+
+如果你喜欢 `<tab>`和 `<s-tab>` 来展开补全以及切换选项，这里有段简单的脚本 [complete.vim](https://gist.github.com/chemzqm/287b0e98560e2e0a1491)
+
+另外两个比较常用的模式是行补全 `<c-x><c-l>` 和文件补全 `<c-x><c-f>` ,没什么需要解释的。
+
+`<c-x><c-o>` omni complete 通常用于代码智能补全，例如 javascript 的代码补全插件 [tern-for-vim](https://github.com/ternjs/tern_for_vim) 就是通过设置 javascript 文件的 omnifunc 选项实现的。Vim 自带 omni complete 并不是默认开启的，你需要设置
+
+``` vim
+set omnifunc=syntaxcomplete#Complete
+```
+
+自带的补全选项只是一些基础的语法补全，如不能满足需要，可使用特定语言的插件。
+
+`<c-x><c-u>` 用户自定义补全，使用选项 `completefunc` 进行设置的补全模式，有些插件例如 [vim-emoji](https://github.com/junegunn/vim-emoji) 使用该选项进行补全，当然你可以设置自己的 `completefunc`
+
+其它补全模式并非不重要，只是因为我日常用不到，这里就略过了。
+
+最后谈一下最为灵活的补全方式：通过使用 complete 函数 `:h complete()`
+
+我使用 [ultisnips](https://github.com/SirVer/ultisnips) 来管理我的 snippets，因为每种文件的 snipptes 缩写都会比较多，所以我就需要实现一个快捷键来帮我补全这些缩写：
+
+``` vim
+inoremap <c-l> <C-R>=SnipComplete()<CR>
+```
+同时我还希望只有一种补全时自动完成扩展，没有补全选项时提供错误消息提示，所以最后代码长这样：
+
+``` vim
+inoremap <c-l> <C-R>=SnipComplete()<CR>
+func! SnipComplete()
+  let line = getline('.')
+  let start = col('.') - 1
+  while start > 0 && line[start - 1] =~# '\k'
+    let start -= 1
+  endwhile
+  let suggestions = []
+  for item in UltiSnips#SnippetsInCurrentScope()
+    let trigger = item[0]
+    let menu = fnamemodify(item[2], ':t:r')
+    let entry = {'word': trigger, 'menu': menu, 'info': item[1]}
+    call add(suggestions, entry)
+  endfor
+  if empty(suggestions)
+    echohl Error | echon 'no match' | echohl None
+  elseif len(suggestions) == 1
+    let pos = getcurpos()
+    if start == 0
+      let str = trigger
+    else
+      let str = line[0:start - 1] . trigger
+    endif
+    call setline('.', str)
+    let pos[2] = len(str) + 1
+    call setpos('.', pos)
+    call UltiSnips#ExpandSnippet()
+  else
+    call complete(start + 1, suggestions)
+  endif
+  return ''
+endfunc
+```
+
+其实只是简单的找了一下补全开始位置，然后转化下当前的可用补全项，添加到 complete 函数。
+
+## 一些认识
+
+vim 一直没有良好的进程通讯模式，所以复杂插件的性能低下是无法避免的。
+vim 需要很多配置，而不是开包即用，这点确实对新人很不友好。
+
+_Happy vimming_

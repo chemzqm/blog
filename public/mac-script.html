@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>使用脚本控制 Mac 的 app</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">使用脚本控制 Mac 的 app</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Thu Jan 28 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2016-1-28
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>Mac 提供了 applescript 接口来提供脚本化控制应用的接口。 applescript 是 apple 搞的一种脚本语言，apple 为了方便开发者，又搞了一套基于 javascript 的接口。 这里我忍不住要吐槽一下，这货并不是标准的 javascript，用起来比 applescript 还坑, 所以建议还是使用 applescript。</p>
+
+<p>虽然 applescript 很强大（或者说有着极其变态复杂的文档），但并不一定所有自动化控制都需要用它来完成。</p>
+
+<p>Mac 下有个非常好用的命令行工具： <code>open</code>，它不仅可以帮你使用默认方式打开文件，还可以打开各种 url 和 app，例如：</p>
+<div class="highlight"><pre><span class="c1"># 打开 safari</span>
+open -a Safari.app
+<span class="c1"># 默认浏览器打开 url</span>
+open https://github.com
+<span class="c1"># 使用默认邮件 app 发送邮件给某人</span>
+open mailto:someone@gmail.com
+<span class="c1"># 后台打开 Dash，并搜索 event</span>
+open -g dash-plugin://query<span class="o">=</span>event
+</pre></div>
+
+<p>使用 <code>open -h</code> 来查看更多选项。</p>
+
+<p>如果你需要暂停/继续某个进程(例如控制一个音乐播放器)，可以使用 kill 命令实现，例如：</p>
+<div class="highlight"><pre><span class="c1"># 假设你的播放器 PID 为 838</span>
+<span class="nb">kill</span> -SIGSTOP 838
+<span class="nb">kill</span> -SIGCONT 838
+</pre></div>
+
+<p>接下来我们用 applescript 做点简单功能。打开 script editor 这个 app，新建文档，然后输入</p>
+<div class="highlight"><pre><span class="nb">set</span> savedSettings to get volume settings
+<span class="c1"># output volume:32, input volume:70, alert volume:78, output muted:false</span>
+<span class="nb">set</span> volume output volume 90
+say <span class="s2">&quot;This is pretty loud.&quot;</span>
+<span class="nb">set</span> volume output volume <span class="o">(</span>output volume of savedSettings<span class="o">)</span>
+</pre></div>
+
+<p>点击执行按钮，相信你凭直觉就能明白这段脚本是干什么的了。</p>
+
+<p>applescript 有个非常有用的功能就是模拟按键，例如：</p>
+<div class="highlight"><pre>tell application <span class="s2">&quot;System Events&quot;</span>
+  key code <span class="o">{</span>58,55,124<span class="o">}</span>
+end tell
+</pre></div>
+
+<p>同时发送 <code>⌥</code> <code>⌘</code> <code>←</code> 这三个键，如果你装有 网易云音乐 这个 app，可以开启全局快捷键，并用这段脚本打开上一首歌曲。</p>
+
+<p>但是我们在自己程序里怎么调用这些脚本呢？
+最简单的方式就是使用 Mac 提供的 osascript 这个命令行工具，例如 <code>osascript xxx.scpt</code>，这里的 xxx.scrpt 不一定是 script editor 生成的二进制文件，它也可以是只包含代码的纯文本文件。你也可以使用</p>
+<div class="highlight"><pre>osasript -e <span class="s1">&#39;tell application &quot;System Events&quot;&#39;</span> -e <span class="s1">&#39;key code {58,55,124}&#39;</span> -e <span class="s1">&#39;end tell&#39;</span>
+</pre></div>
+
+<p>这种方式调用脚本，这种方式的好处是你可以使用其它任何语言生成这段代码，然后直接交给 shell 执行。</p>
+
+<p>如果你需要脚本控制某一个 app，可以使用 script editer 里面的 file -> open directory 选中 app，然后浏览这个应用提供的接口，这个接口是需要 app 开发者实现的，并不是每个 app 都有，例如 网易云音乐 就没有 applescript 接口。</p>
+
+<p>最后再来看一段控制 Chrome 的脚本：</p>
+<div class="highlight"><pre><span class="ch">#!/usr/bin/env osascript</span>
+on run full_path
+
+<span class="nb">set</span> findtab to <span class="nb">false</span>
+tell application <span class="s2">&quot;Google Chrome&quot;</span>
+    <span class="nb">set</span> window_list to every window
+    repeat with the_window in window_list
+        <span class="nb">set</span> tab_list to every tab in the_window
+        <span class="nb">set</span> num to 0
+        repeat with the_tab in tab_list
+            <span class="nb">set</span> num to num + 1
+            <span class="nb">set</span> the_url to the URL of the_tab
+            <span class="k">if</span> the_url starts with full_path <span class="k">then</span>
+                <span class="nb">set</span> active tab index of the_window to num
+                <span class="nb">set</span> findtab to <span class="nb">true</span>
+                tell the_tab
+                    reload
+                end tell
+            end <span class="k">if</span>
+        end repeat
+    end repeat
+    <span class="k">if</span> not findtab <span class="k">then</span>
+        open location full_path
+    end <span class="k">if</span>
+end tell
+end run
+</pre></div>
+
+<p>这段脚本的功能也很简单，它接受一个参数 full_path，判断它是否已经被 Chrome 打开，如果打开就刷新它，如果没有打开就让 Chrome 在新标签页打开它。</p>
+
+<p>Mac 还提供了 Automator.app 这个应用来帮助用户创建自动化流程，甚至应用，只是我习惯用命令行控制，所以对它并没做太多了解。</p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '使用脚本控制 Mac 的 app';
+    var disqus_identifier = '13';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>

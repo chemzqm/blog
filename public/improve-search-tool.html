@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>搜索体验改进尝试</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">搜索体验改进尝试</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Sat Dec 12 2015 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            2015-12-12
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p>默认的代码搜索工具体验并不理想，但是通过一定的配置，我们可以更快的找到要搜索的代码，并进行快速的跳转、编辑等操作，这篇文章包含以下几个方面：</p>
+
+<ul>
+<li>增强 git grep 使其显示行和列</li>
+<li>使用 <a href="https://github.com/ggreer/the_silver_searcher">ag</a> 替换默认的 vim grep 加速搜索</li>
+<li>通过快捷键切换 ag 和 git 搜索</li>
+<li>自定义 command 让 quickfix 更易用</li>
+<li>自定义映射支持 motion 搜索和选中内容搜索</li>
+<li>通过 unite 控制 quickfix 列表实现列表内搜索和快速跳转</li>
+</ul>
+
+<h3>增强版 git grep</h3>
+
+<ul>
+<li><code>--no-index --exclude-standard</code> 支持搜索未加入版本控制但是忽略 gitignore 的文件</li>
+<li>通过 sed  awk 的处理让 git grep 支持显示列，后面会需要</li>
+</ul>
+<div class="highlight"><pre><span class="ch">#! /bin/bash</span>
+git --no-pager grep --no-color --no-index --exclude-standard -n <span class="nv">$1</span> 
+  <span class="se">\|</span> <span class="k">while</span> <span class="nb">read</span> git_grep<span class="p">;</span> <span class="k">do</span>
+
+  <span class="nv">file_and_line</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span>$<span class="s2">git_grep&quot;</span> <span class="p">|</span> cut -d : -f 1,2<span class="k">)</span>
+  <span class="nv">match</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span>$<span class="s2">git_grep&quot;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[^:]*:[^:]*:\(.*\)/\1/&#39;</span><span class="k">)</span>
+  <span class="nv">column</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span>$<span class="s2">match&quot;</span> <span class="p">|</span> awk <span class="s2">&quot;{print index(\$0, \&quot;</span><span class="nv">$1</span><span class="s2">\&quot;)}&quot;</span><span class="k">)</span>
+
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">ile_and_line:</span><span class="nv">$c</span><span class="s2">olumn:</span>$<span class="s2">match&quot;</span>
+<span class="k">done</span>
+</pre></div>
+
+<p>保存为 <code>grepprg</code></p>
+
+<h3>让 vim 使用 grepprg 做 grep</h3>
+<div class="highlight"><pre><span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>grepprg<span class="se">\ </span><span class="nv">$*</span>
+    <span class="nb">set</span> <span class="nv">grepformat</span><span class="o">=</span>%f:%l:%c:%m
+</pre></div>
+
+<h3>让 vim 使用 ag 做 grep</h3>
+<div class="highlight"><pre><span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>ag<span class="se">\ </span>--vimgrep<span class="se">\ </span><span class="nv">$*</span>
+    <span class="nb">set</span> <span class="nv">grepformat</span><span class="o">=</span>%f:%l:%c:%m
+</pre></div>
+
+<h3>通过映射命令灵活切换 ag 和 grep</h3>
+<div class="highlight"><pre>nnoremap &lt;leader&gt;ag :call &lt;SID&gt;SwitchGrepCmd<span class="o">()</span>&lt;cr&gt;
+<span class="nb">let</span> g:g:grep_using_git <span class="o">=</span> 0
+<span class="k">function</span>! s:SwitchGrepCmd<span class="o">()</span>
+  <span class="k">if</span> g:grep_using_git
+    <span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>ag<span class="se">\ </span>--vimgrep<span class="se">\ </span><span class="nv">$*</span>
+    <span class="nb">let</span> g:grep_using_git <span class="o">=</span> 0
+    echohl Identifier <span class="p">|</span> echon <span class="s1">&#39;grep by ag&#39;</span> <span class="p">|</span> echohl None
+  <span class="k">else</span>
+    <span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>grepprg<span class="se">\ </span><span class="nv">$*</span>
+    <span class="nb">let</span> g:grep_using_git <span class="o">=</span> 1
+    echohl Identifier <span class="p">|</span> echon <span class="s1">&#39;grep by git&#39;</span> <span class="p">|</span> echohl None
+  endif
+endfunction
+</pre></div>
+
+<h3>添加快捷命令搜索完成时自动弹出 quickfix 列表</h3>
+
+<p>用自定义 <code>Ag</code> 命令执行 vim grep</p>
+<div class="highlight"><pre>command! -nargs<span class="o">=</span>+ -bar -complete<span class="o">=</span>file Ag silent! grep! &lt;args&gt;<span class="p">|</span>cwindow<span class="p">|</span>redraw!
+</pre></div>
+
+<h3>自定义操作命令快速搜索</h3>
+
+<p>可以减少搜索所需输入</p>
+<div class="highlight"><pre>vnoremap &lt;leader&gt;g :&lt;C-u&gt;call &lt;SID&gt;GrepFromSelected<span class="o">(</span>visualmode<span class="o">())</span>&lt;cr&gt;
+nnoremap &lt;leader&gt;g :&lt;C-u&gt;set <span class="nv">operatorfunc</span><span class="o">=</span>&lt;SID&gt;GrepFromSelected&lt;cr&gt;g@
+
+<span class="k">function</span>! s:GrepFromSelected<span class="o">(</span><span class="nb">type</span><span class="o">)</span>
+  <span class="nb">let</span> <span class="nv">saved_unnamed_register</span> <span class="o">=</span> @@
+  <span class="k">if</span> a:type <span class="o">==</span><span class="c1"># &#39;v&#39;</span>
+    normal! <span class="sb">`</span>&lt;v<span class="sb">`</span>&gt;y
+    <span class="nb">let</span> g:grep_word <span class="o">=</span> @@
+  elseif a:type <span class="o">==</span><span class="c1"># &#39;char&#39;</span>
+    normal! <span class="sb">`</span><span class="o">[</span>v<span class="sb">`</span><span class="o">]</span>y
+    <span class="nb">let</span> g:grep_word <span class="o">=</span> <span class="s1">&#39;\b&#39;</span> . @@ . <span class="s1">&#39;\b&#39;</span>
+  <span class="k">else</span>
+    <span class="k">return</span>
+  endif
+  silent execute <span class="s2">&quot;Ag &#39;&quot;</span> . g:grep_word .<span class="s2">&quot;&#39;&quot;</span>
+  <span class="nb">let</span> @@ <span class="o">=</span> saved_unnamed_register
+endfunction
+</pre></div>
+
+<ul>
+<li><code>&lt;leader&gt;giw</code> 可搜索光标下单词</li>
+<li><code>v***&lt;leader&gt;g</code> 可搜索选中字符串</li>
+</ul>
+
+<h3>使用 Unite 控制 quickfix 列表</h3>
+
+<p>首先需要安装 <a href="https://github.com/chemzqm/unite-location">unite-location</a> 插件</p>
+
+<p>修改自定义 <code>Ag</code> 命令为：</p>
+<div class="highlight"><pre>command! -nargs<span class="o">=</span>+ -bar -complete<span class="o">=</span>file Ag silent! grep! &lt;args&gt;<span class="p">|</span>execute <span class="s2">&quot;Unite -buffer-name=quickfix quickfix&quot;</span>
+</pre></div>
+
+<p>让 Unite 的 quickfix 列表选中后不要退出</p>
+<div class="highlight"><pre>call unite#custom#profile<span class="o">(</span><span class="s1">&#39;quickfix&#39;</span>, <span class="s1">&#39;context&#39;</span>, <span class="o">{</span>
+  <span class="se">\ </span> <span class="s1">&#39;no_quit&#39;</span>: 1
+  <span class="se">\ </span><span class="o">})</span>
+</pre></div>
+
+<h2>添加映射快速控制 Unite 列表</h2>
+<div class="highlight"><pre><span class="k">function</span>! s:ToggleUnite<span class="o">()</span>
+  <span class="k">for</span> i in range<span class="o">(</span>1, winnr<span class="o">(</span><span class="s1">&#39;[markdown]#39;</span><span class="o">))</span>
+    <span class="nb">let</span> <span class="nv">name</span> <span class="o">=</span> bufname<span class="o">(</span>winbufnr<span class="o">(</span>i<span class="o">))</span>
+    <span class="k">if</span> match<span class="o">(</span>name, <span class="s1">&#39;^\[unite\]&#39;</span><span class="o">)</span> <span class="o">==</span> 0
+      UniteClose
+      <span class="k">return</span>
+    endif
+  endfor
+  UniteResume
+endfunction
+
+<span class="s2">&quot; &lt;space&gt;u 显示/关闭列表</span>
+<span class="s2">nmap &lt;silent&gt; &lt;space&gt;u :call &lt;SID&gt;ToggleUnite()&lt;cr&gt;</span>
+
+<span class="s2">&quot;</span> 对前/后<span class="o">[</span>count<span class="o">]</span>项执行默认操作
+nmap &lt;space&gt;j :&lt;C-u&gt;call &lt;SID&gt;Jump<span class="o">(</span>v:count1, <span class="s1">&#39;Next&#39;</span><span class="o">)</span>&lt;cr&gt;
+nmap &lt;space&gt;k :&lt;C-u&gt;call &lt;SID&gt;Jump<span class="o">(</span>v:count1, <span class="s1">&#39;Previous&#39;</span><span class="o">)</span>&lt;cr&gt;
+
+<span class="k">function</span>! s:Jump<span class="o">(</span>count, dir<span class="o">)</span>
+  execute a:count . <span class="s1">&#39;Unite&#39;</span> . a:dir
+endfunction
+</pre></div>
+
+<p>简单些可以直接配置 unite 的 grep 使用 ag 命令你，我放弃那种用法是因为不想再为它做单独的搜索设置，另外 <a href="https://github.com/nelstrom/vim-qargs">vim-qargs</a> 这样的插件来对搜索结果做快速替换等操作。</p>
+
+<p><em>Happy vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = '搜索体验改进尝试';
+    var disqus_identifier = '2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>
