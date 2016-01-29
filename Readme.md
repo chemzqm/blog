@@ -2,6 +2,4 @@
 
 A static blog https://chemzqm.me
 
-Using Makefile for automation
-
-Using Misaka for performant markdown parsing
+Using Makefile and misaka for speed
