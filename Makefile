@@ -17,6 +17,8 @@ public/index.html: index.html $(SRCFILES)
 	@$(HOME) $^
 
 remote: all
+	@git add .
+	@git commit -a -m 'build'
 	@git push me master
 
 clean:
