@@ -14,7 +14,7 @@ tags:
 
 * [system.vim](https://gist.github.com/chemzqm/b798a1c51f533bbc9667) 整合了一些系统相关操作，包括 `rm` `rename` `mkdir` `copy to clipboard`
 
-* [simple_pairs.vim](http://www.vim.org/scripts/script.php?script_id=2339) 轻量的字符配对插件，很容易修改。 不是特别智能，但也不会像某些自作聪明的插件恶心你。
+* [simple_pairs.vim](http://www.vim.org/scripts/script.php?script_id=2339) 轻量的字符配对插件，很容易修改。 不是特别智能，但也不会像某些自作聪明的插件恶心你。 这个插件有些 bug， 而且用了 python 会导致大幅增加 vim 的初始化事件，我有一个用 vim 编写的修复版 [simple_pairs.vim](https://gist.github.com/chemzqm/79c542efef8ddf98a732)
 
 * [complete.vim](https://gist.github.com/chemzqm/287b0e98560e2e0a1491) 简洁的关键词补全插件，只是让 tab 可以实现 `<c-n>` `<c-p>` 不自作聪明，不影响性能。
 
