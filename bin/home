@@ -21,7 +21,7 @@ files.forEach(function (file) {
       if (/^---/.test(line)) return done(null, o)
     })
     rl.on('end', function () {
-      done()
+      done(null, o)
     })
   })
 })
