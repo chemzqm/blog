@@ -9,7 +9,7 @@ HTMLFILES := $(patsubst $(SRCDIR)/%,$(HTMLDIR)/%.html,$(SRCFILES))
 CWD := $(shell pwd)
 
 all: $(HTMLFILES) public/index.html
-	@chrome public/index.html
+	@chrome http://chemzqm.local/
 
 $(HTMLDIR)/%.html : $(SRCDIR)/% template.html
 	@cat $< | $(MARKED) template.html > $@
