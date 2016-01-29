@@ -11,10 +11,10 @@ CWD := $(shell pwd)
 all: $(HTMLFILES) public/index.html
 	@chrome http://chemzqm.local/
 
-$(HTMLDIR)/%.html : $(SRCDIR)/% template.html
-	@cat $< | $(MARKED) template.html > $@
+$(HTMLDIR)/%.html : $(SRCDIR)/% template/post.html
+	@cat $< | $(MARKED) template/post.html > $@
 
-public/index.html: index.html $(SRCFILES)
+public/index.html: template/index.html $(SRCFILES)
 	@$(HOME) $^
 
 remote: all
