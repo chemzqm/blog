@@ -22,7 +22,7 @@
       <div class="entry-meta">
         {{if created}}
           <time class="updated" datetime="{{= created}}" itemprop="datePublished" pubdate="">
-            {{= created.getFullYear() + '-' + (created.getMonth() + 1) + '-' + created.getDate()}}
+            {{= created.toDateString()}}
           </time>
         {{/}}
       </div>

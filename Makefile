@@ -23,6 +23,6 @@ remote: all
 	@git push me master
 
 clean:
-	@rm -rf $(HTMLFILES) public/index.html
+	@rm -rf $(HTMLFILES) public/index.html public/sitemap.xml
 
 .PHONY: all clean remote
