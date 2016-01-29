@@ -12,10 +12,10 @@ all: $(HTMLFILES) public/index.html
 	@chrome http://chemzqm.local/
 
 $(HTMLDIR)/%.html : $(SRCDIR)/% template/post.html
-	@cat $< | $(MARKED) template/post.html > $@
+	cat $< | $(MARKED) template/post.html > $@
 
 public/index.html: template/index.html $(SRCFILES)
-	@$(HOME) $^
+	$(HOME) $^
 
 remote: all
 	@git add .
