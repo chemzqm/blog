@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page not found</title>
+  <style>
+    body {
+      padding: 10px;
+    }
+    .container {
+      width: 680px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>
+      Redirect to home page in <span id="time">5</span> seconds.
+    </p>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    var el = document.getElementById('time')
+    var n = 5
+    setInterval(function() {
+      n = n - 1
+      if (n == 0) {
+        window.location.href = '/'
+      } else {
+        el.innerHTML = n
+      }
+    }, 1000)
+  </script>
+</body>
+</html>
