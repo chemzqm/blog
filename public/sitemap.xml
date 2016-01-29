@@ -11,6 +11,16 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+      <loc>http://chemzqm.me/vim-speed-up</loc>
+        <lastmod>2016-01-28</lastmod>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+      <loc>http://chemzqm.me/vim-complete</loc>
+        <lastmod>2016-01-28</lastmod>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
       <loc>http://chemzqm.me/webpack-sourcemap</loc>
         <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
@@ -31,6 +41,16 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+      <loc>http://chemzqm.me/mobile-components</loc>
+        <lastmod>2016-01-28</lastmod>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+      <loc>http://chemzqm.me/mobile-touch</loc>
+        <lastmod>2016-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
       <loc>http://chemzqm.me/epic-black-friday</loc>
         <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
@@ -38,11 +58,6 @@
     <url>
       <loc>http://chemzqm.me/improve-search-tool</loc>
         <lastmod>2016-01-27</lastmod>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-      <loc>http://chemzqm.me/mobile-components</loc>
-        <lastmod>2016-01-28</lastmod>
         <changefreq>monthly</changefreq>
     </url>
 </urlset>
