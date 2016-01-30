@@ -1,0 +1,58 @@
+title: Macnote.vim 简洁的笔记管理插件
+url: vim-macnote
+created: 2016-01-31
+updated: 2016-01-31
+id: 1454188965
+tags:
+  - vim
+---
+[Macnote.vim](https://github.com/chemzqm/macnote.vim)
+是最近做的一个小插件，用于笔记管理，同时支持同步 Chrome 预览。
+
+## 起因
+
+原来一直使用一个叫做 [vim-notes](https://github.com/xolox/vim-notes) 的插件，
+这个插件功能很多，但是对我来说有些问题：
+
+1. 它自己有一套语法，但是我更青睐于使用 Markdown 来写，因为比较通用，另外也方便发布到网站上。
+2. 项目比较复杂，对 vim 的启动时间有一定影响。
+3. 支持多目录，但是不能再目录内包含文件夹。
+
+## Macnote 的特点
+
+在避免过于复杂的同时，macnote 包含了一些比较实用的功能：
+
+* `Note` 命令不仅可以创建文件，还可以创建文件夹，例如：
+
+        Note blog/
+
+  可以创建 blog 文件夹。
+
+* `NoteDelete` 命令支持 [vim-bbye](https://github.com/moll/vim-bbye),
+  如果要删除的文件当前已经打开，它不会关闭这个窗口，而是尽可能在退出的时候找一个
+  buffer 替代。
+
+* 默认使用 [Misaka](https://github.com/FSX/misaka) 作为 Markdown解析库，
+  这个库底层使用 C 编写，效率非常高，大概是
+  [marked](https://github.com/chjj/marked) 4倍还多。
+
+* 开启了全部的 Markdown 语法扩展，包括：tables, strikethrough, math, fenced-code, footnotes, autolink,
+  以及 smartypants， 访问 [sample.html](/sample) 可查看使用效果。
+
+* 使用 [yaml frontmatter](https://hexo.io/docs/front-matter.html)，可以在文件最上面加一些原信息，方便发布操作，
+  跟 jekky 类似，我现在的静态 blog 就是通过这种方式进行编写的, 使用
+  [ultisnippet](https://github.com/SirVer/ultisnips/) 创建一个 snippet
+
+  ```
+  snippet blog "Description" b
+  title: ${1}
+  url: `!v expand('%:t')`
+  created: `!v strftime("%Y-%m-%d")`
+  updated: `!v strftime("%Y-%m-%d")`
+  tags:
+    - ${5}
+  ---
+  endsnippet
+  ```
+
+  可以更方便的生成原信息。
