@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="True" name="HandheldFriendly" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <title>Macnote.vim 简洁的笔记管理插件</title>
+  <link rel="stylesheet" href="./build.css">
+</head>
+<body>
+  <header id="header">
+    <div id="brand">
+      <a href="/"><strong>目田</strong></a>
+    </div>
+  </header>
+  <div class="container">
+  <article class="yue">
+    <div class="hentry" itemscope="" itemtype="http://schema.org/Article">
+      <h1 class="entry-title" itemprop="name">Macnote.vim 简洁的笔记管理插件</h1>
+      <div class="entry-meta">
+        
+          <time class="updated" datetime="Sun Jan 31 2016 08:00:00 GMT+0800 (CST)" itemprop="datePublished" pubdate="">
+            Sun Jan 31 2016
+          </time>
+        
+      </div>
+      <div class="entry-content" itemprop="articleBody">
+        <p><a href="https://github.com/chemzqm/macnote.vim">Macnote.vim</a>
+是最近做的一个小插件，用于方便自己做笔记管理以及 blog 编写等工作，它使用了 applescript 支持 Chrome 
+同步预览，所以叫 Macnote。</p>
+
+<h2>起因</h2>
+
+<p>原来一直使用一个叫做 <a href="https://github.com/xolox/vim-notes">vim-notes</a> 的插件，
+这个插件功能很多，但是对我来说有些问题：</p>
+
+<ol>
+<li>它自己有一套语法，但是我更青睐于使用 Markdown 来写，因为比较通用，另外也方便发布到网站上。</li>
+<li>项目比较复杂，对 vim 的启动时间有一定影响。</li>
+<li>支持多目录，但是不能在目录内包含文件夹。</li>
+</ol>
+
+<h2>Macnote 的特点</h2>
+
+<p>在避免过于复杂的同时，macnote 包含了一些比较实用的功能：</p>
+
+<ul>
+<li><p>支持 Chrome 同步预览。使用了 applescript 实现，不会重复打开标签页，页面刷新时自动激活，
+buffer 移除时标签页自动关闭。 使用 <code>PreviewAuto</code> 命令可使文件保存或者 CursorHold 触发时页面自动刷新。</p></li>
+<li><p><code>Note</code> 命令不仅可以创建文件，还可以创建文件夹，例如：</p>
+<div class="highlight"><pre>Note blog/
+</pre></div>
+
+<p>可以创建 blog 文件夹。</p></li>
+<li><p><code>NoteDelete</code> 命令支持 <a href="https://github.com/moll/vim-bbye">vim-bbye</a>,
+如果要删除的文件当前已经打开，它不会关闭这个窗口，而是尽可能在退出的时候找一个
+buffer 替代。</p></li>
+<li><p><code>NoteSearch</code> 使用 vim 自带的 <code>:grep</code> 命令，可通过 &lsquo;grep&rsquo; 选项进行调整，例如你可以使用速度更快，
+支持 .gitignore 的 ag，</p>
+<div class="highlight"><pre><span class="nb">set</span> <span class="nv">grepprg</span><span class="o">=</span>ag<span class="se">\ </span>--vimgrep<span class="se">\ </span><span class="nv">$*</span>
+<span class="nb">set</span> <span class="nv">grepformat</span><span class="o">=</span>%f:%l:%c:%m
+</pre></div></li>
+<li><p>默认使用 <a href="https://github.com/FSX/misaka">Misaka</a> 做为 Markdown解析库，
+这个库底层使用 C 编写，效率非常高，大概是
+<a href="https://github.com/chjj/marked">marked</a> 4倍还多。</p></li>
+<li><p>开启了全部的 Markdown 语法扩展，包括：<code>tables</code>, <code>strikethrough</code>, <code>math</code>, <code>fenced-code</code>, <code>footnotes</code>, <code>autolink</code>,
+以及 <code>smartypants</code>， 访问 <a href="/sample">sample.html</a> 可查看使用效果。</p></li>
+<li><p>使用 <a href="https://hexo.io/docs/front-matter.html">yaml frontmatter</a>，可以在文件最上面加一些原信息，方便发布操作，
+跟 jekky 类似，我现在的静态 blog 就是通过这种方式进行编写的, 使用
+<a href="https://github.com/SirVer/ultisnips/">ultisnippet</a> 创建一个 snippet</p>
+<div class="highlight"><pre>snippet blog <span class="s2">&quot;Description&quot;</span> b
+title: <span class="si">${</span><span class="nv">1</span><span class="si">}</span>
+url: <span class="sb">`</span>!v expand<span class="o">(</span><span class="s1">&#39;%:t&#39;</span><span class="o">)</span><span class="sb">`</span>
+created: <span class="sb">`</span>!v strftime<span class="o">(</span><span class="s2">&quot;%Y-%m-%d&quot;</span><span class="o">)</span><span class="sb">`</span>
+updated: <span class="sb">`</span>!v strftime<span class="o">(</span><span class="s2">&quot;%Y-%m-%d&quot;</span><span class="o">)</span><span class="sb">`</span>
+tags:
+  - <span class="si">${</span><span class="nv">5</span><span class="si">}</span>
+---
+endsnippet
+</pre></div>
+
+<p>可以更方便的生成原信息。</p></li>
+<li><p>支持使用 unite 管理 note
+<img src="https://chemzqm.me/images/01-31/unite-note1.png" alt="unite-note">
+支持 <code>open</code> <code>delete</code> <code>new</code> 操作, 通过设置 unite 的 sorters，可以让列表按照编辑时间进行排序，方便选择：</p>
+<div class="highlight"><pre>call unite#custom#source<span class="o">(</span>
+  <span class="se">\ </span> <span class="s1">&#39;note&#39;</span>, <span class="s1">&#39;sorters&#39;</span>, <span class="o">[</span><span class="s1">&#39;sorter_ftime&#39;</span>, <span class="s1">&#39;sorter_reverse&#39;</span><span class="o">]</span>
+  <span class="se">\)</span>
+</pre></div></li>
+<li><p>支持自定义 html 模板，只需要在 note 所在目录下创建一个 html 文件即可，记得里面要包含字符串 <code>[markdown]</code>
+来做为 makrdown 的占位符，可以使用 <a href="https://github.com/chemzqm/et">et</a> 的语法来输出 front matter 的信息
+到 html。</p>
+
+<p>生成的 html 保存在 <code>~/.vim/bundle/macnote.vim/www</code> 目录下面，你可通过自己编写简单的脚本进行发布。</p></li>
+</ul>
+
+<p>安装完成后使用 <code>:h macnote</code> 可以查看更详细的帮助文档。</p>
+
+<h2>最后</h2>
+
+<p>Macnote 尽量保持简洁友好，如果您在使用中有碰到什么问题，欢迎留言或者到 github 提交 <a href="https://github.com/chemzqm/macnote.vim/issues">issue</a>。</p>
+
+<p><em>Happy Vimming</em></p>
+
+
+      </div>
+    </div>
+  </article>
+  </div>
+  <section class="comments yue">
+    <div class="container">
+        <div class="column-large">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+        </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    var disqus_shortname = 'zqm';
+    var disqus_title = 'Macnote.vim 简洁的笔记管理插件';
+    var disqus_identifier = '1454188965';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+<footer>
+  © Copyright by chemzqm
+</footer>
+</body>
+</html>
