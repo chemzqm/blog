@@ -11,4 +11,4 @@
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3, Component
+    HTML5, CSS3, Yue.css
