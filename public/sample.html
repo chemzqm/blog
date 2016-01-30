@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>sample</title>
+  <style>
+body{
+  font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+  color: #444443;
+}
+pre {
+  overflow: auto;
+  padding: 10px;
+  background-color: #eee;
+}
+.highlight code {
+  border: none;
+  background-color: transparent;
+}
+blockquote {
+ font-style: italic;
+  border-left: 5px solid #eee;
+  margin: 1em;
+  padding: 0 1em;
+}
+.container{
+  max-width:680px;
+  margin:30px auto;
+}
+code{
+  margin:0 2px;
+  padding:0 5px;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0 0 10px;
+}
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 6px 13px;
+}
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.toc {
+  position: absolute;
+  right: 100px;
+}
+.highlight {
+ border-radius: 5px;
+background-color: #f7f7f7; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #000000; font-weight: bold } /* Keyword */
+.highlight .o { color: #000000; font-weight: bold } /* Operator */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold; font-style: italic } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #000000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #000000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #000000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #000000; font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #000000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #d01040 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .nd { color: #3c5d5d; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #990000; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d01040 } /* Literal.String.Backtick */
+.highlight .sc { color: #d01040 } /* Literal.String.Char */
+.highlight .sd { color: #d01040 } /* Literal.String.Doc */
+.highlight .s2 { color: #d01040 } /* Literal.String.Double */
+.highlight .se { color: #d01040 } /* Literal.String.Escape */
+.highlight .sh { color: #d01040 } /* Literal.String.Heredoc */
+.highlight .si { color: #d01040 } /* Literal.String.Interpol */
+.highlight .sx { color: #d01040 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #d01040 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>An h1 header</h1>
+
+<p>Paragraphs are separated by a blank line.</p>
+
+<p>2nd paragraph. <em>Italic</em>, <strong>bold</strong>, <code>code</code>,  and <del>strike through</del>. Itemized lists
+look like:</p>
+
+<ul>
+<li>this one</li>
+<li>that one</li>
+<li>the other one</li>
+</ul>
+
+<p>Note that for blockquote the actual text content starts at 4-columns in.</p>
+
+<blockquote>
+<p>Block quotes are
+written like so.</p>
+
+<p>They can span multiple paragraphs,
+if you like.</p>
+</blockquote>
+
+<p>Smartpants:</p>
+
+<table>
+<thead>
+<tr>
+<th>Markdown</th>
+<th>HTML</th>
+<th>Result</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&rsquo;s</td>
+<td>&amp;rsquo;s</td>
+<td>&rsquo;s</td>
+</tr>
+<tr>
+<td>&ldquo;Quotes&rdquo;</td>
+<td>&amp;ldquo;Quotes&amp;rdquo;</td>
+<td>&ldquo;Quotes&rdquo;</td>
+</tr>
+<tr>
+<td><code>---</code></td>
+<td>&amp;mdash;</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>&amp;ndash;</td>
+<td>&ndash;</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td>&amp;hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td><code>. . .</code></td>
+<td>&amp;hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td><code>(c)</code></td>
+<td>&amp;copy;</td>
+<td>&copy;</td>
+</tr>
+<tr>
+<td><code>(r)</code></td>
+<td>&amp;reg;</td>
+<td>&reg;</td>
+</tr>
+<tr>
+<td><code>(tm)</code></td>
+<td>&amp;trade;</td>
+<td>&trade;</td>
+</tr>
+<tr>
+<td><code>3/4</code></td>
+<td>&amp;frac34;</td>
+<td>&frac34;</td>
+</tr>
+<tr>
+<td><code>1/2</code></td>
+<td>&amp;frac12;</td>
+<td>&frac12;</td>
+</tr>
+<tr>
+<td><code>1/4</code></td>
+<td>&amp;frac14;</td>
+<td>&frac14;</td>
+</tr>
+</tbody>
+</table>
+
+<h2>An h2 header</h2>
+
+<p>Here&rsquo;s a numbered list:</p>
+
+<ol>
+<li>first item</li>
+<li>second item</li>
+<li>third item</li>
+</ol>
+
+<p>Note again how the actual text starts at 4 columns in (4 characters
+from the left side). Here&rsquo;s a code sample:</p>
+<div class="highlight"><pre><span class="c1"># Let me re-iterate ...</span>
+<span class="k">for</span> i in <span class="m">1</span> .. <span class="m">10</span> <span class="o">{</span> <span class="k">do</span>-something<span class="o">(</span>i<span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+<p>As you probably guessed, indented 4 spaces. By the way, instead of
+indenting the block, you can use delimited blocks, if you like:</p>
+<div class="highlight"><pre>define foobar<span class="o">()</span> <span class="o">{</span>
+    print <span class="s2">&quot;Welcome to flavor country!&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+<div class="highlight"><pre>import <span class="nb">time</span>
+<span class="c1"># Quick, count to ten!</span>
+<span class="k">for</span> i in range<span class="o">(</span>10<span class="o">)</span>:
+    <span class="c1"># (but not *too* quick)</span>
+    time.sleep<span class="o">(</span>0.5<span class="o">)</span>
+    print i
+</pre></div>
+
+<h3>An h3 header</h3>
+
+<p>Now a nested list:</p>
+
+<ol>
+<li><p>First, get these ingredients:</p>
+
+<ul>
+<li>carrots</li>
+<li>celery</li>
+<li>lentils</li>
+</ul></li>
+<li><p>Boil some water.</p></li>
+<li><p>Dump everything in the pot and follow
+this algorithm:</p>
+<div class="highlight"><pre>find wooden spoon
+uncover pot
+stir
+cover pot
+balance wooden spoon precariously on pot handle
+<span class="nb">wait</span> <span class="m">10</span> minutes
+goto first step <span class="o">(</span>or shut off burner when <span class="k">done</span><span class="o">)</span>
+</pre></div>
+
+<p>Do not bump wooden spoon or it will fall.</p></li>
+</ol>
+
+<p>Notice again how text always lines up on 4-space indents (including
+that last line which continues item 3 above).</p>
+
+<h3>Links and footnote</h3>
+
+<p>Here&rsquo;s a link to <a href="http://foo.bar">a website</a>, to a <a href="local-doc.html">local
+doc</a>, and to a <a href="#an-h2-header">section heading in the current
+doc</a>. Here&rsquo;s a footnote <sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup>.</p>
+
+<h3>Tables</h3>
+
+<p>A simple table looks like this:</p>
+
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+
+<p>If you wish, you can add a leading and tailing pipe to each line of the table:</p>
+
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+
+<p>Specify alignment for each column by adding colons to separator lines:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left">First Header</th>
+<th style="text-align: center">Second Header</th>
+<th style="text-align: right">Third Header</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">Left</td>
+<td style="text-align: center">Center</td>
+<td style="text-align: right">Right</td>
+</tr>
+<tr>
+<td style="text-align: left">Left</td>
+<td style="text-align: center">Center</td>
+<td style="text-align: right">Right</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h3>Images</h3>
+
+<p>An inline image <img src="http://25.io/smaller/favicon.ico" alt="Smaller icon" title="Title here">, title is optional.</p>
+
+<p>A <img src="http://resizesafari.com/favicon.ico" alt="Resize icon" title="Title"> reference style image.</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>Footnote text goes here.&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+
+</div>
+</body>
+</html>
