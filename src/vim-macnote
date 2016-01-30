@@ -7,7 +7,8 @@ tags:
   - vim
 ---
 [Macnote.vim](https://github.com/chemzqm/macnote.vim)
-是最近做的一个小插件，用于笔记管理，同时支持同步 Chrome 预览。
+是最近做的一个小插件，用于方便自己做笔记管理以及 blog 编写等工作，它使用了 applescript 支持 Chrome 
+同步预览，所以叫 Macnote。
 
 ## 起因
 
@@ -16,47 +17,78 @@ tags:
 
 1. 它自己有一套语法，但是我更青睐于使用 Markdown 来写，因为比较通用，另外也方便发布到网站上。
 2. 项目比较复杂，对 vim 的启动时间有一定影响。
-3. 支持多目录，但是不能再目录内包含文件夹。
+3. 支持多目录，但是不能在目录内包含文件夹。
 
 ## Macnote 的特点
 
 在避免过于复杂的同时，macnote 包含了一些比较实用的功能：
 
-* `Note` 命令不仅可以创建文件，还可以创建文件夹，例如：
+  * 支持 Chrome 同步预览。使用了 applescript 实现，不会重复打开标签页，页面刷新时自动激活，
+    buffer 移除时标签页自动关闭。 使用 `PreviewAuto` 命令可使文件保存或者 CursorHold 触发时页面自动刷新。
 
-        Note blog/
+  * `Note` 命令不仅可以创建文件，还可以创建文件夹，例如：
 
-  可以创建 blog 文件夹。
+          Note blog/
 
-* `NoteDelete` 命令支持 [vim-bbye](https://github.com/moll/vim-bbye),
-  如果要删除的文件当前已经打开，它不会关闭这个窗口，而是尽可能在退出的时候找一个
-  buffer 替代。
+    可以创建 blog 文件夹。
 
-* 默认使用 [Misaka](https://github.com/FSX/misaka) 作为 Markdown解析库，
-  这个库底层使用 C 编写，效率非常高，大概是
-  [marked](https://github.com/chjj/marked) 4倍还多。
+  * `NoteDelete` 命令支持 [vim-bbye](https://github.com/moll/vim-bbye),
+    如果要删除的文件当前已经打开，它不会关闭这个窗口，而是尽可能在退出的时候找一个
+    buffer 替代。
 
-* 开启了全部的 Markdown 语法扩展，包括：tables, strikethrough, math, fenced-code, footnotes, autolink,
-  以及 smartypants， 访问 [sample.html](/sample) 可查看使用效果。
+  * `NoteSearch` 使用 vim 自带的 `:grep` 命令，可通过 'grep' 选项进行调整，例如你可以使用速度更快，
+    支持 .gitignore 的 ag，
 
-* 使用 [yaml frontmatter](https://hexo.io/docs/front-matter.html)，可以在文件最上面加一些原信息，方便发布操作，
-  跟 jekky 类似，我现在的静态 blog 就是通过这种方式进行编写的, 使用
-  [ultisnippet](https://github.com/SirVer/ultisnips/) 创建一个 snippet
+    ``` vim
+    set grepprg=ag\ --vimgrep\ $*
+    set grepformat=%f:%l:%c:%m
+    ```
 
-  ```
-  snippet blog "Description" b
-  title: ${1}
-  url: `!v expand('%:t')`
-  created: `!v strftime("%Y-%m-%d")`
-  updated: `!v strftime("%Y-%m-%d")`
-  tags:
-    - ${5}
-  ---
-  endsnippet
-  ```
+  * 默认使用 [Misaka](https://github.com/FSX/misaka) 做为 Markdown解析库，
+    这个库底层使用 C 编写，效率非常高，大概是
+    [marked](https://github.com/chjj/marked) 4倍还多。
 
-  可以更方便的生成原信息。
+  * 开启了全部的 Markdown 语法扩展，包括：`tables`, `strikethrough`, `math`, `fenced-code`, `footnotes`, `autolink`,
+    以及 `smartypants`， 访问 [sample.html](/sample) 可查看使用效果。
 
-* 支持使用 unite 管理 note
-  ![unite-note](https://chemzqm.me/images/01-31/unite-note1.png)
-* 
+  * 使用 [yaml frontmatter](https://hexo.io/docs/front-matter.html)，可以在文件最上面加一些原信息，方便发布操作，
+    跟 jekky 类似，我现在的静态 blog 就是通过这种方式进行编写的, 使用
+    [ultisnippet](https://github.com/SirVer/ultisnips/) 创建一个 snippet
+
+    ```
+    snippet blog "Description" b
+    title: ${1}
+    url: `!v expand('%:t')`
+    created: `!v strftime("%Y-%m-%d")`
+    updated: `!v strftime("%Y-%m-%d")`
+    tags:
+      - ${5}
+    ---
+    endsnippet
+    ```
+
+    可以更方便的生成原信息。
+
+  * 支持使用 unite 管理 note
+    ![unite-note](https://chemzqm.me/images/01-31/unite-note1.png)
+    支持 `open` `delete` `new` 操作, 通过设置 unite 的 sorters，可以让列表按照编辑时间进行排序，方便选择：
+
+    ``` vim
+    call unite#custom#source(
+      \  'note', 'sorters', ['sorter_ftime', 'sorter_reverse']
+      \)
+    ```
+
+  * 支持自定义 html 模板，只需要在 note 所在目录下创建一个 html 文件即可，记得里面要包含字符串 `[markdown]`
+    来做为 makrdown 的占位符，可以使用 [et](https://github.com/chemzqm/et) 的语法来输出 front matter 的信息
+    到 html。
+
+    生成的 html 保存在 `~/.vim/bundle/macnote.vim/www` 目录下面，你可通过自己编写简单的脚本进行发布。
+
+安装完成后使用 `:h macnote` 可以查看更详细的帮助文档。
+
+## 最后
+
+Macnote 尽量保持简洁友好，如果您在使用中有碰到什么问题，欢迎留言或者到 github 提交 [issue](https://github.com/chemzqm/macnote.vim/issues)。
+
+_Happy Vimming_
