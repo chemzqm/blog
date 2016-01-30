@@ -26,7 +26,7 @@ tags:
 
 * [jscheck](https://github.com/chemzqm/jscheck) 只做 js 语法检查的 vim 插件，用以解决 eslint 之类插件速度太慢的问题
 
-* [unite-extra](https://github.com/chemzqm/unite-extra) 一些实用的 unite 源，包括 emoji command project 和 note
+* [unite-extra](https://github.com/chemzqm/unite-extra) 一些实用的 unite 源，包括 emoji command project 和 node
 
 * [unite-git-log](https://github.com/chemzqm/unite-git-log) 整合 gitlog 到 unite 界面的插件
 
