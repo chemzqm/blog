@@ -13,7 +13,7 @@ all: $(HTMLFILES) public/index.html
 	@touch logs/nginx.{access,error}.log
 	@chrome http://chemzqm.local/
 
-$(HTMLDIR)/%.html : $(SRCDIR)/% template/post.html
+$(HTMLDIR)/%.html: $(SRCDIR)/% template/post.html
 	@[ -d public ] || mkdir public
 	@cat $< | $(MARKED) template/post.html > $@
 
