@@ -48,7 +48,12 @@
 
 <ul>
 <li><p>支持 Chrome 同步预览。使用了 applescript 实现，不会重复打开标签页，页面刷新时自动激活，
-buffer 移除时标签页自动关闭。 使用 <code>PreviewAuto</code> 命令可使文件保存或者 CursorHold 触发时页面自动刷新。</p></li>
+buffer 移除时标签页自动关闭。 使用 <code>PreviewAuto</code> 命令可使文件保存或者 CursorHold 触发时页面自动刷新。
+一键预览 html 页面，只需要添加映射:</p>
+<div class="highlight"><pre>nnoremap &lt;C-p&gt; :PreviewAuto&lt;CR&gt;
+</pre></div>
+
+<p>到 <code>.vimrc</code></p></li>
 <li><p><code>Note</code> 命令不仅可以创建文件，还可以创建文件夹，例如：</p>
 <div class="highlight"><pre>Note blog/
 </pre></div>
