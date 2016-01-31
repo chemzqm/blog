@@ -11,7 +11,6 @@ CWD := $(shell pwd)
 all: $(HTMLFILES) public/index.html
 	@[ -d logs ] || mkdir logs
 	@touch logs/nginx.{access,error}.log
-	@chrome http://chemzqm.local/
 
 $(HTMLDIR)/%.html: $(SRCDIR)/% template/post.html
 	@[ -d public ] || mkdir public
