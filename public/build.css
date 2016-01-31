@@ -57,13 +57,13 @@
   margin-top: 0;
   margin-bottom: 1.46em;
 }
-.yue a {
+a {
   color: #111;
   word-wrap: break-word;
   -moz-text-decoration-color: rgba(0, 0, 0, 0.4);
   text-decoration-color: rgba(0, 0, 0, 0.4);
 }
-.yue a:hover {
+a:hover,a:visited {
   color: #555;
   -moz-text-decoration-color: rgba(0, 0, 0, 0.6);
   text-decoration-color: rgba(0, 0, 0, 0.6);
