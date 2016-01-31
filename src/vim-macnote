@@ -89,6 +89,8 @@ tags:
 
 ## 最后
 
+如果你只是需要 Chrome 预览 Markdown 功能，可以试用 [macdown.vim](https://github.com/chemzqm/macdown.vim) 这个插件。
+
 Macnote 尽量保持简洁友好，如果您在使用中有碰到什么问题，欢迎留言或者到 github 提交 [issue](https://github.com/chemzqm/macnote.vim/issues)。
 
 _Happy Vimming_
