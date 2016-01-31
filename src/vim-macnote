@@ -21,7 +21,7 @@ tags:
 
 ## Macnote 的特点
 
-在避免过于复杂的同时，macnote 包含了一些比较实用的功能：
+在避免过于复杂的同时，macnote 包含了一些比（我）较（需）实（要）用的功能：
 
   * 支持 Chrome 同步预览。使用了 applescript 实现，不会重复打开标签页，页面刷新时自动激活，
     buffer 移除时标签页自动关闭。 使用 `PreviewAuto` 命令可使文件保存或者 CursorHold 触发时页面自动刷新。
