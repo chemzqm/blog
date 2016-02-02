@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /build/
+Sitemap: https://chemzqm.me/sitemap.xml
